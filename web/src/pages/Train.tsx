@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { Chess } from 'chess.js'
 import type { Data, Mistake } from '../types'
@@ -13,7 +13,10 @@ export default function Train({ data }: { data: Data }) {
   const pool = useMemo(() => data.mistakes.filter(m => (!tag || m.tags.includes(tag)) && (!onlyFindable || m.findable)), [data, tag, onlyFindable])
   const [queue, setQueue] = useState<string[]>([])
   const [idx, setIdx] = useState(0)
-  const start = () => { setQueue(dueIds(shuffle(pool.map(m => m.id)), 10)); setIdx(0) }
+  const [score, setScore] = useState(0)
+  const start = () => { setQueue(dueIds(shuffle(pool.map(m => m.id)), 10)); setIdx(0); setScore(0) }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(start, [pool])
   const cur = queue[idx] ? data.mistakes.find(m => m.id === queue[idx]) : undefined
   return (
     <div className="page">
@@ -27,13 +30,14 @@ export default function Train({ data }: { data: Data }) {
         <label><input type="checkbox" checked={onlyFindable} onChange={e => setOnlyFindable(e.target.checked)} /> Seulement les coups à ma portée</label>
         <button onClick={start}>Nouvelle série ({Math.min(10, pool.length)})</button>
       </div>
-      {cur && <Puzzle key={cur.id} m={cur} onDone={() => setIdx(i => i + 1)} n={idx + 1} total={queue.length} />}
-      {queue.length > 0 && !cur && <p className="done">Série terminée. Reviens demain pour les répétitions.</p>}
+      {cur && <Puzzle key={cur.id} m={cur} onDone={ok => { setScore(s => s + (ok ? 1 : 0)); setIdx(i => i + 1) }} n={idx + 1} total={queue.length} />}
+      {pool.length === 0 && <p className="done">Aucune position pour ce thème.</p>}
+      {queue.length > 0 && !cur && <div className="done"><div className="big">{score}/{queue.length}</div><p>Série terminée. Les positions ratées reviendront demain.</p><button className="btn primary" onClick={start}>Encore une série</button></div>}
     </div>
   )
 }
 
-function Puzzle({ m, onDone, n, total }: { m: Mistake; onDone: () => void; n: number; total: number }) {
+function Puzzle({ m, onDone, n, total }: { m: Mistake; onDone: (ok: boolean) => void; n: number; total: number }) {
   const [fen, setFen] = useState(m.fen)
   const [state, setState] = useState<'play' | 'ok' | 'ko'>('play')
   const [tried, setTried] = useState<string | null>(null)
@@ -58,7 +62,7 @@ function Puzzle({ m, onDone, n, total }: { m: Mistake; onDone: () => void; n: nu
       {state === 'ko' && <p className="bad">{tried} n'est pas le bon coup. La flèche montre {m.best_san}.</p>}
       {state !== 'play' && <div className="explain"><Md text={m.text} /><p className="muted">Ce qui s'est passé : {m.refutation_san}</p>
         <p><a href={m.url} target="_blank">Voir la partie sur chess.com</a></p>
-        <button onClick={onDone}>Suivant</button></div>}
+        <button onClick={() => onDone(state === 'ok')}>Suivant</button></div>}
     </div>
   )
 }

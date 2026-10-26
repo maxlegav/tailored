@@ -1,4 +1,13 @@
-# Coach d'échecs personnel
+# Tailored
+
+Coach d'échecs personnel pour maxthechessnoob (chess.com) : Stockfish trouve les coups, Maia 1900 dit s'ils sont humainement trouvables, l'app explique en français et entraîne sur tes propres erreurs.
+
+App : https://maxlegav.github.io/tailored/
+
+```
+./setup.sh   # Stockfish, venv (chess, maia2), npm
+./sync.sh    # fetch last 365 days, analyse new games, rebuild, deploy gh-pages + analysis-cache
+```
 
 Pipeline (Python 3, `.venv` with `chess`, `maia2`; Stockfish binary at `~/bin/stockfish`):
 

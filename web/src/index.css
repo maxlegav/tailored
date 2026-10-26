@@ -46,3 +46,10 @@ button.on, .controls button, .btn.primary { background: var(--green); box-shadow
 .controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 12px 0; }
 .explain { background: var(--panel); border-radius: 8px; padding: 4px 16px 16px; line-height: 1.5; }
 .lesson h2 { cursor: pointer; background: var(--panel); padding: 14px; border-radius: 8px; }
+.tabs a .ic svg, .side a.nav .ic svg { display: block; margin: 0 auto; }
+.plan { display: grid; gap: 8px; }
+.planrow { display: flex; gap: 14px; align-items: center; background: var(--panel); border-radius: 8px; padding: 12px 14px; color: #fff; text-decoration: none; box-shadow: 0 2px 0 #1c1b19; }
+.planrow:hover { background: var(--panel2); }
+.rank { width: 30px; height: 30px; border-radius: 50%; background: var(--green); display: grid; place-items: center; font-weight: 800; flex-shrink: 0; }
+.puzzle { max-width: 760px; }
+@media (min-width: 900px) { .puzzle { display: grid; grid-template-columns: minmax(0, 460px) 1fr; gap: 20px; align-items: start; } .puzzle > p.muted { grid-column: 1 / -1; margin: 0; } .puzzle .board { margin: 0; } }
