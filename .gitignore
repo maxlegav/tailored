@@ -1,0 +1,4 @@
+.venv/
+maia2_models/
+data/
+__pycache__/
