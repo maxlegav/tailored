@@ -6,6 +6,7 @@ import Repertoire from './pages/Repertoire'
 import Train from './pages/Train'
 import Lessons from './pages/Lessons'
 import Games from './pages/Games'
+import Settings from './pages/Settings'
 
 const I = (d: string) => <svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d={d} /></svg>
 const NAV = [
@@ -28,7 +29,7 @@ export default function App() {
         {NAV.map(n => <NavLink key={n.to} to={n.to} end={n.to === '/'} className="nav"><span className="ic">{n.ic}</span>{n.label}</NavLink>)}
       </aside>
       <main>
-        <header className="topbar"><Brand /></header>
+        <header className="topbar"><Brand /><NavLink to="/reglages" className="gear" aria-label="Réglages">⚙</NavLink></header>
         {!data ? <div className="loading">Chargement de ton coach…</div> : (
           <Routes>
             <Route path="/" element={<Profile data={data} />} />
@@ -36,6 +37,7 @@ export default function App() {
             <Route path="/entrainement" element={<Train data={data} />} />
             <Route path="/repertoire" element={<Repertoire data={data} />} />
             <Route path="/parties" element={<Games data={data} />} />
+                 <Route path="/reglages" element={<Settings />} />
           </Routes>
         )}
       </main>

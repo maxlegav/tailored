@@ -1,0 +1,228 @@
+[
+ {
+  "id": "qgd",
+  "color": "black",
+  "title": "Contre 1.d4 d5 2.c4 : la Défense orthodoxe (…e6)",
+  "stats": "Avec 2…c6 (la Slave), tu marques 38 % des points sur 45 parties.",
+  "yours": "2…c6",
+  "rec": "2…e6",
+  "why": "Avec …e6, tu retrouves les structures …e6/…d5 où tu joues déjà bien (ta Française Échange, tes lignes Bg5 avec les Blancs). Le plan se répète d'une partie à l'autre : développer, roquer, puis te libérer par des échanges et une poussée centrale.",
+  "plan": [
+   "Développe dans cet ordre : …Nf6, …Be7, …O-O, …Nbd7. Ton roi est à l'abri avant que le centre s'ouvre.",
+   "Ta seule vraie faiblesse : le fou c8, enfermé derrière e6. Tout le plan sert à le libérer.",
+   "Contre Bg5/e3/Rc1 : …c6, puis …dxc4 dès que le fou f1 a bougé (tu gagnes un temps), puis …Nd5 pour échanger deux paires de pièces (la manœuvre de Capablanca).",
+   "Après les échanges, joue …e5 (ou …c5) : le centre s'ouvre, ton fou c8 respire, et la position est égale et facile à jouer.",
+   "Si les Blancs prennent en d5 (variante d'échange) : …c6, …Be7, …Nbd7, …O-O, …Re8, …Nf8 puis …Ng6 ou …Ne6. Tes pièces se dirigent vers le roque blanc."
+  ],
+  "line": "d4 d5 c4 e6 Nc3 Nf6 Bg5 Be7 e3 O-O Nf3 Nbd7 Rc1 c6 Bd3 dxc4 Bxc4 Nd5 Bxe7 Qxe7 O-O Nxc3 Rxc3 e5",
+  "line_title": "La libération de Capablanca",
+  "line_text": "…dxc4 au moment où le fou a déjà bougé, …Nd5 pour échanger, puis …e5 : ton fou c8 est libre et la position est égale.",
+  "ideas": [
+   {
+    "kind": "Piège",
+    "title": "Le piège de l'éléphant",
+    "line": "d4 d5 c4 e6 Nc3 Nf6 Bg5 Nbd7 cxd5 exd5 Nxd5 Nxd5 Bxd8 Bb4+ Qd2 Bxd2+ Kxd2 Kxd8",
+    "text": "Après 4.Bg5 Nbd7, le pion d5 semble gratuit parce que le Nf6 est cloué. C'est un faux clouage : 6.Nxd5?? Nxd5! 7.Bxd8 Bb4+! 8.Qd2 Bxd2+ 9.Kxd2 Kxd8. Les dames sont échangées et tu as une pièce de plus.",
+    "eval": 3.7
+   },
+   {
+    "kind": "Position",
+    "title": "Variante d'échange : le plan …Nf8",
+    "line": "d4 d5 c4 e6 Nc3 Nf6 cxd5 exd5 Bg5 c6 e3 Be7 Bd3 Nbd7 Qc2 O-O Nf3 Re8 O-O Nf8",
+    "text": "Structure Carlsbad. Ton cavalier passe par f8 vers g6 ou e6, ton fou c8 sortira en g4 ou e6. Les Blancs jouent à l'aile dame (b4-b5), toi à l'aile roi.",
+    "eval": -0.6
+   }
+  ],
+  "line_eval": -0.4
+ },
+ {
+  "id": "jobava",
+  "color": "black",
+  "title": "Contre le Jobava (1.d4 Nf6 2.Nc3 d5 3.Bf4)",
+  "stats": "Tu marques 22 % des points sur 16 parties.",
+  "yours": "pas de plan fixe",
+  "rec": "3…e6 puis 4…Bb4",
+  "why": "Le Jobava vise c7 avec Nb5, puis attaque vite ton roi (Qf3, O-O-O, g4). L'antidote est simple : clouer le cavalier c3 pour qu'il ne puisse plus rien faire, et frapper le centre avec …c5.",
+  "plan": [
+   "3…e6 puis 4…Bb4 : le cavalier c3 est cloué, il ne peut plus sauter en b5 ni soutenir e4.",
+   "…c5 : tu attaques d4. Si dxc5, reprends avec …Nbd7 puis …Nxc5 : ton cavalier arrive au centre et vise e4 et d3.",
+   "…Bxc3 n'est bon que si les Blancs doivent reprendre bxc3 : leurs pions doublés deviennent une cible.",
+   "Roque petit, puis …Qa5 ou …Qb6 contre les pions de l'aile dame."
+  ],
+  "line": "d4 Nf6 Nc3 d5 Bf4 e6 e3 Bb4 Bd3 c5 dxc5 Nbd7 Nf3 Nxc5",
+  "line_title": "Le cavalier en c5",
+  "line_text": "Le cavalier c3 est cloué, ton cavalier reprend en c5 et vise e4 et d3. Le moteur donne un léger avantage aux Noirs.",
+  "ideas": [
+   {
+    "kind": "À savoir",
+    "title": "Si 4.Nb5 tout de suite",
+    "line": "d4 Nf6 Nc3 d5 Bf4 e6 Nb5 Bb4+ c3 Ba5 e3 O-O",
+    "text": "La menace est Nxc7+. Réponse : 4…Bb4+ 5.c3 Ba5 : le fou défend c7 et le cavalier b5 n'a plus de but. (4…Na6 défend aussi c7.)",
+    "eval": -0.2
+   }
+  ],
+  "line_eval": 0.2
+ },
+ {
+  "id": "french-adv",
+  "color": "black",
+  "title": "Française Avance avec …Qb6 : la bataille pour d4",
+  "stats": "Après 6.Bd3, tu marques 20 % des points (10 parties) ; 30 % dès 5.Nf3 (27 parties).",
+  "yours": "…Nc6 et …Qb6 sont bons, le problème vient après",
+  "rec": "6…cxd4 7.cxd4 Bd7 !",
+  "why": "Toute la Française Avance tourne autour du pion d4. Tes pièces l'attaquent (…Nc6, …Qb6, bientôt …Nf5), les Blancs le défendent. Après 6.Bd3, échange d'abord en d4, puis …Bd7 prépare la prise en d4 sans tomber dans le piège Bb5+.",
+  "plan": [
+   "6…cxd4 7.cxd4 : la colonne c s'ouvre pour toi.",
+   "7…Bd7 ! Ce coup prépare …Nxd4 : désormais, Bb5+ sera paré par le fou d7.",
+   "Si les Blancs défendent avec 8.Be2 : …Nge7 puis …Nf5. Trois attaquants sur d4 contre deux défenseurs, le pion tombe.",
+   "S'ils sacrifient d4 avec 8.O-O (le gambit Milner-Barry), prends : 8…Nxd4 9.Nxd4 Qxd4 10.Nc3 a6 (empêche Nb5). Tu as un pion de plus : …Ne7 et roque vite.",
+   "Plus tard, la poussée …f6 attaque e5, la base de la chaîne de pions blanche."
+  ],
+  "line": "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Bd3 cxd4 cxd4 Bd7 O-O Nxd4 Nxd4 Qxd4 Nc3 a6",
+  "line_title": "Gambit Milner-Barry accepté",
+  "line_text": "Tu as pris d4 au bon moment et …a6 enlève la case b5. Pion de plus pour toi.",
+  "ideas": [
+   {
+    "kind": "Piège à éviter",
+    "title": "Ne prends pas d4 trop tôt",
+    "line": "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Bd3 cxd4 cxd4 Nxd4 Nxd4 Qxd4 Bb5+",
+    "text": "7…Nxd4?? 8.Nxd4 Qxd4?? 9.Bb5+ ! Le fou donne échec et découvre la Qd1 sur ta dame d4 : tu perds la dame. C'est pour ça que …Bd7 passe avant …Nxd4.",
+    "eval": -6.6
+   },
+   {
+    "kind": "Idée",
+    "title": "L'assaut sur d4 (si 8.Be2)",
+    "line": "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Bd3 cxd4 cxd4 Bd7 Be2 Nge7 O-O Nf5",
+    "text": "Nc6, Nf5 et Qb6 visent d4, défendu seulement par Nf3 et Qd1. Le pion est perdu pour les Blancs.",
+    "eval": 1.4
+   }
+  ],
+  "line_eval": 0.7
+ },
+ {
+  "id": "scandi-nf6",
+  "color": "white",
+  "title": "Contre 1.e4 d5 2.exd5 Nf6 : prends le centre avec d4 et c4",
+  "stats": "Avec 3.Nc3, tu marques 27 % des points (11 parties), 12 % après 3…Nxd5 4.Nf3.",
+  "yours": "3.Nc3",
+  "rec": "3.d4 puis 4.c4",
+  "why": "Avec 3.Nc3, les Noirs reprennent en d5 tranquillement et égalisent. Avec 3.d4 puis 4.c4, tu prends le centre en chassant le cavalier : c'est la façon la plus simple d'obtenir un avantage durable.",
+  "plan": [
+   "3.d4 Nxd5 4.c4 : le cavalier doit reculer, souvent en b6.",
+   "Développe normalement : Nf3, Nc3, Be2 ou Be3, h3 (contre …Bg4), O-O.",
+   "Ton atout : l'espace des pions c4-d4. Ton plan : c5 pour chasser le cavalier b6, ou d5 pour gêner les pièces noires.",
+   "Contre le gambit portugais 3…Bg4, garde le pion : 4.Bb5+ Nbd7 5.f3 Bf5 6.c4."
+  ],
+  "line": "e4 d5 exd5 Nf6 d4 Nxd5 c4 Nb6 Nf3 g6 Nc3 Bg7 h3 O-O Be3",
+  "line_title": "La structure idéale",
+  "line_text": "Deux pions au centre, tout est développé, h3 empêche …Bg4. Les Blancs sont nettement mieux.",
+  "ideas": [
+   {
+    "kind": "Idée",
+    "title": "Si 5…Bg4 : la poussée c5",
+    "line": "e4 d5 exd5 Nf6 d4 Nxd5 c4 Nb6 Nf3 Bg4 c5 N6d7 Be2",
+    "text": "6.c5 ! renvoie le cavalier en d7, où il bloque le développement noir. Tu gagnes encore de l'espace et ton fou e2 neutralise le clouage.",
+    "eval": 1.3
+   },
+   {
+    "kind": "Gambit",
+    "title": "Le gambit portugais (3…Bg4)",
+    "line": "e4 d5 exd5 Nf6 d4 Bg4 Bb5+ Nbd7 f3 Bf5 c4",
+    "text": "Les Noirs ont sacrifié un pion pour se développer vite. Garde-le avec c4, finis ton développement, et ne joue pas de coups de pion inutiles.",
+    "eval": 0.4
+   }
+  ],
+  "line_eval": 0.8
+ },
+ {
+  "id": "vs-g6",
+  "color": "white",
+  "title": "Contre …g6/…Bg7 : e4 plutôt que Bg5",
+  "stats": "Avec 3.Bg5, tu marques 25 % des points après 3…h6 (8 parties) ; tes lignes Bg5-c3 contre le fianchetto plafonnent à 27-30 %.",
+  "yours": "3.Bg5",
+  "rec": "3.e4",
+  "why": "Ton fou g5 est fort quand il vise le cavalier f6 et la dame d8. Contre un fianchetto, il ne vise rien et se fait chasser par …h6. Les Noirs t'offrent le centre : prends-le avec e4.",
+  "plan": [
+   "3.e4 d6 4.Nc3 Nf6 : deux pions au centre, développement naturel.",
+   "Le plan simple : Be2, O-O, puis a4 pour gagner de l'espace à l'aile dame (contre …b5) et h3.",
+   "Le plan agressif : Be3, Qd2 puis Bh6 pour échanger le fou g7, le meilleur défenseur du roi noir.",
+   "Si les Noirs poussent …c5 ou …e5, réponds souvent d5 : tu gagnes de l'espace et le fou g7 se heurte à ton centre."
+  ],
+  "line": "d4 g6 Nf3 Bg7 e4 d6 Nc3 Nf6 Be2 O-O O-O c6 a4",
+  "line_title": "Le système classique",
+  "line_text": "Centre e4-d4, développement simple, a4 freine …b5. Petit avantage blanc, sans risque.",
+  "ideas": [
+   {
+    "kind": "Idée",
+    "title": "Échanger le fou g7 avec Bh6",
+    "line": "d4 g6 Nf3 Bg7 e4 d6 Nc3 Nf6 Be3 O-O Qd2 c6 Bh6",
+    "text": "Be3, Qd2, Bh6 : sans le fou g7, les cases f6 et h6 autour du roi noir deviennent faibles. Ensuite h4-h5 ouvre la colonne h.",
+    "eval": 0.8
+   }
+  ],
+  "line_eval": 0.6
+ },
+ {
+  "id": "torre",
+  "color": "white",
+  "title": "Ton système Torre (Bg5) : Nbd2 avant e3",
+  "stats": "Tu marques 69 à 81 % dans plusieurs lignes avec Bg5, mais 29 % après 3…Be7 (17 parties) et 23 % quand tu enchaînes avec 4.e3.",
+  "yours": "4.e3",
+  "rec": "4.Nbd2",
+  "why": "Ce système te réussit, garde-le. Mais après 3…Be7, le plan blanc est la poussée e4 : avec Nbd2 d'abord, e4 est soutenu tout de suite et tu gardes le choix entre e4 et l'attaque Ne5-f4.",
+  "plan": [
+   "Nbd2, e3, c3, Bd3, O-O : la base du système, presque toujours dans cet ordre.",
+   "Plan A, la poussée e4 : prépare-la avec Qe2 ou Re1. L'échange Bxf6 au bon moment enlève un défenseur de e4.",
+   "Plan B, si les Noirs jouent …d5 et …b6 : Ne5 puis f4 (attaque Pillsbury). La tour passe par f3-h3, la dame va en h5.",
+   "N'échange Bxe7 que si ça attire la dame noire loin de son roi ou si ça te fait gagner un temps."
+  ],
+  "line": "d4 Nf6 Nf3 e6 Bg5 Be7 Nbd2 d5 e3 O-O Bd3 c5 c3 Nbd7 O-O b6 Ne5 Bb7 f4",
+  "line_title": "Le Pillsbury : Ne5 et f4",
+  "line_text": "Le cavalier e5 est ancré, f4 le soutient et ouvre la colonne f vers le roque noir.",
+  "ideas": [
+   {
+    "kind": "Idée",
+    "title": "L'attaque sur la colonne f",
+    "line": "d4 Nf6 Nf3 e6 Bg5 Be7 Nbd2 d5 e3 O-O Bd3 c5 c3 Nbd7 O-O b6 Ne5 Bb7 f4 Nxe5 fxe5 Nd7 Bxe7 Qxe7 Qh5",
+    "text": "Après …Nxe5 fxe5, ta colonne f est ouverte et le cavalier noir a quitté f6. Bxe7 puis Qh5 : la dame et la tour f1 attaquent directement le roi, avec Rf3-h3 en réserve.",
+    "eval": 1.3
+   }
+  ],
+  "line_eval": 0.2
+ },
+ {
+  "id": "vs-c4",
+  "color": "black",
+  "title": "Contre 1.c4 : joue 1…c6, ta Slave d'échange",
+  "stats": "Avec 1…Nf6, tu marques 25 % après 2.Nc3 (14 parties). Avec 1…c6 2.Nc3 d5 3.cxd5 cxd5 4.d4, tu marques 75 % (8 parties).",
+  "yours": "1…Nf6",
+  "rec": "1…c6",
+  "why": "Tu joues déjà 1…c6 et ça te réussit : tu arrives dans une Slave d'échange, symétrique et solide, où tu sais quoi faire. Avec 1…Nf6, tu entres dans des positions anglaises que tu ne connais pas.",
+  "plan": [
+   "…c6 puis …d5 : tu prends ta part du centre tout de suite.",
+   "Si cxd5 cxd5 : sors le fou c8 AVANT …e6 (…Bf5), sinon il reste enfermé.",
+   "Ensuite …e6, …Nc6, …Bd6 ou …Be7 et roque. La colonne c est ouverte : …Rc8, et ta tour met la pression sur c3 et c2.",
+   "Si les Blancs jouent Nf3 et e3 sans prendre en d5 : …Nf6, …e6, …Nbd7, puis …dxc4 et …b5 pour jouer à l'aile dame."
+  ],
+  "line": "c4 c6 Nc3 d5 cxd5 cxd5 d4 Nf6 Bf4 Nc6 e3 Bf5",
+  "line_title": "La Slave d'échange",
+  "line_text": "Le fou c8 est sorti avant …e6 : toutes tes pièces ont une bonne case. Position égale et confortable.",
+  "ideas": [
+   {
+    "kind": "Position",
+    "title": "Si Bb5 : …Nd7 et …Rc8",
+    "line": "c4 c6 Nc3 d5 cxd5 cxd5 d4 Nf6 Bf4 Nc6 e3 Bf5 Nf3 e6 Bb5 Nd7",
+    "text": "Le clouage Bb5 n'est pas dangereux : …Nd7 prépare …Be7, le roque et …Rc8. Si Bxc6, tu reprends bxc6 et tu as la colonne b.",
+    "eval": -0.1
+   },
+   {
+    "kind": "Position",
+    "title": "Sans échange : la Semi-Slave",
+    "line": "c4 c6 Nf3 d5 e3 Nf6 Nc3 e6 d4 Nbd7 Bd3 dxc4 Bxc4 b5 Bd3 Bb7",
+    "text": "…dxc4 au moment où le fou f1 a bougé, puis …b5 et …Bb7 : ton fou c8 sort par b7 et tu prépares …c5.",
+    "eval": -0.2
+   }
+  ],
+  "line_eval": -0.3
+ }
+]

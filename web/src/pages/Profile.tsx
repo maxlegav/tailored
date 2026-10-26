@@ -6,7 +6,9 @@ export default function Profile({ data }: { data: Data }) {
   const s = stats()
   const tags = data.tags.filter(t => t.tag !== 'positionnel').sort((a, b) => b.loss - a.loss)
   const maxLoss = Math.max(...tags.map(t => t.loss))
-  const top = tags.slice(0, 3)
+  const top = [...tags].sort((a, b) => (b.core_loss ?? b.loss) - (a.core_loss ?? a.loss)).slice(0, 3)
+  const k = data.kinds || {}
+  const habits = (data.habits || []).filter(h => h.n >= 3)
   const phases = ['ouverture', 'milieu', 'finale'].filter(p => data.phase[p])
   return (
     <div className="page">
@@ -18,7 +20,16 @@ export default function Profile({ data }: { data: Data }) {
         <div className="card"><div className="big">{pct(data.conversion.won / Math.max(1, data.conversion.winning))}</div>des positions gagnantes converties</div>
         <div className="card"><div className="big">{s.mastered}</div>exercices maîtrisés</div>
       </div>
+      <h2>Tes erreurs, par type</h2>
+      <p className="muted">Toutes les erreurs n'ont pas le même poids. Une pièce laissée en prise ou un coup joué avec 5 s, ça arrive : on travaille un réflexe. Une erreur d'habitude ou de compréhension se répète, et c'est là qu'on gagne des points.</p>
+      <div className="kinds">
+        {[['habitude', 'Habitudes', "le même mauvais choix, encore et encore"], ['comprehension', 'Compréhension', "plan, structure, avantage gâché, avec le temps de réfléchir"], ['accident', 'Accidents', "pièce en prise, menace pas vue"], ['zeitnot', 'Zeitnot', "moins de 20 s : sauver la pendule d'abord"]].map(([id, l, d]) =>
+          <a key={id} className="card" href={`#/entrainement?kind=${id}`}><b>{k[id]?.n ?? 0}</b><span style={{ color: '#fff', fontWeight: 700 }}>{l}</span><br /><span className="small">{d}</span></a>)}
+      </div>
+      {habits.length > 0 && <><h2>Tes habitudes à corriger</h2>
+        {habits.map(h => <a key={h.ids[0]} className="planrow" href={`#/entrainement?kind=habitude`}><span className="rank">{h.n}×</span><span><b>{h.san}</b>, joué {h.n} fois dans la même position<br /><span className="small">s'entraîner sur cette position →</span></span></a>)}</>}
       <h2>Le plan du coach</h2>
+      <p className="muted">Les 3 thèmes qui te coûtent le plus, accidents et zeitnot mis de côté.</p>
       <div className="plan">
         {top.map((t, i) => <a key={t.tag} className="planrow" href={`#/entrainement?tag=${encodeURIComponent(t.tag)}`}>
           <span className="rank">{i + 1}</span><span><b>{t.label}</b><br /><span className="small">{t.n} fois dans tes parties · s'entraîner →</span></span></a>)}

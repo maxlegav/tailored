@@ -1,5 +1,5 @@
 """Builds web/public/data.json from analysis + profile (after humanize.py)."""
-import json, sys, collections, io, time
+import json, sys, collections, io, time, os
 import chess, chess.pgn
 from classify import classify_game, winp, cp_of
 from explain import explain, san_line
@@ -23,8 +23,21 @@ opp_nodes = collections.defaultdict(lambda: [0, 0.0, None, None])
 mistakes = []; games = []; tagloss = collections.Counter(); tagn = collections.Counter()
 phase = collections.defaultdict(lambda: [0, 0.0, 0]); clock = collections.defaultdict(lambda: [0, 0.0])
 color_score = collections.defaultdict(lambda: [0, 0.0]); conv = [0, 0]; comeback = [0, 0]
-for g in analysis:
-    s = result(g); moves, max_wp = classify_game(g); col = g["color"] == "white"
+classified = [classify_game(g) for g in analysis]
+seen = collections.Counter((key(m["fen"]), m["san"]) for moves, _ in classified for m in moves if m["sev"])
+visits = collections.Counter(key(m["fen"]) for moves, _ in classified for m in moves if m["move_no"] <= 15)
+CHEAP = {"pièce_déplacée_en_prise", "matériel_perdu", "mat_concédé", "fourchette_subie"}
+WEIGHT = {"habitude": 2.0, "comprehension": 1.0, "accident": 0.5, "zeitnot": 0.25}
+def kind(m):
+    if m["clk"] is not None and m["clk"] < 20: return "zeitnot"
+    if seen[(key(m["fen"]), m["san"])] >= 2 or (m["move_no"] <= 15 and visits[key(m["fen"])] >= 5): return "habitude"
+    if CHEAP & set(m["tags"]): return "accident"
+    return "comprehension"
+plans = json.load(open("data/plans.json")) if os.path.exists("data/plans.json") else {}
+kinds = collections.defaultdict(lambda: [0, 0.0]); coreloss = collections.Counter(); coren = collections.Counter()
+habits = collections.defaultdict(list)
+for g, (moves, max_wp) in zip(analysis, classified):
+    s = result(g); col = g["color"] == "white"
     color_score[g["color"]][0] += 1; color_score[g["color"]][1] += s
     if max_wp >= 85: conv[0] += 1; conv[1] += s == 1
     plies = g["plies"]
@@ -47,11 +60,17 @@ for g in analysis:
             h = hum.get((g["url"], m["ply"]), {})
             m.update({k: h[k] for k in ("p_best_human", "p_played_human", "findable") if k in h})
             m["color"] = g["color"]; m["url"] = g["url"]; m["date"] = g["end_time"]
-            for t in m["tags"]: tagloss[t] += m["loss"]; tagn[t] += 1
+            m["kind"] = kind(m)
+            for t in m["tags"]:
+                tagloss[t] += m["loss"]; tagn[t] += 1
+                if m["kind"] in ("habitude", "comprehension"): coreloss[t] += m["loss"] * WEIGHT[m["kind"]]; coren[t] += 1
             if m["sev"] in ("gaffe", "erreur"):
+                kinds[m["kind"]][0] += 1; kinds[m["kind"]][1] += m["loss"]
                 m["text"] = explain(m); m["id"] = f'{g["url"].split("/")[-1]}-{m["ply"]}'
+                if m["id"] in plans: m["goal"] = plans[m["id"]]
+                if m["kind"] == "habitude" and seen[(key(m["fen"]), m["san"])] >= 2: habits[(key(m["fen"]), m["san"])].append(m["id"])
                 m["refutation_san"] = san_line(chess.Board(m["fen"]).fen(), [m["uci"]] + m["refutation"], 7)
-                mistakes.append({k: m[k] for k in ("id", "fen", "san", "uci", "best", "best_san", "good", "loss", "sev", "phase", "clk", "tags", "text", "url", "date", "color", "move_no", "wp_before", "wp_after", "findable", "p_best_human", "best_pv", "refutation_san") if k in m})
+                mistakes.append({k: m[k] for k in ("id", "fen", "san", "uci", "best", "best_san", "good", "loss", "sev", "phase", "clk", "tags", "text", "url", "date", "color", "move_no", "wp_before", "wp_after", "findable", "p_best_human", "best_pv", "refutation_san", "kind", "goal") if k in m})
                 if not worst or m["loss"] > worst["loss"]: worst = m
     opp = g["black"] if col else g["white"]
     games.append({"url": g["url"], "date": g["end_time"], "color": g["color"], "score": s, "opp": opp["username"], "opp_elo": opp["rating"],
@@ -89,7 +108,10 @@ out = {"generated": int(time.time()), "user": "maxthechessnoob", "time_class": "
        "conversion": {"winning": conv[0], "won": conv[1]},
        "phase": {k: {"moves": v[0], "avg_loss": round(v[1]/v[0], 2), "serious": v[2], "per100": round(100*v[2]/v[0], 2)} for k, v in phase.items()},
        "clock": {k: {"moves": v[0], "avg_loss": round(v[1]/v[0], 2)} for k, v in clock.items()},
-       "tags": [{"tag": t, "label": TAG_FR[t], "n": tagn[t], "loss": round(tagloss[t])} for t in sorted(tagloss, key=lambda t: -tagloss[t])],
+       "tags": [{"tag": t, "label": TAG_FR[t], "n": tagn[t], "loss": round(tagloss[t]), "core_n": coren[t], "core_loss": round(coreloss[t])} for t in sorted(tagloss, key=lambda t: -tagloss[t])],
+       "kinds": {k: {"n": v[0], "loss": round(v[1])} for k, v in kinds.items()},
+       "openings": json.load(open("content/openings.json")) if os.path.exists("content/openings.json") else [],
+       "habits": sorted(({"san": k[1], "n": seen[k], "ids": v} for k, v in habits.items()), key=lambda h: -h["n"])[:20],
        "findable": {"serious": len(mistakes), "findable": sum(1 for m in mistakes if m.get("findable"))},
        "repertoire": rep[:80], "trouble": trouble[:15], "comfort": comfort[:15], "mistakes": mistakes, "games": sorted(games, key=lambda x: -x["date"])}
 import os
