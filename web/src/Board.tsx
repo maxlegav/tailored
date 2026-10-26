@@ -10,7 +10,7 @@ export default function Board({ fen, orientation = 'white', arrows = [], onMove,
         arrows: arrows.map(a => ({ startSquare: a.from, endSquare: a.to, color: a.color || 'rgba(0,160,60,0.8)' })),
         squareStyles,
         onPieceDrop: ({ sourceSquare, targetSquare }) => (onMove && targetSquare ? onMove(sourceSquare, targetSquare) : false),
-        darkSquareStyle: { backgroundColor: '#769656' }, lightSquareStyle: { backgroundColor: '#eeeed2' },
+        darkSquareStyle: { backgroundColor: '#739552' }, lightSquareStyle: { backgroundColor: '#ebecd0' },
       }} />
     </div>
   )

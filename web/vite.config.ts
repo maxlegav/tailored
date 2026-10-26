@@ -9,15 +9,15 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: 'Mon Coach d\'Échecs',
-        short_name: 'Coach',
+        name: 'Tailored',
+        short_name: 'Tailored',
         lang: 'fr',
         display: 'standalone',
-        background_color: '#1e1e1e',
-        theme_color: '#769656',
-        icons: [{ src: 'icon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' }],
+        background_color: '#312e2b',
+        theme_color: '#262421',
+        icons: [{ src: 'icon-192.png', sizes: '192x192', type: 'image/png' }, { src: 'icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any maskable' }, { src: 'icon.svg', sizes: 'any', type: 'image/svg+xml' }],
       },
-      workbox: { globPatterns: ['**/*.{js,css,html,svg,json}'], maximumFileSizeToCacheInBytes: 20 * 1024 * 1024 },
+      workbox: { globPatterns: ['**/*.{js,css,html,svg,json,png}'], maximumFileSizeToCacheInBytes: 20 * 1024 * 1024 },
     }),
   ],
 })
