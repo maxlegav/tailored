@@ -12,7 +12,7 @@ App : https://maxlegav.github.io/tailored/
 Pipeline (Python 3, `.venv` with `chess`, `maia2`; Stockfish binary at `~/bin/stockfish`):
 
 ```
-python3 fetch.py maxthechessnoob blitz 1000                        # chess.com public API -> data/blitz.json
+python3 fetch.py maxthechessnoob blitz 365                         # last 365 days, chess.com public API -> data/blitz.json
 python3 analyze.py data/blitz.json data/blitz_analysis.jsonl       # Stockfish, resumable
 .venv/bin/python profile.py data/blitz_analysis.jsonl              # mistakes -> data/profile.json
 .venv/bin/python humanize.py data/profile.json                     # Maia 1900: is the best move findable?
