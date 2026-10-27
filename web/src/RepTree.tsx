@@ -27,15 +27,19 @@ export default function RepTree({ tree, onPlan }: { tree: { white: TreeNode; bla
           <div className="crumbs"><span onClick={() => go([])}>Départ</span>{nodes.slice(1).map((n, i) => <span key={i} onClick={() => go(path.slice(0, i + 1))}> › {n.san}</span>)}</div>
           <p className="small muted">{node.n} parties ici · {Math.round(node.score * 100)} % de points{node.eval != null ? ` · moteur ${mine(node.eval)} pour toi` : ''}{node.best ? ` · coup du moteur : ${node.best}` : ''}</p>
           {node.plans?.map(id => <button key={id} className="btn" onClick={() => onPlan(id)}>Voir le plan de cette ouverture</button>)}
+          <p className="small muted"><span className="dot good" /> bon <span className="dot ok" /> jouable <span className="dot bad" /> {myTurn ? 'mauvais' : 'dangereux pour toi'} · jugé selon le moteur ET tes résultats</p>
           <h3>{myTurn ? 'Ce que tu joues ici' : 'Ce que l\'adversaire joue ici'}</h3>
           {!node.kids.length && <p className="muted">Pas assez de parties pour aller plus loin (minimum 3).</p>}
           {node.kids.map((k, i) => {
             const v = k.verdict && VERD[k.verdict]
             return (
               <div key={k.san} className="tnode" onClick={() => go([...path, i])}>
-                <div className="tn-h"><b>{k.san}</b>{k.san === node.best && <span className="evalchip">★ moteur</span>}{v && <span className={`tag ${v[1]}`}>{v[0]}</span>}
+                <div className="tn-h"><span className={`dot ${k.grade || 'none'}`} /><b>{k.san}</b>{k.san === node.best && <span className="evalchip">★ moteur</span>}{v && <span className={`tag ${v[1]}`}>{v[0]}</span>}
                   <span className="tn-s">{k.n} parties · {Math.round(k.score * 100)} %</span></div>
                 <div className="bar"><div style={{ width: `${Math.round(k.score * 100)}%` }} /></div>
+                {!myTurn && k.grade === 'good' && <p className="small">Imprécis de sa part (environ {((k.delta || 0) / 100).toFixed(1)} pour toi) : la position s'améliore pour toi ici.</p>}
+                {!myTurn && k.grade === 'bad' && <p className="small">Bonne réponse de sa part : la position se complique pour toi ({((k.delta || 0) / 100).toFixed(1)}). C'est ici qu'il faut connaître ton plan.</p>}
+                {myTurn && k.grade === 'good' && !k.verdict && <p className="small">Bon coup : il garde ou améliore la position.</p>}
                 {k.verdict === 'bad' && <p className="small">Tu le joues souvent mais tu perds en moyenne {k.loss} % de chances de gain sur ce coup. Joue plutôt <b>{node.best}</b>.</p>}
                 {k.verdict === 'risky' && <p className="small">Mauvais selon le moteur (−{k.loss} %), mais il te réussit encore. Garde-le seulement si tu as un piège précis en tête, sinon passe à <b>{node.best}</b>.</p>}
                 {k.verdict === 'idea' && <p className="small">Pas le meilleur coup du moteur (−{k.loss} %, il préfère {node.best}), mais tu marques {Math.round(k.score * 100)} % avec : c'est une position qui te va, tu peux le garder.</p>}

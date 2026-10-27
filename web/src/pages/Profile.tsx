@@ -1,5 +1,7 @@
 import type { Data } from '../types'
+import { useState } from 'react'
 import { stats } from '../srs'
+import { isClosed, loadDB, mark } from '../progress'
 
 const pct = (x: number) => `${Math.round(x * 100)}%`
 export default function Profile({ data }: { data: Data }) {
@@ -8,7 +10,11 @@ export default function Profile({ data }: { data: Data }) {
   const maxLoss = Math.max(...tags.map(t => t.loss))
   const top = [...tags].sort((a, b) => (b.core_loss ?? b.loss) - (a.core_loss ?? a.loss)).slice(0, 3)
   const k = data.kinds || {}
-  const habits = (data.habits || []).filter(h => h.n >= 3)
+  const [db, setDb] = useState(loadDB)
+  const hd = (ids: string[]) => ids.map(i => data.mistakes.find(m => m.id === i)?.date || 0)
+  const allH = (data.habits || []).filter(h => h.n >= 2)
+  const habits = allH.filter(h => !isClosed(db.habits[h.ids[0]], hd(h.ids))).slice(0, 5)
+  const fixedN = allH.length - allH.filter(h => !isClosed(db.habits[h.ids[0]], hd(h.ids))).length
   const phases = ['ouverture', 'milieu', 'finale'].filter(p => data.phase[p])
   return (
     <div className="page">
@@ -27,7 +33,9 @@ export default function Profile({ data }: { data: Data }) {
           <a key={id} className="card" href={`#/entrainement?kind=${id}`}><b>{k[id]?.n ?? 0}</b><span style={{ color: '#fff', fontWeight: 700 }}>{l}</span><br /><span className="small">{d}</span></a>)}
       </div>
       {habits.length > 0 && <><h2>Tes habitudes à corriger</h2>
-        {habits.map(h => <a key={h.ids[0]} className="planrow" href={`#/entrainement?kind=habitude`}><span className="rank">{h.n}×</span><span><b>{h.san}</b>, joué {h.n} fois dans la même position<br /><span className="small">s'entraîner sur cette position →</span></span></a>)}</>}
+        <p className="muted">Coche « Corrigé » quand tu as compris : l'habitude disparaît, et revient seulement si tu la rejoues dans une nouvelle partie.{fixedN ? ` ${fixedN} déjà corrigée(s).` : ''}</p>
+        {habits.map(h => <div key={h.ids[0]} className="planrow"><span className="rank">{h.n}×</span><a href={`#/entrainement?kind=habitude`} style={{ flex: 1 }}><b>{h.san}</b>, joué {h.n} fois dans la même position<br /><span className="small">s'entraîner sur cette position →</span></a>
+          <button onClick={() => setDb(mark('habits', h.ids[0], true))}>✓ Corrigé</button></div>)}</>}
       <h2>Le plan du coach</h2>
       <p className="muted">Les 3 thèmes qui te coûtent le plus, accidents et zeitnot mis de côté.</p>
       <div className="plan">

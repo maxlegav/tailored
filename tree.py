@@ -24,7 +24,7 @@ for g in analysis:
             node["best"] = b.san(chess.Move.from_uci(t["uci"])); node["best_uci"] = t["uci"]
             node["eval"] = sc(t["s"]) * (1 if b.turn == chess.WHITE else -1)
         node = k
-def prune(node, me_to_move, depth, line):
+def prune(node, me_to_move, depth, line, sign=1):
     kids = sorted(node["kids"].items(), key=lambda kv: -kv[1]["n"])
     keep = [(s, k) for s, k in kids if k["n"] >= 3][:6]
     out = {"n": node["n"], "score": round(node["pts"] / node["n"], 2)}
@@ -32,7 +32,7 @@ def prune(node, me_to_move, depth, line):
         if f in node: out[f] = node[f]
     out["kids"] = []
     for san, k in keep:
-        c = prune(k, not me_to_move, depth + 1, line + [san])
+        c = prune(k, not me_to_move, depth + 1, line + [san], sign)
         c["san"] = san; c["uci"] = k["uci"]
         if me_to_move and k["nl"]:
             c["loss"] = round(k["loss"] / k["nl"], 1)
@@ -40,11 +40,19 @@ def prune(node, me_to_move, depth, line):
                 c["verdict"] = "bad" if c["score"] < 0.55 else "risky"
             elif c["loss"] >= 4 and c["score"] >= 0.55:
                 c["verdict"] = "idea"
+        pe, ce = node.get("eval"), c.get("eval")
+        if me_to_move:
+            l = c.get("loss", 0)
+            c["grade"] = "good" if (san == node.get("best") or l < 3) else "ok" if (l < 8 or (c["score"] >= 0.55 and l < 12)) else "bad"
+        elif pe is not None and ce is not None:
+            d = (ce - pe) * sign
+            c["grade"] = "good" if d >= 40 else "bad" if d <= -40 else "ok"
+            c["delta"] = d
         out["kids"].append(c)
     return out
 tree = {}
 for col, root in roots.items():
-    tree[col] = prune(root, col == "white", 0, [])
+    tree[col] = prune(root, col == "white", 0, [], 1 if col == "white" else -1)
 # link the opening plans (content/openings.json) to the node reached by their recommended line
 for o in openings:
     node = tree[o["color"]]; depth = 0

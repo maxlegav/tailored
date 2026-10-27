@@ -30,7 +30,7 @@ export type Data = {
   book_guide?: GuideItem[]
   tree?: { white: TreeNode; black: TreeNode }
 }
-export type TreeNode = { n: number; score: number; fen?: string; best?: string; best_uci?: string; eval?: number; san?: string; uci?: string; loss?: number; verdict?: 'bad' | 'risky' | 'idea'; plans?: string[]; kids: TreeNode[] }
+export type TreeNode = { n: number; score: number; fen?: string; best?: string; best_uci?: string; eval?: number; san?: string; uci?: string; loss?: number; verdict?: 'bad' | 'risky' | 'idea'; grade?: 'good' | 'ok' | 'bad'; delta?: number; plans?: string[]; kids: TreeNode[] }
 export type GuideItem = { concept: string; title: string; pages: string; minutes: number; tags: string[]; why: string; change: string[] }
 export type BookConcept = { title: string; ch: number; pages: string; advice: string; question: string; exercises?: { label: string; pages: string; solutions: number } }
 export type Book = { book: { title: string; author: string; short: string; note: string }; concepts: Record<string, BookConcept>; tags: Record<string, string[]> }

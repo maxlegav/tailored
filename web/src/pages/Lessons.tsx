@@ -5,9 +5,14 @@ import { Md } from '../md'
 import Board from '../Board'
 import AnalysisBoard from '../AnalysisBoard'
 import { BookConceptCard, conceptsFor } from '../BookBox'
+import { isClosed, loadDB, mark } from '../progress'
 
 export default function Lessons({ data }: { data: Data }) {
-  const [open, setOpen] = useState<string | null>(data.lessons?.[0]?.id ?? null)
+  const [db, setDb] = useState(loadDB)
+  const dates = (ids: string[] = []) => ids.map(i => data.mistakes.find(m => m.id === i)?.date || 0)
+  const lessons = (data.lessons || []).filter(l => !isClosed(db.lessons[l.id], dates(l.mistakes)))
+  const doneL = (data.lessons || []).filter(l => isClosed(db.lessons[l.id], dates(l.mistakes)))
+  const [open, setOpen] = useState<string | null>(lessons[0]?.id ?? null)
   const book = data.book
   const core = useMemo(() => data.mistakes.filter(m => m.kind === 'habitude' || m.kind === 'comprehension'), [data])
   const chapters = useMemo(() => {
@@ -20,15 +25,19 @@ export default function Lessons({ data }: { data: Data }) {
   return (
     <div className="page">
       <h1>Cours</h1>
-      {(data.lessons || []).map(l => (
+      {!lessons.length && <p className="muted">Tu as lu tous les cours. De nouveaux arrivent avec la mise à jour du lundi.</p>}
+      {lessons.map(l => (
         <div key={l.id} className="lesson">
           <h2 onClick={() => setOpen(open === l.id ? null : l.id)}>{l.title}</h2>
           {open === l.id && <><Md text={l.body} />
             {(l.mistakes || []).map(id => data.mistakes.find(m => m.id === id)).filter(m => !!m).map(m => (
               <div key={m!.id} className="item"><AnalysisBoard fen={m!.fen} line={m!.best_pv} orientation={m!.color} engineReply arrows={[{ from: m!.uci.slice(0, 2), to: m!.uci.slice(2, 4), color: 'rgba(200,60,60,0.8)' }]} />
                 <div><Md text={m!.text} /><p className="muted">Flèche rouge : ton coup dans la partie. ▶ Jouer : la bonne suite. <a href={m!.url} target="_blank">Partie</a></p></div></div>))}
-            {l.tag && <Link className="btn" to={`/entrainement?tag=${encodeURIComponent(l.tag)}`}>S'entraîner sur ce thème</Link>}</>}
+            <div className="row">{l.tag && <Link className="btn" to={`/entrainement?tag=${encodeURIComponent(l.tag)}`}>S'entraîner sur ce thème</Link>}
+              <label className="check"><input type="checkbox" checked={false} onChange={() => setDb(mark('lessons', l.id, true))} /> Lu et compris : retirer ce cours (il reviendra si tu refais l'erreur)</label></div></>}
         </div>))}
+      {!!doneL.length && <details className="done-list"><summary>Cours déjà lus ({doneL.length})</summary>
+        {doneL.map(l => <p key={l.id}>{l.title} <button onClick={() => setDb(mark('lessons', l.id, false))}>Remettre</button></p>)}</details>}
       {book && <div className="bk-list">
         <h1 style={{ marginTop: 28 }}>Le livre : {book.book.title}</h1>
         <p className="muted">{book.book.author}. Chaque thème du livre est relié à tes positions d'entraînement, classé selon le nombre de tes erreurs d'habitude ou de compréhension qui le concernent. {book.book.note}</p>
