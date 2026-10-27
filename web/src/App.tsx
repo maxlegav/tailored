@@ -21,7 +21,7 @@ const Brand = () => <NavLink to="/" className="brand"><img src="./icon.svg" alt=
 
 export default function App() {
   const [data, setData] = useState<Data | null>(null)
-  useEffect(() => { fetch('./data.json').then(r => r.json()).then(setData) }, [])
+  useEffect(() => { fetch('./data.json', { cache: 'no-cache' }).then(r => r.json()).then(setData) }, [])
   return (
     <div className="app">
       <aside className="side">

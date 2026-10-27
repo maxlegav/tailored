@@ -101,3 +101,16 @@ button.on, .controls button, .btn.primary { background: var(--green); box-shadow
 .guide-item { display: grid; grid-template-columns: 36px 1fr; gap: 12px; background: var(--panel); border-radius: 8px; padding: 14px; margin: 10px 0; line-height: 1.5; }
 .guide-item ul { margin: 4px 0 8px; padding-left: 20px; }
 .guide-n { width: 32px; height: 32px; border-radius: 50%; background: var(--green); color: #fff; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+.ab-ctl { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0; }
+.ab-ctl button { min-width: 44px; }
+.ab-idea { background: #2b3a22; border-radius: 6px; padding: 6px 10px; margin: 6px 0; color: #e8f0dc; }
+.ab-moves { line-height: 1.9; font-size: .92rem; }
+.ab-moves span { cursor: pointer; padding: 2px 3px; border-radius: 4px; }
+.ab-moves span.on { background: #5b5a56; color: #fff; }
+.ab-moves span.mine { color: #9fd0ff; }
+.crumbs { font-size: .9rem; margin-bottom: 6px; } .crumbs span { cursor: pointer; color: #9fd0ff; }
+.tnode { background: var(--panel); border-radius: 8px; padding: 10px 12px; margin: 8px 0; cursor: pointer; }
+.tnode:hover { outline: 1px solid #5b5a56; }
+.tn-h { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; } .tn-s { margin-left: auto; font-size: .85rem; color: #bbb; }
+.tnode .bar { height: 6px; background: #3a3936; border-radius: 3px; margin-top: 6px; } .tnode .bar div { height: 6px; background: var(--green); border-radius: 3px; }
+.tag { font-size: .75rem; padding: 2px 6px; border-radius: 4px; } .tag.bad { background: #8a2c2c; } .tag.warn { background: #8a6a2c; } .tag.idea { background: #2c5f8a; }

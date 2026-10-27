@@ -2,23 +2,29 @@ import { useState } from 'react'
 import type { Data } from '../types'
 import Board from '../Board'
 import LinePlayer from '../LinePlayer'
+import RepTree from '../RepTree'
 import type { Opening } from '../types'
 
 export default function Repertoire({ data }: { data: Data }) {
-  const [tab, setTab] = useState<'plans' | 'verdicts' | 'trouble' | 'comfort'>('plans')
+  const [tab, setTab] = useState<'tree' | 'plans' | 'verdicts' | 'trouble' | 'comfort'>(data.tree ? 'tree' : 'plans')
+  const [focus, setFocus] = useState<string | null>(null)
   const nodes = data.repertoire.filter(r => r.verdict)
   return (
     <div className="page">
       <h1>Ton répertoire</h1>
       <div className="seg">
-        <button className={tab === 'plans' ? 'on' : ''} onClick={() => setTab('plans')}>Plans ({data.openings?.length ?? 0})</button>
+        {data.tree && <button className={tab === 'tree' ? 'on' : ''} onClick={() => setTab('tree')}>Ton arbre</button>}
+        <button className={tab === 'plans' ? 'on' : ''} onClick={() => { setFocus(null); setTab('plans') }}>Plans ({data.openings?.length ?? 0})</button>
         <button className={tab === 'verdicts' ? 'on' : ''} onClick={() => setTab('verdicts')}>À corriger ({nodes.length})</button>
         <button className={tab === 'trouble' ? 'on' : ''} onClick={() => setTab('trouble')}>Lignes difficiles</button>
         <button className={tab === 'comfort' ? 'on' : ''} onClick={() => setTab('comfort')}>Tes points forts</button>
       </div>
+      {tab === 'tree' && data.tree && <><p className="muted">Ton répertoire tel que tu le joues vraiment, tiré de tes parties. Touche un coup (ou joue-le sur l'échiquier) pour descendre dans l'arbre.</p>
+        <RepTree tree={data.tree} onPlan={id => { setFocus(id); setTab('plans') }} /></>}
       {tab === 'plans' && <>
         <p className="muted">Les lignes choisies à partir de tes parties : ce que tu joues, ce qu'on change, et surtout le plan. Appuie sur ▶ pour voir la suite. Évaluations vérifiées par Stockfish, de ton point de vue.</p>
-        {(data.openings || []).map(o => <OpeningCard key={o.id} o={o} />)}</>}
+        {(data.openings || []).filter(o => !focus || o.id === focus).map(o => <OpeningCard key={o.id} o={o} />)}
+        {focus && <button className="btn" onClick={() => setFocus(null)}>Voir tous les plans</button>}</>}
       {tab === 'verdicts' && nodes.map(r => {
         const black = r.fen.split(' ')[1] === 'b'
         return (

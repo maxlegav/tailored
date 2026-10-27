@@ -6,7 +6,7 @@ import Board from '../Board'
 import Coach from '../Coach'
 import { Md } from '../md'
 import { dueIds, grade } from '../srs'
-import { analyse } from '../lib/engine'
+import AnalysisBoard from '../AnalysisBoard'
 import { pieceList, sanLine, uciOf } from '../lib/chess'
 
 const KINDS: Record<string, string> = {
@@ -22,11 +22,12 @@ export default function Train({ data }: { data: Data }) {
   const [kind, setKind] = useState<string>(params.get('kind') || 'prio')
   const [silman, setSilman] = useState<string>(params.get('silman') || '')
   const [onlyFindable, setOnlyFindable] = useState(true)
+  const [withObvious, setWithObvious] = useState(false)
   useEffect(() => { setTag(params.get('tag') || ''); setKind(params.get('kind') || 'prio'); setSilman(params.get('silman') || '') }, [params])
   const bookEx = useMemo(() => (data.book_ex || []).map(e => fromBook(e, data)), [data])
   const pool = useMemo(() => kind === 'livre' ? bookEx.filter(m => !silman || m.tags.includes(silman)) : data.mistakes.filter(m => (!tag || m.tags.includes(tag)) && (!onlyFindable || m.findable)
-    && (!silman || !data.book || conceptsFor(m, data.book, 3).includes(silman))
-    && (kind === 'all' || (kind === 'prio' ? m.kind === 'habitude' || m.kind === 'comprehension' : m.kind === kind))), [data, tag, onlyFindable, kind, silman, bookEx])
+    && (!silman || !data.book || conceptsFor(m, data.book, 3).includes(silman)) && (withObvious || !obvious(m))
+    && (kind === 'all' || (kind === 'prio' ? m.kind === 'habitude' || m.kind === 'comprehension' : m.kind === kind))), [data, tag, onlyFindable, kind, silman, bookEx, withObvious])
   const all = kind === 'livre' ? bookEx : data.mistakes
   const [queue, setQueue] = useState<string[]>([])
   const [idx, setIdx] = useState(0)
@@ -49,6 +50,7 @@ export default function Train({ data }: { data: Data }) {
           <option value="">Tous les thèmes de {data.book.book.short}</option>
           {Object.entries(data.book.concepts).map(([k, c]) => <option key={k} value={k}>{data.book!.book.short} : {c.title}</option>)}
         </select>}
+        <label><input type="checkbox" checked={withObvious} onChange={e => setWithObvious(e.target.checked)} /> Inclure les coups évidents (prises, gaffes à punir)</label>
         <label><input type="checkbox" checked={onlyFindable} onChange={e => setOnlyFindable(e.target.checked)} /> Seulement les coups à ma portée</label>
         <button onClick={start}>Nouvelle série ({Math.min(10, pool.length)})</button>
       </div>
@@ -76,79 +78,49 @@ ${tried ? `Dans l'exercice, Max vient d'essayer ${tried}.` : ''}`
 function Puzzle({ m, book, onDone, n, total }: { m: Mistake; book: Data; onDone: (ok: boolean) => void; n: number; total: number }) {
   const isBook = m.id.startsWith('silman-')
   const [fen, setFen] = useState(m.fen)
-  const [state, setState] = useState<'play' | 'ok' | 'ko' | 'free'>('play')
+  const [state, setState] = useState<'play' | 'ok' | 'ko'>('play')
   const [tried, setTried] = useState<string | null>(null)
-  const [solved, setSolved] = useState(false)
   const [last, setLast] = useState<[string, string] | undefined>()
-  const [hist, setHist] = useState<string[]>([])
-  const [thinking, setThinking] = useState(false)
   const me = m.color === 'white' ? 'w' : 'b'
-
   const tryMove = (from: string, to: string) => {
     const r = uciOf(m.fen, from, to); if (!r) return false
     const ok = m.good.some(g => g.slice(0, 4) === r.uci.slice(0, 4))
-    setFen(r.fen); setLast([from, to]); setTried(r.san); setState(ok ? 'ok' : 'ko'); setSolved(ok); grade(m.id, ok)
+    setFen(r.fen); setLast([from, to]); setTried(r.san); setState(ok ? 'ok' : 'ko'); grade(m.id, ok)
     return true
-  }
-  const freeMove = (from: string, to: string) => {
-    if (thinking) return false
-    const r = uciOf(fen, from, to); if (!r) return false
-    setHist(h => [...h, fen]); setFen(r.fen); setLast([from, to]); setThinking(true)
-    analyse(r.fen, { movetime: 600 }).then(ls => {
-      const u = ls[0]?.pv[0]
-      const rr = u && uciOf(r.fen, u.slice(0, 2), u.slice(2, 4))
-      if (rr) { setFen(rr.fen); setLast([u.slice(0, 2), u.slice(2, 4)]) }
-      setThinking(false)
-    })
-    return true
-  }
-  const continueFrom = (f: string) => {
-    setState('free'); setHist([]); setLast(undefined)
-    const turnIsMe = f.split(' ')[1] === me
-    if (turnIsMe) { setFen(f); return }
-    setFen(f); setThinking(true)
-    analyse(f, { movetime: 600 }).then(ls => {
-      const u = ls[0]?.pv[0]; const rr = u && uciOf(f, u.slice(0, 2), u.slice(2, 4))
-      if (rr) { setFen(rr.fen); setLast([u.slice(0, 2), u.slice(2, 4)]) }
-      setThinking(false)
-    })
   }
   const side = m.color === 'white' ? 'Blancs' : 'Noirs'
   const revealed = state !== 'play'
+  const red = m.uci && !isBook ? [{ from: m.uci.slice(0, 2), to: m.uci.slice(2, 4), color: 'rgba(200,60,60,0.75)' }] : []
   return (
     <div className="puzzle">
       <div className="pz-board">
         <p className="muted">{n}/{total} · {isBook ? m.phase : `${m.phase} · coup ${m.move_no}`} · tu as les {side}{m.clk != null ? ` · ${Math.round(m.clk)} s à la pendule` : ''}</p>
-        <Board fen={fen} orientation={m.color} lastMove={last}
-          onMove={state === 'play' ? tryMove : state === 'free' ? freeMove : undefined}
-          arrows={state === 'ok' || state === 'ko' ? [{ from: m.best.slice(0, 2), to: m.best.slice(2, 4) }] : []} />
-        {state === 'free' && <div className="row">
-          <span className="small">{thinking ? 'Le moteur réfléchit…' : 'À toi : le moteur répond à chaque coup.'}</span>
-          <button disabled={!hist.length || thinking} onClick={() => { setFen(hist[hist.length - 1]); setHist(h => h.slice(0, -1)); setLast(undefined) }}>↶ Annuler</button>
-          <button onClick={() => { setFen(m.fen); setHist([]); setLast(undefined) }}>⟲ Départ</button>
-        </div>}
+        {revealed
+          ? <AnalysisBoard fen={m.fen} line={m.best_pv} orientation={m.color} engineReply arrows={red} />
+          : <Board fen={fen} orientation={m.color} lastMove={last} onMove={tryMove} />}
+        {revealed && <p className="small muted">▶ Jouer anime la bonne suite (flèche bleue = coup suivant{red.length ? ', flèche rouge = ton coup dans la partie' : ''}). Tu peux aussi bouger les pièces : le moteur te répond.</p>}
       </div>
       <div className="pz-side">
         {state === 'play' && (isBook ? <p>À toi de jouer, trait aux {side}. Commence par lister les déséquilibres, puis cherche le coup qui en profite.</p>
           : <p>À toi de jouer. Pendant la partie, tu avais joué <b>{m.san}</b>. Touche une pièce pour voir ses coups.</p>)}
         {state === 'ok' && <p className="good">Bien joué : {tried} !</p>}
-        {state === 'ko' && <p className="bad">{tried} n'est pas le bon coup. La flèche montre {m.best_san}.</p>}
+        {state === 'ko' && <p className="bad">{tried} n'est pas le bon coup. Le bon coup : {m.best_san}.</p>}
         {revealed && <>
-          {m.goal && <div className="goal"><div className="goal-h">Le but de la position</div><Md text={m.goal} /></div>}
+          {m.goal && <div className="goal"><div className="goal-h">{state === 'ok' ? 'Pourquoi c\'est le bon coup' : 'Le but de la position'}</div><Md text={m.goal} /></div>}
           <BookBox m={m} book={book.book} />
           <div className="explain"><Md text={m.text} />{!isBook && <><p className="muted">Ce qui s'est passé : {m.refutation_san}</p>
             <p className="small"><a href={m.url} target="_blank">Voir la partie sur chess.com</a></p></>}</div>
-          <div className="row">
-            {state !== 'free' && <button onClick={() => continueFrom(fen)}>▶ Continuer à jouer</button>}
-            {state !== 'free' && !solved && <button onClick={() => { const r = uciOf(m.fen, m.best.slice(0, 2), m.best.slice(2, 4)); if (r) continueFrom(r.fen) }}>▶ Jouer à partir de {m.best_san}</button>}
-            <button className="btn primary" onClick={() => onDone(solved)}>Suivant →</button>
-          </div>
+          <div className="row"><button className="btn primary" onClick={() => onDone(state === 'ok')}>Suivant →</button></div>
           <Coach context={context(m, tried)} fen={m.fen} pov={me}
             suggestions={['Quel est le plan ici ?', `Pourquoi ${m.best_san} ?`, ...(isBook ? ['Quels sont les déséquilibres ?'] : [`Pourquoi ${m.san} était mauvais ?`]), ...(tried && tried !== m.best_san && tried !== m.san ? [`Et ${tried}, pourquoi pas ?`] : [])]} />
         </>}
       </div>
     </div>
   )
+}
+export function obvious(m: Mistake) {
+  const p = m.p_best_human ?? 0
+  return p >= 0.6 || (/[x+#]/.test(m.best_san) && p >= 0.25) || m.tags.includes('mat_manqué')
 }
 function fromBook(e: BookEx, data: Data): Mistake {
   const c = e.concept && data.book?.concepts[e.concept]
