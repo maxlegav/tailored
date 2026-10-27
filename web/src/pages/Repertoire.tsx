@@ -36,7 +36,7 @@ export default function Repertoire({ data }: { data: Data }) {
               <p className="muted">★ = choix du moteur{r.engine && !r.moves[r.engine] ? ` (${r.engine}, jamais joué par toi)` : ''}</p></div>
           </div>)
       })}
-      {tab !== 'verdicts' && (tab === 'trouble' ? data.trouble : data.comfort).map(l => (
+      {(tab === 'trouble' || tab === 'comfort') && (tab === 'trouble' ? data.trouble : data.comfort).map(l => (
         <div key={l.fen} className="item">
           <Board fen={l.fen} orientation={l.fen.split(' ')[1] === 'b' ? 'black' : 'white'} />
           <div><p><b>{l.line}</b></p><p>{l.n} parties, {Math.round(l.score * 100)}% de points.</p></div>

@@ -94,11 +94,11 @@ export default function AnalysisBoard({ fen, line = [], orientation = 'white', a
     <div className="ab">
       <Board fen={cur} orientation={orientation} arrows={arr} lastMove={last ? [last.uci.slice(0, 2), last.uci.slice(2, 4)] : undefined} onMove={userMove} />
       <div className="ab-ctl">
-        <button onClick={() => { setPlaying(false); setIdx(0) }} aria-label="Début">⏮</button>
+        <button onClick={() => { setPlaying(false); setIdx(0) }} aria-label="Début">|◀</button>
         <button onClick={() => { setPlaying(false); setIdx(i => Math.max(0, i - 1)) }} aria-label="Précédent">◀</button>
         <button className="primary" onClick={() => { if (idx >= moves.length) setIdx(0); setPlaying(p => !p) }}>{playing ? '❚❚' : '▶ Jouer'}</button>
         <button onClick={() => { setPlaying(false); setIdx(i => Math.min(moves.length, i + 1)) }} aria-label="Suivant">▶</button>
-        <button onClick={() => { setPlaying(false); setIdx(moves.length) }} aria-label="Fin">⏭</button>
+        <button onClick={() => { setPlaying(false); setIdx(moves.length) }} aria-label="Fin">▶|</button>
         {changed && <button onClick={() => { setPlaying(false); setMoves(orig); setIdx(0) }}>↺ Ligne d'origine</button>}
       </div>
       {thinking && <p className="small muted">Le moteur réfléchit…</p>}
