@@ -118,6 +118,12 @@ import os
 if os.path.exists("content/lessons.json"):
     ids = {m["id"] for m in mistakes}
     out["lessons"] = [dict(l, mistakes=[i for i in l.get("mistakes", []) if i in ids]) for l in json.load(open("content/lessons.json"))]
+if os.path.exists("content/silman.json"):
+    out["book"] = json.load(open("content/silman.json"))
+    sil = json.load(open("data/silman.json")) if os.path.exists("data/silman.json") else {}
+    for m in mistakes:
+        if m["id"] in sil: m["silman"] = sil[m["id"]]
+    if os.path.exists("content/silman_exercises.json"): out["book_ex"] = json.load(open("content/silman_exercises.json"))
 json.dump(out, open("web/public/data.json", "w"), ensure_ascii=False)
 print("ok", len(mistakes), "mistakes", len(rep), "rep nodes", len(trouble), "trouble", len(comfort), "comfort")
 for r in rep[:40]:

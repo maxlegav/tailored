@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import type { Data, Mistake } from '../types'
+import type { BookEx, Data, Mistake } from '../types'
+import BookBox, { conceptsFor } from '../BookBox'
 import Board from '../Board'
 import Coach from '../Coach'
 import { Md } from '../md'
@@ -11,6 +12,7 @@ import { pieceList, sanLine, uciOf } from '../lib/chess'
 const KINDS: Record<string, string> = {
   prio: 'Priorités : habitudes et compréhension', all: 'Toutes les positions',
   habitude: 'Habitudes à corriger', comprehension: 'Compréhension / plans', accident: 'Accidents (pièces en prise)', zeitnot: 'Zeitnot (< 20 s)',
+  livre: 'Exercices du livre de Silman',
 }
 export const KIND_LABEL: Record<string, string> = { habitude: 'Habitude', comprehension: 'Compréhension', accident: 'Accident', zeitnot: 'Zeitnot' }
 
@@ -18,16 +20,21 @@ export default function Train({ data }: { data: Data }) {
   const [params] = useSearchParams()
   const [tag, setTag] = useState<string>(params.get('tag') || '')
   const [kind, setKind] = useState<string>(params.get('kind') || 'prio')
+  const [silman, setSilman] = useState<string>(params.get('silman') || '')
   const [onlyFindable, setOnlyFindable] = useState(true)
-  const pool = useMemo(() => data.mistakes.filter(m => (!tag || m.tags.includes(tag)) && (!onlyFindable || m.findable)
-    && (kind === 'all' || (kind === 'prio' ? m.kind === 'habitude' || m.kind === 'comprehension' : m.kind === kind))), [data, tag, onlyFindable, kind])
+  useEffect(() => { setTag(params.get('tag') || ''); setKind(params.get('kind') || 'prio'); setSilman(params.get('silman') || '') }, [params])
+  const bookEx = useMemo(() => (data.book_ex || []).map(e => fromBook(e, data)), [data])
+  const pool = useMemo(() => kind === 'livre' ? bookEx.filter(m => !silman || m.tags.includes(silman)) : data.mistakes.filter(m => (!tag || m.tags.includes(tag)) && (!onlyFindable || m.findable)
+    && (!silman || !data.book || conceptsFor(m, data.book, 3).includes(silman))
+    && (kind === 'all' || (kind === 'prio' ? m.kind === 'habitude' || m.kind === 'comprehension' : m.kind === kind))), [data, tag, onlyFindable, kind, silman, bookEx])
+  const all = kind === 'livre' ? bookEx : data.mistakes
   const [queue, setQueue] = useState<string[]>([])
   const [idx, setIdx] = useState(0)
   const [score, setScore] = useState(0)
   const start = () => { setQueue(dueIds(shuffle(pool.map(m => m.id)), 10)); setIdx(0); setScore(0) }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(start, [pool])
-  const cur = queue[idx] ? data.mistakes.find(m => m.id === queue[idx]) : undefined
+  const cur = queue[idx] ? all.find(m => m.id === queue[idx]) : undefined
   return (
     <div className="page">
       <h1>Entraînement</h1>
@@ -38,10 +45,14 @@ export default function Train({ data }: { data: Data }) {
           <option value="">Tous les thèmes</option>
           {data.tags.map(t => <option key={t.tag} value={t.tag}>{t.label} ({t.n})</option>)}
         </select>
+        {data.book && <select value={silman} onChange={e => setSilman(e.target.value)}>
+          <option value="">Tous les thèmes de {data.book.book.short}</option>
+          {Object.entries(data.book.concepts).map(([k, c]) => <option key={k} value={k}>{data.book!.book.short} : {c.title}</option>)}
+        </select>}
         <label><input type="checkbox" checked={onlyFindable} onChange={e => setOnlyFindable(e.target.checked)} /> Seulement les coups à ma portée</label>
         <button onClick={start}>Nouvelle série ({Math.min(10, pool.length)})</button>
       </div>
-      {cur && <Puzzle key={cur.id} m={cur} onDone={ok => { setScore(s => s + (ok ? 1 : 0)); setIdx(i => i + 1) }} n={idx + 1} total={queue.length} />}
+      {cur && <Puzzle key={cur.id} m={cur} book={data} onDone={ok => { setScore(s => s + (ok ? 1 : 0)); setIdx(i => i + 1) }} n={idx + 1} total={queue.length} />}
       {pool.length === 0 && <p className="done">Aucune position pour ce filtre.</p>}
       {queue.length > 0 && !cur && <div className="done"><div className="big">{score}/{queue.length}</div><p>Série terminée. Les positions ratées reviendront demain.</p><button className="btn primary" onClick={start}>Encore une série</button></div>}
     </div>
@@ -62,7 +73,8 @@ But de la position déjà affiché : ${m.goal || '—'}
 ${tried ? `Dans l'exercice, Max vient d'essayer ${tried}.` : ''}`
 }
 
-function Puzzle({ m, onDone, n, total }: { m: Mistake; onDone: (ok: boolean) => void; n: number; total: number }) {
+function Puzzle({ m, book, onDone, n, total }: { m: Mistake; book: Data; onDone: (ok: boolean) => void; n: number; total: number }) {
+  const isBook = m.id.startsWith('silman-')
   const [fen, setFen] = useState(m.fen)
   const [state, setState] = useState<'play' | 'ok' | 'ko' | 'free'>('play')
   const [tried, setTried] = useState<string | null>(null)
@@ -106,7 +118,7 @@ function Puzzle({ m, onDone, n, total }: { m: Mistake; onDone: (ok: boolean) => 
   return (
     <div className="puzzle">
       <div className="pz-board">
-        <p className="muted">{n}/{total} · {m.phase} · coup {m.move_no} · tu as les {side}{m.clk != null ? ` · ${Math.round(m.clk)} s à la pendule` : ''}</p>
+        <p className="muted">{n}/{total} · {isBook ? m.phase : `${m.phase} · coup ${m.move_no}`} · tu as les {side}{m.clk != null ? ` · ${Math.round(m.clk)} s à la pendule` : ''}</p>
         <Board fen={fen} orientation={m.color} lastMove={last}
           onMove={state === 'play' ? tryMove : state === 'free' ? freeMove : undefined}
           arrows={state === 'ok' || state === 'ko' ? [{ from: m.best.slice(0, 2), to: m.best.slice(2, 4) }] : []} />
@@ -117,23 +129,36 @@ function Puzzle({ m, onDone, n, total }: { m: Mistake; onDone: (ok: boolean) => 
         </div>}
       </div>
       <div className="pz-side">
-        {state === 'play' && <p>À toi de jouer. Pendant la partie, tu avais joué <b>{m.san}</b>. Touche une pièce pour voir ses coups.</p>}
+        {state === 'play' && (isBook ? <p>À toi de jouer, trait aux {side}. Commence par lister les déséquilibres, puis cherche le coup qui en profite.</p>
+          : <p>À toi de jouer. Pendant la partie, tu avais joué <b>{m.san}</b>. Touche une pièce pour voir ses coups.</p>)}
         {state === 'ok' && <p className="good">Bien joué : {tried} !</p>}
         {state === 'ko' && <p className="bad">{tried} n'est pas le bon coup. La flèche montre {m.best_san}.</p>}
         {revealed && <>
           {m.goal && <div className="goal"><div className="goal-h">Le but de la position</div><Md text={m.goal} /></div>}
-          <div className="explain"><Md text={m.text} /><p className="muted">Ce qui s'est passé : {m.refutation_san}</p>
-            <p className="small"><a href={m.url} target="_blank">Voir la partie sur chess.com</a></p></div>
+          <BookBox m={m} book={book.book} />
+          <div className="explain"><Md text={m.text} />{!isBook && <><p className="muted">Ce qui s'est passé : {m.refutation_san}</p>
+            <p className="small"><a href={m.url} target="_blank">Voir la partie sur chess.com</a></p></>}</div>
           <div className="row">
             {state !== 'free' && <button onClick={() => continueFrom(fen)}>▶ Continuer à jouer</button>}
             {state !== 'free' && !solved && <button onClick={() => { const r = uciOf(m.fen, m.best.slice(0, 2), m.best.slice(2, 4)); if (r) continueFrom(r.fen) }}>▶ Jouer à partir de {m.best_san}</button>}
             <button className="btn primary" onClick={() => onDone(solved)}>Suivant →</button>
           </div>
           <Coach context={context(m, tried)} fen={m.fen} pov={me}
-            suggestions={['Quel est le plan ici ?', `Pourquoi ${m.best_san} ?`, `Pourquoi ${m.san} était mauvais ?`, ...(tried && tried !== m.best_san && tried !== m.san ? [`Et ${tried}, pourquoi pas ?`] : [])]} />
+            suggestions={['Quel est le plan ici ?', `Pourquoi ${m.best_san} ?`, ...(isBook ? ['Quels sont les déséquilibres ?'] : [`Pourquoi ${m.san} était mauvais ?`]), ...(tried && tried !== m.best_san && tried !== m.san ? [`Et ${tried}, pourquoi pas ?`] : [])]} />
         </>}
       </div>
     </div>
   )
+}
+function fromBook(e: BookEx, data: Data): Mistake {
+  const c = e.concept && data.book?.concepts[e.concept]
+  const pv = sanLine(e.fen, e.best_pv, 6)
+  const alt = e.best_san !== e.book_move ? ` Stockfish propose aussi ${e.best_san} (${pv}).` : ` Suite du moteur : ${pv}.`
+  return {
+    id: e.id, fen: e.fen, san: '', uci: e.book_uci, best: e.book_uci, best_san: e.book_move, good: e.good, loss: 0, sev: '', phase: `Silman, ${e.chapter}${e.level ? ` · niveau ${e.level}` : ''}`,
+    tags: e.concept ? [e.concept] : [], url: '', date: 0, color: e.color, move_no: Number(e.fen.split(' ')[5]), wp_before: 50, wp_after: 50, best_pv: e.best_pv, refutation_san: '',
+    text: `Exercice du livre (chapitre ${e.ch}, solution p. ${e.page}). Le coup de Silman : **${e.book_move}**.${alt} Lis l'explication complète dans le livre, p. ${e.page}.`,
+    goal: c ? `${c.title} : ${c.question}` : undefined,
+  }
 }
 function shuffle<T>(a: T[]) { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]] } return b }

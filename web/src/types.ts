@@ -4,6 +4,7 @@ export type Mistake = {
   color: 'white' | 'black'; move_no: number; wp_before: number; wp_after: number; findable?: boolean
   p_best_human?: number; best_pv: string[]; refutation_san: string
   kind?: 'habitude' | 'comprehension' | 'accident' | 'zeitnot'; goal?: string
+  silman?: [string, string][]
 }
 export type RepNode = { fen: string; total: number; moves: Record<string, { n: number; score: number; loss: number }>; main: string; engine?: string; verdict?: string }
 export type Opening = { id: string; color: 'white' | 'black'; title: string; stats: string; yours: string; rec: string; why: string; plan: string[]; line: string; line_title: string; line_text: string; line_eval?: number
@@ -24,4 +25,10 @@ export type Data = {
   findable: { serious: number; findable: number }
   repertoire: RepNode[]; trouble: Line[]; comfort: Line[]; mistakes: Mistake[]; games: Game[]
   lessons?: Lesson[]
+  book?: Book
+  book_ex?: BookEx[]
 }
+export type BookConcept = { title: string; ch: number; pages: string; advice: string; question: string; exercises?: { label: string; pages: string; solutions: number } }
+export type Book = { book: { title: string; author: string; short: string; note: string }; concepts: Record<string, BookConcept>; tags: Record<string, string[]> }
+export type BookEx = { id: string; fen: string; color: 'white' | 'black'; ch: number; chapter: string; concept?: string; page: number; level?: string
+  book_move: string; book_uci: string; good: string[]; best_san: string; best_pv: string[]; eval: number }

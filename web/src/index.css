@@ -90,3 +90,11 @@ button.on, .controls button, .btn.primary { background: var(--green); box-shadow
 .choice div { background: var(--panel2); border-radius: 6px; padding: 8px 10px; }
 .choice .rec { border: 2px solid var(--green); }
 .evalchip { display: inline-block; background: #1c1b19; border-radius: 4px; padding: 1px 6px; font-size: .78rem; font-weight: 700; margin-left: 6px; color: #fff; }
+.book { background: #2a2f3a; border-left: 4px solid #6c8ebf; border-radius: 8px; padding: 10px 14px; line-height: 1.5; color: #e4e9f2; margin-top: 10px; }
+.book ul { margin: 4px 0 8px; padding-left: 20px; }
+.bk-c { border-top: 1px solid #3a4150; padding-top: 8px; margin-top: 8px; }
+.bk-c p { margin: 4px 0; }
+.bk-t { font-weight: 700; color: #fff; }
+.bk-ref { font-weight: 400; font-size: .8rem; color: #9fb3d1; margin-left: 6px; }
+.bk-q { font-style: italic; color: #cfe0ff; }
+.bk-list .lesson h2 .cnt { float: right; font-size: .8rem; font-weight: 400; color: var(--muted, #aaa); }

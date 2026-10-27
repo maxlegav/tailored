@@ -20,7 +20,7 @@ open(f"data/{tc}_analysis.jsonl", "w").writelines(rows); print(len(rows), "analy
 PY
 .venv/bin/python profile.py data/${TC}_analysis.jsonl
 .venv/bin/python humanize.py data/profile.json
-.venv/bin/python build_data.py data/${TC}_analysis.jsonl data/profile.json && .venv/bin/python plan.py web/public/data.json data/plans.json
+.venv/bin/python build_data.py data/${TC}_analysis.jsonl data/profile.json && .venv/bin/python plan.py web/public/data.json data/plans.json && .venv/bin/python silman.py web/public/data.json data/silman.json
 .venv/bin/python build_data.py data/${TC}_analysis.jsonl data/profile.json
 (cd web && npm run build)
 if [ "${DEPLOY:-1}" = 1 ]; then

@@ -1,0 +1,650 @@
+[
+{
+"id": "silman-432",
+"fen": "5rk1/1b1n2pp/p3pr2/1p1p4/3R1P2/P1N2R2/1PP1B1PP/7K b - - 2 22",
+"color": "black",
+"ch": 2,
+"chapter": "Les pièces légères",
+"concept": "cavalier",
+"page": 432,
+"level": "1800-2000",
+"book_move": "Nb8",
+"book_uci": "d7b8",
+"good": [
+"d7b8"
+],
+"best_san": "Nb8",
+"best_pv": [
+"d7b8",
+"h1g1",
+"b8c6",
+"d4d3",
+"f6f4",
+"f3f4",
+"f8f4",
+"c3a2"
+],
+"eval": 166
+},
+{
+"id": "silman-439",
+"fen": "r1b2rk1/1p1nqpbp/2p2np1/p3p3/P3P3/2NQBN1P/1PP1BPP1/R4RK1 w - - 0 12",
+"color": "white",
+"ch": 2,
+"chapter": "Les pièces légères",
+"concept": "cavalier",
+"page": 439,
+"level": "2000-2200",
+"book_move": "Nd2",
+"book_uci": "f3d2",
+"good": [
+"f1d1",
+"d3c4",
+"f1e1",
+"f3d2"
+],
+"best_san": "Rfd1",
+"best_pv": [
+"f1d1"
+],
+"eval": 32
+},
+{
+"id": "silman-445",
+"fen": "4r1k1/pp2rpbp/3q2p1/2p5/8/5B2/PPQ2PPP/3R1RK1 b - - 5 21",
+"color": "black",
+"ch": 2,
+"chapter": "Les pièces légères",
+"concept": "gros_pion",
+"page": 445,
+"level": "1400-1600",
+"book_move": "Bd4",
+"book_uci": "g7d4",
+"good": [
+"g7d4"
+],
+"best_san": "Bd4",
+"best_pv": [
+"g7d4",
+"g2g3",
+"h7h5",
+"g1g2",
+"h5h4",
+"b2b4",
+"b7b6",
+"c2d2"
+],
+"eval": 228
+},
+{
+"id": "silman-453",
+"fen": "r1r5/pb2kp1p/1pn1p1p1/8/3P4/3BPN2/P3KPPP/1RR5 w - - 4 17",
+"color": "white",
+"ch": 2,
+"chapter": "Les pièces légères",
+"concept": "gros_pion",
+"page": 453,
+"level": null,
+"book_move": "g4",
+"book_uci": "g2g4",
+"good": [
+"g2g4",
+"e3e4",
+"h2h4",
+"d3b5"
+],
+"best_san": "g4",
+"best_pv": [
+"g2g4",
+"c8c7",
+"g4g5",
+"a8c8",
+"e2d2",
+"f7f5",
+"g5f6",
+"e7f6"
+],
+"eval": 47
+},
+{
+"id": "silman-455",
+"fen": "r2q1rk1/ppb2ppp/2p1bn2/5p2/2NP4/4P1P1/PPQ1NPBP/R4RK1 w - - 3 13",
+"color": "white",
+"ch": 2,
+"chapter": "Les pièces légères",
+"concept": "fou_cavalier",
+"page": 455,
+"level": "1900-2200",
+"book_move": "Ne5",
+"book_uci": "c4e5",
+"good": [
+"c4e5",
+"f1d1",
+"a1c1",
+"f1c1"
+],
+"best_san": "Ne5",
+"best_pv": [
+"c4e5",
+"g7g6",
+"e2f4",
+"e6c8",
+"a1c1",
+"d8e7",
+"e5d3",
+"c7d6"
+],
+"eval": 5
+},
+{
+"id": "silman-462",
+"fen": "3rr3/ppk2pp1/1npb1np1/8/8/3B2NP/PPPB1PP1/3RR1K1 b - - 2 18",
+"color": "black",
+"ch": 2,
+"chapter": "Les pièces légères",
+"concept": "fou_cavalier",
+"page": 462,
+"level": "1400-1600",
+"book_move": "Bxg3",
+"book_uci": "d6g3",
+"good": [
+"e8e1",
+"b6a4",
+"d6e5",
+"b6d5",
+"d6g3"
+],
+"best_san": "Rxe1+",
+"best_pv": [
+"e8e1",
+"d1e1",
+"b6a4",
+"d2c1",
+"f6d5",
+"d3c4",
+"b7b5",
+"c4d5"
+],
+"eval": 9
+},
+{
+"id": "silman-466",
+"fen": "r4rk1/pbq2ppp/1p3n2/4p3/8/QP2P3/1P2BPPP/R1B2RK1 b - - 0 17",
+"color": "black",
+"ch": 2,
+"chapter": "Les pièces légères",
+"concept": "fou_cavalier",
+"page": 466,
+"level": "1600-1800",
+"book_move": "Rfd8",
+"book_uci": "f8d8",
+"good": [
+"f8d8",
+"a7a5",
+"c7c2"
+],
+"best_san": "Rfd8",
+"best_pv": [
+"f8d8",
+"a3b4",
+"c7c2",
+"b4e1",
+"a7a5",
+"e2c4",
+"b7d5",
+"e3e4"
+],
+"eval": 110
+},
+{
+"id": "silman-469",
+"fen": "2rr2k1/pb3pp1/1p1nq2p/4p2n/1P2P3/P3BPP1/1Q1N3P/2RR1BK1 b - - 4 26",
+"color": "black",
+"ch": 2,
+"chapter": "Les pièces légères",
+"concept": "fou_cavalier",
+"page": 469,
+"level": "1400-2200",
+"book_move": "f5",
+"book_uci": "f7f5",
+"good": [
+"c8c1",
+"g7g5",
+"f7f5",
+"e6e7"
+],
+"best_san": "Rxc1",
+"best_pv": [
+"c8c1",
+"d1c1"
+],
+"eval": -63
+},
+{
+"id": "silman-471",
+"fen": "r6r/pp2kpRp/4bn2/1N1p1p2/3P4/3BP2P/PP1K1P2/R7 w - - 3 18",
+"color": "white",
+"ch": 2,
+"chapter": "Les pièces légères",
+"concept": "fou_cavalier",
+"page": 471,
+"level": "1400-2200",
+"book_move": "Nc7",
+"book_uci": "b5c7",
+"good": [
+"a1c1",
+"h3h4",
+"g7g3",
+"a1g1",
+"b5c7"
+],
+"best_san": "Rc1",
+"best_pv": [
+"a1c1",
+"a8c8",
+"c1c8",
+"h8c8",
+"h3h4",
+"f5f4",
+"e3f4",
+"f6h5"
+],
+"eval": 46
+},
+{
+"id": "silman-479",
+"fen": "2r3k1/p1q2p2/1p2ppp1/2p5/2P5/1P2P1P1/P2RQP1P/6K1 w - - 0 22",
+"color": "white",
+"ch": 3,
+"chapter": "Tours et colonnes",
+"concept": "colonne",
+"page": 479,
+"level": "1400-1600",
+"book_move": "Qd3",
+"book_uci": "e2d3",
+"good": [
+"e2d1",
+"e2d3",
+"h2h4",
+"e2f3"
+],
+"best_san": "Qd1",
+"best_pv": [
+"e2d1",
+"a7a6",
+"d2d7",
+"c7c6",
+"d1d6",
+"c6d6",
+"d7d6",
+"b6b5"
+],
+"eval": 24
+},
+{
+"id": "silman-488",
+"fen": "r3kb1r/5ppp/pp2q3/2ppP3/8/3Q2P1/PP2PP1P/R1BR2K1 b kq - 4 16",
+"color": "black",
+"ch": 4,
+"chapter": "Divagations psychologiques",
+"concept": null,
+"page": 488,
+"level": "1800-2200",
+"book_move": "Rd8",
+"book_uci": "a8d8",
+"good": [
+"f8e7",
+"a8d8"
+],
+"best_san": "Be7",
+"best_pv": [
+"f8e7",
+"d3d5",
+"a8d8",
+"d5b3",
+"d8d1",
+"b3d1",
+"e8g8",
+"d1b3"
+],
+"eval": 21
+},
+{
+"id": "silman-500",
+"fen": "2kr1b1r/pp2pp1p/1np2p2/Q7/3P4/4B1N1/PPP2PqP/1K1R3R b - - 1 14",
+"color": "black",
+"ch": 4,
+"chapter": "Divagations psychologiques",
+"concept": null,
+"page": 500,
+"level": "1600-2000",
+"book_move": "Kb8",
+"book_uci": "c8b8",
+"good": [
+"c8b8",
+"g2d5"
+],
+"best_san": "Kb8",
+"best_pv": [
+"c8b8",
+"c2c4",
+"e7e6",
+"e3f4",
+"f8d6",
+"f4d6",
+"d8d6",
+"c4c5"
+],
+"eval": 28
+},
+{
+"id": "silman-509",
+"fen": "8/p3r2p/2p3pk/2r5/2PR1PP1/4P1K1/P7/3R4 w - - 1 34",
+"color": "white",
+"ch": 4,
+"chapter": "Divagations psychologiques",
+"concept": null,
+"page": 509,
+"level": "1600-2000",
+"book_move": "Rd7",
+"book_uci": "d4d7",
+"good": [
+"d4d7",
+"g4g5"
+],
+"best_san": "Rd7",
+"best_pv": [
+"d4d7",
+"e7d7",
+"g4g5",
+"h6g7",
+"d1d7",
+"g7h8",
+"d7a7",
+"c5c4"
+],
+"eval": 463
+},
+{
+"id": "silman-519",
+"fen": "r1bqkb1r/ppp1p3/2n2p2/3p1np1/3P3p/2NQ4/PPPBPPPP/R3KBNR w KQkq - 2 9",
+"color": "white",
+"ch": 4,
+"chapter": "Divagations psychologiques",
+"concept": null,
+"page": 519,
+"level": "1400-1800",
+"book_move": "O-O-O",
+"book_uci": "e1c1",
+"good": [
+"e1c1"
+],
+"best_san": "O-O-O",
+"best_pv": [
+"e1c1",
+"e7e6",
+"a2a3",
+"f5d4",
+"e2e4",
+"f8g7",
+"c1b1",
+"d5e4"
+],
+"eval": -44
+},
+{
+"id": "silman-532",
+"fen": "2r2rk1/1bq1bppp/p2p4/np1Pp2n/P3P3/1P1B1N1P/5PP1/RNBQR1K1 b - - 0 16",
+"color": "black",
+"ch": 5,
+"chapter": "Le tir à la cible",
+"concept": null,
+"page": 532,
+"level": "1400-1800",
+"book_move": "b4",
+"book_uci": "b5b4",
+"good": [
+"b5b4",
+"c7c1"
+],
+"best_san": "b4",
+"best_pv": [
+"b5b4",
+"a1a2",
+"c7c1",
+"d1c1",
+"c8c1",
+"e1c1",
+"f7f5",
+"e4f5"
+],
+"eval": -59
+},
+{
+"id": "silman-541",
+"fen": "r2qnrk1/p1pp1ppp/bp2p3/n7/2PPP3/P1PBBP2/4N1PP/R2QK2R w KQ - 7 11",
+"color": "white",
+"ch": 6,
+"chapter": "La dualité statique-dynamique",
+"concept": "statique_dynamique",
+"page": 541,
+"level": "1400-2200",
+"book_move": "O-O",
+"book_uci": "e1g1",
+"good": [
+"c4c5",
+"e1g1"
+],
+"best_san": "c5",
+"best_pv": [
+"c4c5",
+"d8c8",
+"e1g1",
+"d7d6",
+"d3a6",
+"c8a6",
+"c5d6",
+"c7d6"
+],
+"eval": -11
+},
+{
+"id": "silman-551",
+"fen": "r3k2r/1pp1q1pp/p1pb1pn1/8/2Q1P3/4BN2/PPP2PPP/R2R2K1 w kq - 1 13",
+"color": "white",
+"ch": 6,
+"chapter": "La dualité statique-dynamique",
+"concept": "statique_dynamique",
+"page": 551,
+"level": "1400-2200",
+"book_move": "h3",
+"book_uci": "h2h3",
+"good": [
+"d1e1",
+"e3d2",
+"e3d4",
+"b2b4",
+"h2h3"
+],
+"best_san": "Re1",
+"best_pv": [
+"d1e1",
+"e8c8",
+"a1d1",
+"h8e8",
+"e3d4",
+"c6c5",
+"d4c3",
+"e7e6"
+],
+"eval": -35
+},
+{
+"id": "silman-553",
+"fen": "r2rb1k1/1pq1ppbp/p5p1/2pPn3/2P1P3/2NBB2P/P4PP1/1R1Q1RK1 b - - 1 16",
+"color": "black",
+"ch": 7,
+"chapter": "L'espace",
+"concept": "espace",
+"page": 553,
+"level": "1600-2200",
+"book_move": "Rab8",
+"book_uci": "a8b8",
+"good": [
+"c7a5",
+"e5c4",
+"b7b5",
+"a8b8"
+],
+"best_san": "Qa5",
+"best_pv": [
+"c7a5",
+"c3e2",
+"d8b8",
+"e3f4",
+"b7b5",
+"f4e5",
+"g7e5",
+"f2f4"
+],
+"eval": 19
+},
+{
+"id": "silman-556",
+"fen": "3q1rk1/1ppbn1bp/3p1np1/3Pp3/1PP1P3/2N1B3/3NB1PP/Q4RK1 w - - 1 17",
+"color": "white",
+"ch": 7,
+"chapter": "L'espace",
+"concept": "espace",
+"page": 556,
+"level": "1400-2000",
+"book_move": "c5",
+"book_uci": "c4c5",
+"good": [
+"c4c5"
+],
+"best_san": "c5",
+"best_pv": [
+"c4c5",
+"g6g5",
+"a1a7",
+"e7g6",
+"a7b7",
+"g6f4",
+"c5c6",
+"d7g4"
+],
+"eval": 191
+},
+{
+"id": "silman-560",
+"fen": "r3r1kb/p4p1n/b2p2p1/q2P4/2p1PP2/2NnB1N1/P1RQ2BP/5R1K w - - 0 26",
+"color": "white",
+"ch": 7,
+"chapter": "L'espace",
+"concept": "espace",
+"page": 560,
+"level": "1800-2200",
+"book_move": "e5",
+"book_uci": "e4e5",
+"good": [
+"e4e5"
+],
+"best_san": "e5",
+"best_pv": [
+"e4e5",
+"a6c8",
+"g2e4",
+"c8g4",
+"d2g2",
+"d6e5",
+"f4f5",
+"d3f4"
+],
+"eval": 149
+},
+{
+"id": "silman-571",
+"fen": "r2q1rk1/3nnppp/p4b2/1ppPp3/4P3/1B2BQ1P/PP3PP1/RN3RK1 w - c6 0 17",
+"color": "white",
+"ch": 8,
+"chapter": "Les pions passés",
+"concept": "pion_passe",
+"page": 571,
+"level": "1600-2200",
+"book_move": "a4",
+"book_uci": "a2a4",
+"good": [
+"f3g4",
+"a2a4",
+"f1c1",
+"d5c6"
+],
+"best_san": "Qg4",
+"best_pv": [
+"f3g4",
+"c5c4",
+"b3c2",
+"e7c8",
+"a2a4",
+"b5b4",
+"a4a5",
+"b4b3"
+],
+"eval": 107
+},
+{
+"id": "silman-574",
+"fen": "r3r1k1/p5pp/bp1q1pn1/2pPp3/2P1P2P/P1PBB1P1/4Q3/R4RK1 b - - 0 22",
+"color": "black",
+"ch": 8,
+"chapter": "Les pions passés",
+"concept": "pion_passe",
+"page": 574,
+"level": "1600-2100",
+"book_move": "Ne7",
+"book_uci": "g6e7",
+"good": [
+"g6h8",
+"g6e7",
+"a6c8",
+"g6f8"
+],
+"best_san": "Nh8",
+"best_pv": [
+"g6h8",
+"a3a4"
+],
+"eval": -48
+},
+{
+"id": "silman-598",
+"fen": "2rq1rk1/1p3ppp/p1n2n2/2bp3b/8/1PN1PN1P/PB2BPP1/R2Q1RK1 w - - 3 14",
+"color": "white",
+"ch": 9,
+"chapter": "Les autres déséquilibres",
+"concept": "desequilibres",
+"page": 598,
+"level": "1600-2000",
+"book_move": "Nh4",
+"book_uci": "f3h4",
+"good": [
+"a1c1",
+"f3h4",
+"c3a4",
+"a1b1"
+],
+"best_san": "Rc1",
+"best_pv": [
+"a1c1",
+"d8d6",
+"f3h4",
+"h5g6",
+"h4g6",
+"h7g6",
+"e2f3",
+"f8d8"
+],
+"eval": 26
+}
+]
