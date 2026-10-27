@@ -1,7 +1,17 @@
 [
  {
+  "id": "habitudes",
+  "title": "Cours 1 — Tes 3 habitudes qui coûtent des points",
+  "body": "Ces trois erreurs ne sont pas des accidents : tu les as rejouées **dans la même position**, plusieurs fois. C'est donc un réflexe à reprogrammer, et c'est rentable : la même position reviendra.\n\n**1. …Ne7 avec ton fou en d6 (7 fois).** Dans ces structures avec …d5/…e6 et c4, le cavalier en e7 enlève au fou d6 sa seule case de retraite. Les Blancs jouent c4-c5 : le fou est piégé et tu dois le donner contre deux pions (6.c5 Bxc5 7.dxc5, environ −3,8 selon le moteur). **La règle :** quand ton fou est en d6 et qu'un pion blanc peut venir en c5, garde e7 libre. Joue d'abord …c6 (il tient d5 et offre la case c7 au fou), puis …Nf6 et le roque. C'est la suite du moteur : 5…c6 6.Nc3 Nf6 7.Bd3 O-O.\n\n**2. …Bc5 avec ta dame en b6 et son cavalier en b5 (3 fois).** Ton roi est en e8 et ta tour en a8 : la case c7 est une fourchette qui attend. Après …Bc5, Bxc5 Qxc5 détourne ta dame, puis Nc7+ prend la tour (14.Bxc5 Qxc5 15.Rc1 Qb4 16.Nc7+ Kd8 17.Nxa8). **La règle :** si un cavalier adverse vise c7 (ou c2 avec les Blancs) et que ton roi n'a pas roqué, règle d'abord le cavalier (…a6, …Qa5) avant de développer.\n\n**3. e4 avec ton roi en g1 et ta diagonale g1-a7 ouverte (3 fois).** Sans pion f2, la case e3 est un point de mat : 9.e4?? Qe3#. **La règle :** dès que ton pion f a avancé ou disparu et que ton roi est en g1, vérifie la diagonale e3-g1 avant chaque coup de pion central.\n\nJoue les positions ci-dessous : ▶ montre la bonne suite, et tu peux essayer d'autres coups contre le moteur.",
+  "mistakes": [
+   "174053733658-9",
+   "172660206102-25",
+   "170226828626-16"
+  ]
+ },
+ {
   "id": "contre-d4",
-  "title": "Cours 3 — Contre 1.d4 : joue la structure où tu es à l'aise",
+  "title": "Cours 2 — Contre 1.d4 : joue la structure où tu es à l'aise",
   "body": "Avec les Noirs contre 1.d4, tu ne marques que **40 % des points** (139 parties avec 1...d5). Le problème vient surtout de ta Slave : après **2.c4 c6 3.Nc3 Nf6**, tu tombes à **25-35 %**, que les Blancs jouent 4.Bf4 ou 4.Nf3.\n\nPourtant, tu marques **62 à 88 %** dans la Française échange avec les Noirs, et **65 à 75 %** avec les Blancs dans tes lignes Bg5 contre ...e6/...Be7. Dans ces positions, tu as un centre de pions solide sur d5 (ou d4), tu développes tes pièces derrière, et les fous de cases noires disparaissent souvent par l'échange Bg5xe7. **C'est ton terrain.**\n\n**La proposition : 1.d4 d5 2.c4 e6** (Gambit Dame refusé) au lieu de 2...c6, puis ...Nf6, ...Be7, ...O-O et ...Nbd7 (ou ...c6 plus tard).\n\nPourquoi ça te convient :\n\n**1.** C'est la même idée de pions que dans tes positions préférées, avec un pion solide en d5 et un fou en e7.\n\n**2.** Contre Bg5, tu connais déjà le plan, puisque c'est ce que **toi** tu joues avec les Blancs : tu sais quelles pièces échanger et où aller.\n\n**3.** Tu n'as presque rien à apprendre par cœur : ce sont des plans, pas des variantes.\n\n**Contre le Londres (Bf4)** et les systèmes avec 2.Nf3, garde ...d5 + ...e6 et joue ...c5 rapidement.\n\n**À valider ensemble :** on suit tes résultats dans cette structure sur tes 50 prochaines parties avec les Noirs contre 1.d4. Si ça ne marche pas, on change."
  }
 ]
