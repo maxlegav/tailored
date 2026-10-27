@@ -1,0 +1,20 @@
+[
+  {"concept": "patience", "title": "Convertir tes positions gagnantes", "pages": "197-220, puis 349", "minutes": 45, "tags": ["avantage_gâché"],
+   "why": "C'est ton 2e thème le plus coûteux : tu ne convertis que 77 % de tes positions gagnantes. Silman explique pourquoi les avantages s'évaporent (impatience, coups « mous ») et décrit la méthode du chat et de la souris.",
+   "change": ["Quand tu es mieux, demande-toi d'abord quel est son seul contre-jeu, et supprime-le avant d'attaquer.", "Améliore ta pire pièce avant de forcer quoi que ce soit : en blitz, un coup d'amélioration sûr vaut mieux qu'une percée hasardeuse.", "Avant chaque coup en position gagnante, cherche ce que le coup apporte. S'il n'apporte rien de concret, joue plus simple."]},
+  {"concept": "desequilibres", "title": "Lire une position en 10 secondes", "pages": "1-28", "minutes": 50, "tags": ["plan_flou"],
+   "why": "Le « coup sans but » est ta 1re priorité dans le plan du coach. Le chapitre 1 est le cœur du livre : la liste des déséquilibres qui te dit quoi faire quand tu ne sais pas quoi jouer.",
+   "change": ["Apprends par cœur la liste des déséquilibres du rappel p. 28 (pièce légère, structure, espace, matériel, colonne, case faible, développement, initiative, roi).", "Dans tes parties, quand tu ne sais pas quoi jouer, cherche un seul déséquilibre qui te favorise et joue pour lui.", "Dans l'entraînement de Tailored, lis l'encadré « déséquilibres de la position » avant de jouer."]},
+  {"concept": "plan", "title": "Les mini-plans de 2-3 coups", "pages": "13-16 et annexe 616-625", "minutes": 25, "tags": ["plan_flou"],
+   "why": "Le même problème, vu sous l'angle du plan : Silman répond à un maître qui ne trouve pas de plan et se met en zeitnot. C'est exactement ta situation en blitz 3+0.",
+   "change": ["Ne cherche pas un plan pour toute la partie : une opération de 2 ou 3 coups (une case à prendre, un pion à attaquer, une tour à activer) suffit.", "Pose-toi sa question : « Quel coup ai-je envie de jouer, et comment le rendre possible ? »"]},
+  {"concept": "cases_faibles", "title": "Ce que coûte un coup de pion", "pages": "93-97, 248-258 et 332-336", "minutes": 35, "tags": ["poussée_prématurée", "roque_affaibli"],
+   "why": "La poussée de pion prématurée revient souvent dans tes erreurs. Silman montre qu'un coup de pion abandonne pour toujours des cases, qui deviennent des maisons pour les pièces adverses.",
+   "change": ["Avant chaque coup de pion, regarde la case qu'il ne protégera plus jamais.", "Si l'adversaire a un cavalier, vérifie qu'il ne pourra pas s'installer sur la case que ton pion abandonne."]},
+  {"concept": "pion_isole", "title": "Le pion isolé (tes structures …e6 et Française)", "pages": "227-235 et annexe 627-631", "minutes": 25, "tags": [],
+   "why": "Le pion isolé apparaît très souvent dans tes positions d'erreur. C'est la structure typique du Gambit Dame avec …e6 et des Françaises recommandés dans ton répertoire.",
+   "change": ["Contre le pion isolé : bloque-le, échange les pièces légères, puis attaque-le.", "Avec le pion isolé : garde les pièces et joue pour l'activité ou l'attaque, pas pour la finale."]},
+  {"concept": "ouverture", "title": "Choisir ses ouvertures par les déséquilibres", "pages": "391-420", "minutes": 40, "tags": [],
+   "why": "C'est la logique derrière ton onglet Répertoire : jouer les structures où tu te sens bien (…e6 contre 1.d4) plutôt que celles qui te coûtent des points (…c6).",
+   "change": ["Pour chaque ouverture de ton répertoire, nomme le déséquilibre typique qu'elle crée et le plan qui va avec.", "Garde les lignes qui t'amènent dans tes zones de confort, même si le moteur les juge un peu moins bonnes."]}
+]

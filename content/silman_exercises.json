@@ -14,15 +14,15 @@
 "best_san": "g6",
 "best_pv": [
 "g5g6",
-"h7g6",
-"h5g6",
 "b7b5",
 "c4b3",
+"h7g6",
+"h5g6",
 "e8f8",
 "h1g2",
 "c7d5"
 ],
-"eval": 425,
+"eval": 414,
 "good": [
 "g5g6"
 ]
@@ -42,15 +42,15 @@
 "best_san": "Nb8",
 "best_pv": [
 "d7b8",
-"a3a4",
+"c3d1",
 "b8c6",
-"d4d1",
-"b5b4",
-"c3a2",
+"d4d3",
 "f6f4",
-"f3f4"
+"f3f4",
+"f8f4",
+"h1g1"
 ],
-"eval": 177,
+"eval": 157,
 "good": [
 "d7b8"
 ],
@@ -73,14 +73,14 @@
 "best_pv": [
 "d6e5",
 "d4e5",
-"c6c5",
-"e1f1",
+"d8e7",
+"a1d1",
 "g7g5",
-"a3c2",
-"a6a5",
-"a1d1"
+"e1f1",
+"g5f4",
+"e3f4"
 ],
-"eval": 129,
+"eval": 121,
 "good": [
 "d6e5"
 ]
@@ -102,18 +102,17 @@
 "f1e1",
 "a7a6",
 "a3a4",
+"e7d6",
+"d2b1",
 "a6b5",
 "a4b5",
-"f8d8",
-"d2b1",
-"f6e8"
+"f8e8"
 ],
-"eval": 147,
+"eval": 148,
 "good": [
 "f1e1",
 "a1e1",
-"g2h3",
-"a3a4"
+"g2h3"
 ]
 },
 {
@@ -131,19 +130,17 @@
 "best_san": "Re2",
 "best_pv": [
 "e1e2",
-"e8f8",
-"h4e1",
+"g8f8",
+"f1a1",
 "d7b6",
-"c4a5",
-"f6f5",
-"e4e5",
-"d6e5"
+"c4b6",
+"c7b6",
+"a1a6",
+"b6b8"
 ],
-"eval": 187,
+"eval": 191,
 "good": [
-"e1e2",
-"c3a2",
-"h4g3"
+"e1e2"
 ]
 },
 {
@@ -176,40 +173,92 @@
 },
 {
 "id": "silman-2-7",
-"fen": "r1b2rk1/1p1nqpbp/2p2np1/p3p3/P3P3/2NQBN1P/1PP1BPP1/R4RK1 w - - 0 1",
+"fen": "r1b2rk1/1p1nqpbp/2p2np1/p3p3/P7/2NQBN1P/1PP1BPP1/R4RK1 w - - 0 1",
 "color": "white",
 "ch": 2,
 "n": 7,
 "chapter": "Les pièces légères",
 "concept": "cavalier",
 "ex_page": 53,
-"page": 439,
-"sol_exact": true,
-"level": "2000-2200",
-"best_san": "Rfd1",
+"page": 431,
+"sol_exact": false,
+"level": null,
+"best_san": "Qc4",
 "best_pv": [
-"f1d1",
-"f8e8",
 "d3c4",
-"g7f8",
-"c4a2",
-"d7c5",
-"e2c4",
-"c5e4"
+"e7b4",
+"f3d2",
+"d7b6",
+"c4b4",
+"a5b4",
+"e3b6",
+"b4c3"
 ],
-"eval": 38,
+"eval": -83,
 "good": [
-"f1d1",
 "d3c4",
-"f1e1",
-"f3d2"
+"d3d2",
+"f3g5"
+]
+},
+{
+"id": "silman-2-8",
+"fen": "r1b1rnk1/1p2qpbp/p1pp1np1/4p3/3P4/1QN1B1N1/1P5P/1K1R1B1R w - - 0 1",
+"color": "white",
+"ch": 2,
+"n": 8,
+"chapter": "Les pièces légères",
+"concept": "cavalier",
+"ex_page": 53,
+"page": 431,
+"sol_exact": false,
+"level": null,
+"best_san": "d5",
+"best_pv": [
+"d4d5",
+"f6d5",
+"d1d5",
+"c8e6",
+"g3e4",
+"c6d5",
+"c3d5",
+"e6d5"
 ],
-"book_move": "Nd2",
-"book_uci": "f3d2"
+"eval": -453,
+"good": [
+"d4d5",
+"h2h4",
+"d4e5",
+"f1e2"
+]
+},
+{
+"id": "silman-2-9",
+"fen": "3rnrk1/2qn1pbp/1p4p1/2p1p3/4P3/4B1PP/1PPNQPB1/R4RK1 w - - 0 1",
+"color": "white",
+"ch": 2,
+"n": 9,
+"chapter": "Les pièces légères",
+"concept": "cavalier",
+"ex_page": 53,
+"page": 431,
+"sol_exact": false,
+"level": null,
+"best_san": "Nc4",
+"best_pv": [
+"d2c4"
+],
+"eval": 143,
+"good": [
+"d2c4",
+"f1d1",
+"a1a2",
+"d2b1"
+]
 },
 {
 "id": "silman-2-10",
-"fen": "r2qnrk1/5pbp/2npb1p1/p1pNpP2/1pP1P3/1P1PB1PP/P2QNRB1/1R4K1 b - - 0 1",
+"fen": "r2qnrk1/5pbp/2npb1p1/p1pNpP2/1p2P3/1P1PB1PP/P2QNRB1/1R4K1 b - - 0 1",
 "color": "black",
 "ch": 2,
 "n": 10,
@@ -221,9 +270,16 @@
 "level": null,
 "best_san": "Bxd5",
 "best_pv": [
-"e6d5"
+"e6d5",
+"e4d5",
+"c6e7",
+"g3g4",
+"g6f5",
+"g4f5",
+"g8h8",
+"e2g3"
 ],
-"eval": -102,
+"eval": 89,
 "good": [
 "e6d5"
 ]
@@ -247,11 +303,11 @@
 "h7h5",
 "g1g2",
 "h5h4",
-"b2b3",
-"d6f6",
-"d1d3"
+"b2b4",
+"b7b6",
+"c2d2"
 ],
-"eval": 216,
+"eval": 231,
 "good": [
 "g7d4"
 ],
@@ -279,13 +335,12 @@
 "g2e4",
 "c8e8",
 "d1e1",
-"b7c8"
+"e5e6"
 ],
-"eval": 109,
+"eval": 122,
 "good": [
 "e2e4",
-"d2f4",
-"d1e1"
+"d2f4"
 ]
 },
 {
@@ -300,14 +355,21 @@
 "page": 443,
 "sol_exact": false,
 "level": null,
-"best_san": "Be3",
+"best_san": "Nc3",
 "best_pv": [
-"f4e3"
-],
-"eval": 18,
-"good": [
-"f4e3",
 "b1c3",
+"c6f6",
+"f4g3",
+"h8g8",
+"a1b1",
+"h7h5",
+"h2h4",
+"f6e6"
+],
+"eval": 24,
+"good": [
+"b1c3",
+"f4e3",
 "c2c3"
 ]
 },
@@ -328,13 +390,13 @@
 "e5e6",
 "d7b5",
 "d3d2",
-"b5f1",
-"e6f7",
 "g5g4",
+"e6f7",
+"b5f1",
 "h3g4",
-"d5d6"
+"f5g4"
 ],
-"eval": 346,
+"eval": 366,
 "good": [
 "e5e6"
 ]
@@ -351,23 +413,23 @@
 "page": 443,
 "sol_exact": false,
 "level": null,
-"best_san": "b4",
+"best_san": "Bc2",
 "best_pv": [
-"b2b4",
-"d8e7",
-"d3e2",
-"g8g7",
-"h2h3",
-"f7h6",
-"b1b3",
-"h6f7"
-],
-"eval": 56,
-"good": [
-"b2b4",
-"d3e2",
 "d3c2",
-"h2h3"
+"g8g7",
+"b2b4",
+"f7h6",
+"c2a4",
+"d7a4",
+"c3a4",
+"a8c8"
+],
+"eval": 53,
+"good": [
+"d3c2",
+"b2b4",
+"b2b3",
+"d3e2"
 ]
 },
 {
@@ -393,12 +455,12 @@
 "g5f6",
 "e7f6"
 ],
-"eval": 45,
+"eval": 47,
 "good": [
 "g2g4",
 "e3e4",
 "h2h4",
-"e2d2"
+"g2g3"
 ],
 "book_move": "g4",
 "book_uci": "g2g4"
@@ -418,19 +480,19 @@
 "best_san": "Ne5",
 "best_pv": [
 "c4e5",
-"a7a5",
-"e5d3",
-"c7d6",
-"d3c5",
+"f8e8",
+"e2f4",
 "e6c8",
-"f1d1",
-"d8e7"
+"f4d3",
+"d8e7",
+"a2a3",
+"h7h5"
 ],
 "eval": 0,
 "good": [
 "c4e5",
-"f1d1",
 "a1c1",
+"f1d1",
 "b2b4"
 ],
 "book_move": "Ne5",
@@ -451,20 +513,14 @@
 "best_san": "O-O",
 "best_pv": [
 "e1g1",
-"f7f5",
-"f3d5",
-"g8h8",
-"f2f4",
-"c6e7",
-"b2b4",
-"e7d5"
+"f7f5"
 ],
-"eval": 27,
+"eval": 21,
 "good": [
 "e1g1",
 "b2b4",
 "d3e4",
-"b2b3"
+"g3f5"
 ]
 },
 {
@@ -481,9 +537,16 @@
 "level": null,
 "best_san": "Bxc5",
 "best_pv": [
-"e3c5"
+"e3c5",
+"d6c5",
+"d5e3",
+"f7f6",
+"b3e6",
+"e8e6",
+"d3d7",
+"f6g5"
 ],
-"eval": 147,
+"eval": 125,
 "good": [
 "e3c5"
 ]
@@ -503,9 +566,15 @@
 "best_san": "Nh2",
 "best_pv": [
 "f3h2",
-"b6b5"
+"b6b5",
+"a4b5",
+"a6b5",
+"c1g5",
+"b5b4",
+"g5f6",
+"d7f6"
 ],
-"eval": 50,
+"eval": 56,
 "good": [
 "f3h2",
 "c1g5",
@@ -527,21 +596,14 @@
 "level": null,
 "best_san": "Nfd5",
 "best_pv": [
-"f6d5",
-"g3e4",
-"d6f4",
-"d3f1",
-"f4c1",
-"d1c1",
-"b6a4",
-"e4g5"
+"f6d5"
 ],
-"eval": 10,
+"eval": 8,
 "good": [
 "f6d5",
 "e8e1",
-"a7a5",
-"d6e5"
+"b6d5",
+"b6a4"
 ]
 },
 {
@@ -563,11 +625,11 @@
 "g7d4",
 "g1h1",
 "f8b8",
-"h2h4",
-"g5h4",
-"b2b3"
+"b2b3",
+"a5a4",
+"h2h4"
 ],
-"eval": 24,
+"eval": 18,
 "good": [
 "e5e4"
 ]
@@ -588,12 +650,12 @@
 "best_pv": [
 "b5b4"
 ],
-"eval": -65,
+"eval": -60,
 "good": [
 "b5b4",
-"e7e5",
-"c7b6",
-"d8a8"
+"b7d5",
+"d8a8",
+"c7b6"
 ]
 },
 {
@@ -614,12 +676,12 @@
 "f3e4",
 "f6g4",
 "c1b1",
-"b7b6",
-"h2h3",
-"g4e3",
-"d2e3"
+"f8f7",
+"c4c5",
+"d8d7",
+"h2h3"
 ],
-"eval": 1,
+"eval": -1,
 "good": [
 "f5e4",
 "f6e4",
@@ -644,17 +706,17 @@
 "f1e1",
 "c7c2",
 "e2f1",
+"h7h6",
+"e3e4",
 "f6e4",
-"e1e2",
-"c2c6",
-"f2f3"
+"e1e2"
 ],
-"eval": 112,
+"eval": 124,
 "good": [
 "f8d8",
 "a8d8",
 "a7a5",
-"h7h6"
+"c7c2"
 ],
 "book_move": "Rfd8",
 "book_uci": "f8d8"
@@ -671,23 +733,17 @@
 "page": 469,
 "sol_exact": true,
 "level": "1400-2200",
-"best_san": "Rxc1",
+"best_san": "f5",
 "best_pv": [
-"c8c1",
-"d1c1",
-"g7g5",
-"d2c4",
-"d6c4",
-"f1c4",
-"e6e7",
-"a3a4"
-],
-"eval": -58,
-"good": [
-"c8c1",
 "f7f5",
+"c1c8"
+],
+"eval": -70,
+"good": [
+"f7f5",
+"c8c1",
 "g7g5",
-"e6e7"
+"g8h8"
 ],
 "book_move": "f5",
 "book_uci": "f7f5"
@@ -704,22 +760,15 @@
 "page": 471,
 "sol_exact": true,
 "level": "1400-2200",
-"best_san": "Rag8",
+"best_san": "Rhg8",
 "best_pv": [
-"a8g8",
-"a1g1",
-"g8g7",
-"g1g7",
-"f5f4",
-"h3h4",
-"f4e3",
-"f2e3"
+"h8g8"
 ],
-"eval": -22,
+"eval": -16,
 "good": [
-"a8g8",
 "h8g8",
 "f5f4",
+"a8g8",
 "a7a6",
 "b5c7"
 ],
@@ -749,10 +798,11 @@
 "c8b7",
 "b1c3"
 ],
-"eval": -99,
+"eval": -103,
 "good": [
 "e8d8",
-"e8f8"
+"e8f8",
+"d7b5"
 ]
 },
 {
@@ -770,17 +820,50 @@
 "best_san": "Rd1",
 "best_pv": [
 "e1d1",
-"e5c7",
+"e5e7",
 "g2g3",
 "d8d7",
 "g1g2",
 "g8f8",
-"h2h3",
-"c7d8"
+"c3c4",
+"f8f7"
 ],
-"eval": 42,
+"eval": 27,
 "good": [
-"e1d1"
+"e1d1",
+"c2a4",
+"g2g3"
+]
+},
+{
+"id": "silman-3-3",
+"fen": "1r4k1/3bpqbr/1p1n1ppp/p1pPpP2/P1P1P1PP/1PNBB3/6RK/2Q2R2 w - - 0 1",
+"color": "white",
+"ch": 3,
+"n": 3,
+"chapter": "Tours et colonnes",
+"concept": "colonne",
+"ex_page": 132,
+"page": 476,
+"sol_exact": false,
+"level": null,
+"best_san": "Ne2",
+"best_pv": [
+"c3e2",
+"g6g5",
+"f1h1",
+"f7e8",
+"h2g1",
+"h7h8",
+"g2h2",
+"d6f7"
+],
+"eval": 143,
+"good": [
+"c3e2",
+"h2g1",
+"c1e1",
+"f5g6"
 ]
 },
 {
@@ -811,7 +894,7 @@
 "e2d1",
 "e2d3",
 "e2f3",
-"h2h4"
+"d2d3"
 ],
 "book_move": "Qd3",
 "book_uci": "e2d3"
@@ -832,16 +915,71 @@
 "best_pv": [
 "d5d1",
 "d8c7",
-"f2f4",
-"e8e6",
-"e1f2",
-"b7b6",
 "a2e2",
-"b8e8"
+"f6d7",
+"h3h4",
+"b8d8",
+"g2h3",
+"d7c5"
 ],
-"eval": 111,
+"eval": 94,
 "good": [
-"d5d1"
+"d5d1",
+"d5d3",
+"d5d2"
+]
+},
+{
+"id": "silman-3-6",
+"fen": "5bk1/5p2/p5p1/n3P3/1p6/4NP2/r4P1P/2RR2K1 w - - 0 1",
+"color": "white",
+"ch": 3,
+"n": 6,
+"chapter": "Tours et colonnes",
+"concept": "colonne",
+"ex_page": 132,
+"page": 476,
+"sol_exact": false,
+"level": null,
+"best_san": "Rc8",
+"best_pv": [
+"c1c8"
+],
+"eval": 308,
+"good": [
+"c1c8",
+"d1d8"
+]
+},
+{
+"id": "silman-3-7",
+"fen": "3R1bk1/p5p1/2r3p1/6Np/P4p1P/5P2/8/7K b - - 0 1",
+"color": "black",
+"ch": 3,
+"n": 7,
+"chapter": "Tours et colonnes",
+"concept": "colonne",
+"ex_page": 132,
+"page": 476,
+"sol_exact": false,
+"level": null,
+"best_san": "Ra6",
+"best_pv": [
+"c6a6",
+"d8c8",
+"a6a4",
+"g5e6",
+"a4a1",
+"h1g2",
+"a1a2",
+"g2h3"
+],
+"eval": -12,
+"good": [
+"c6a6",
+"c6b6",
+"c6f6",
+"c6c1"
 ]
 },
 {
@@ -860,19 +998,48 @@
 "best_pv": [
 "h1e1",
 "f8e7",
-"c3d5",
-"e6d5",
 "e3c5",
 "d6c5",
-"e4d5",
-"a8d8"
+"c3d5",
+"c7b7",
+"h2h4",
+"e8g8"
 ],
-"eval": 173,
+"eval": 175,
 "good": [
 "h1e1",
 "e3d4",
-"e3c5",
-"d2d4"
+"e3c5"
+]
+},
+{
+"id": "silman-4-2",
+"fen": "rnb2rk1/ppp2pbp/3p2p1/3Pp2n/2P1P2q/2N1BPP1/PP1Q3P/R3KBNR b KQ - 0 1",
+"color": "black",
+"ch": 4,
+"n": 2,
+"chapter": "Divagations psychologiques",
+"concept": "materiel",
+"ex_page": 156,
+"page": 484,
+"sol_exact": false,
+"level": null,
+"best_san": "Qe7",
+"best_pv": [
+"h4e7",
+"g3g4",
+"h5f4",
+"e1c1",
+"f7f5",
+"g4f5",
+"g6f5",
+"g1e2"
+],
+"eval": -111,
+"good": [
+"h4e7",
+"h5g3",
+"h4d8"
 ]
 },
 {
@@ -896,7 +1063,7 @@
 "d8d1",
 "b3d1",
 "e8g8",
-"d1b3"
+"d1a4"
 ],
 "eval": 21,
 "good": [
@@ -905,6 +1072,65 @@
 ],
 "book_move": "Rd8",
 "book_uci": "a8d8"
+},
+{
+"id": "silman-4-4",
+"fen": "5rk1/p1q1ppbp/3p2p1/2rP4/2PN4/4Q3/P4PPP/2R2RK1 b - - 0 1",
+"color": "black",
+"ch": 4,
+"n": 4,
+"chapter": "Divagations psychologiques",
+"concept": "materiel",
+"ex_page": 156,
+"page": 484,
+"sol_exact": false,
+"level": null,
+"best_san": "Bxd4",
+"best_pv": [
+"g7d4",
+"e3d4",
+"f8c8",
+"g2g3",
+"a7a5",
+"f1e1",
+"c5c4",
+"d4c4"
+],
+"eval": 42,
+"good": [
+"g7d4",
+"g7f6",
+"h7h5",
+"f8c8"
+]
+},
+{
+"id": "silman-4-5",
+"fen": "r1bq1rk1/pp1n2bp/3p4/2pPpp1n/2P5/2NBBP2/PPQN2PP/R4RK1 b - - 0 1",
+"color": "black",
+"ch": 4,
+"n": 5,
+"chapter": "Divagations psychologiques",
+"concept": "materiel",
+"ex_page": 156,
+"page": 484,
+"sol_exact": false,
+"level": null,
+"best_san": "e4",
+"best_pv": [
+"e5e4",
+"f3e4",
+"f5f4",
+"e3f2",
+"d7e5",
+"d3e2",
+"d8g5",
+"d2f3"
+],
+"eval": 45,
+"good": [
+"e5e4"
+]
 },
 {
 "id": "silman-4-6",
@@ -925,13 +1151,15 @@
 "c7e6",
 "f1g2",
 "f8h6",
-"d1d3",
-"d8f8"
+"h1f1",
+"h6f4",
+"c1f4"
 ],
-"eval": -21,
+"eval": -27,
 "good": [
 "a6c7",
-"f8h6"
+"f8h6",
+"e7d7"
 ]
 },
 {
@@ -949,15 +1177,15 @@
 "best_san": "Be6",
 "best_pv": [
 "c8e6",
-"b3c2",
-"d8d5",
-"g2g3",
-"d5e5",
-"f1g2",
-"e5a5",
-"c1d2"
+"b3b5",
+"c7c6",
+"b5a5",
+"e8g8",
+"e4c5",
+"d8c8",
+"e2e4"
 ],
-"eval": 115,
+"eval": 127,
 "good": [
 "c8e6",
 "g7e5"
@@ -978,9 +1206,15 @@
 "best_san": "Be6",
 "best_pv": [
 "c8e6",
-"g2f1"
+"g2f1",
+"d6d5",
+"b3c2",
+"d8c7",
+"c4c5",
+"b6c4",
+"f1c4"
 ],
-"eval": -73,
+"eval": -62,
 "good": [
 "c8e6"
 ]
@@ -1000,15 +1234,15 @@
 "best_san": "h5",
 "best_pv": [
 "h4h5",
+"a8b8",
+"h5h6",
+"g7h8",
+"b2b3",
 "a6a5",
-"f3e5",
-"a7b7",
-"h5g6",
-"f7g6",
-"e5c6",
-"d7f6"
+"c1c6",
+"b8b4"
 ],
-"eval": 163,
+"eval": 165,
 "good": [
 "h4h5"
 ]
@@ -1044,27 +1278,34 @@
 },
 {
 "id": "silman-4-11",
-"fen": "2kr1b1r/pp2pp1p/1np2p2/Q7/3P4/4B1N1/PPP2PqP/1K1R3R b - - 0 1",
+"fen": "2kr1b1r/pp2pp1p/1np2p2/Q7/3P4/4B1N1/PPP2PQP/1K1R3R b - - 0 1",
 "color": "black",
 "ch": 4,
 "n": 11,
 "chapter": "Divagations psychologiques",
 "concept": "menaces",
 "ex_page": 174,
-"page": 500,
-"sol_exact": true,
-"level": "1600-2000",
-"best_san": "Kb8",
+"page": 484,
+"sol_exact": false,
+"level": null,
+"best_san": "e6",
 "best_pv": [
-"c8b8"
+"e7e6",
+"g2f1",
+"f8d6",
+"c2c4",
+"d6g3",
+"h2g3",
+"d8g8",
+"a5a7"
 ],
-"eval": 10,
+"eval": -918,
 "good": [
-"c8b8",
-"g2d5"
-],
-"book_move": "Kb8",
-"book_uci": "c8b8"
+"e7e6",
+"b6d5",
+"b6c4",
+"f6f5"
+]
 },
 {
 "id": "silman-4-12",
@@ -1081,18 +1322,19 @@
 "best_san": "Rd6",
 "best_pv": [
 "d7d6",
-"d5c4",
+"d5a2",
 "d6d1",
 "e1d1",
-"c8c7",
-"d1d7",
-"c7d7",
-"g4d7"
+"c8f8",
+"d1d2",
+"c6e5",
+"f3e5"
 ],
-"eval": -26,
+"eval": -28,
 "good": [
 "d7d6",
-"d7d8"
+"d7d8",
+"d7c7"
 ]
 },
 {
@@ -1112,13 +1354,13 @@
 "d8d5",
 "c5b6",
 "d5b5",
-"f5f6",
-"g7f6",
-"b6c7",
+"d3b5",
 "h4d4",
-"g1h2"
+"b6d4",
+"e5d4",
+"b5a4"
 ],
-"eval": 186,
+"eval": 207,
 "good": [
 "d8d5"
 ]
@@ -1138,9 +1380,15 @@
 "best_san": "Rc2",
 "best_pv": [
 "c8c2",
-"e6e2"
+"e6e2",
+"f8c5",
+"e2c2",
+"b4c2",
+"b5d3",
+"c2b4",
+"d3c4"
 ],
-"eval": 14,
+"eval": 13,
 "good": [
 "c8c2",
 "g8f7",
@@ -1167,11 +1415,11 @@
 "c1a3",
 "f8e8",
 "a1d1",
-"d7d5",
-"c4d5",
-"e5f4"
+"c7c6",
+"f4e5",
+"c6e4"
 ],
-"eval": 127,
+"eval": 112,
 "good": [
 "b2c3",
 "e4e5"
@@ -1179,34 +1427,24 @@
 },
 {
 "id": "silman-4-16",
-"fen": "8/p3r2p/2p3pk/2r5/2PR1PP1/4P1K1/P7/3R4 w - - 0 1",
+"fen": "8/p3r2p/2pR2pk/2r5/2PR1PP1/4P1K1/P7/8 w - - 0 1",
 "color": "white",
 "ch": 4,
 "n": 16,
 "chapter": "Divagations psychologiques",
 "concept": "initiative",
 "ex_page": 195,
-"page": 509,
-"sol_exact": true,
-"level": "1600-2000",
+"page": 484,
+"sol_exact": false,
+"level": null,
 "best_san": "Rd7",
 "best_pv": [
-"d4d7",
-"e7d7",
-"g4g5",
-"h6g7",
-"d1d7",
-"g7h8",
-"d7a7",
-"c5c4"
+"d6d7"
 ],
-"eval": 453,
+"eval": 433,
 "good": [
-"d4d7",
-"g4g5"
-],
-"book_move": "Rd7",
-"book_uci": "d4d7"
+"d6d7"
+]
 },
 {
 "id": "silman-4-17",
@@ -1227,11 +1465,11 @@
 "d8c7",
 "d2e2",
 "f8c8",
-"c4a2",
-"a6a5",
+"c4d3",
+"b4c3",
 "a1c1"
 ],
-"eval": 84,
+"eval": 78,
 "good": [
 "c5c4"
 ]
@@ -1251,15 +1489,15 @@
 "best_san": "b5",
 "best_pv": [
 "b7b5",
-"c3b4",
-"f6c6",
-"b4a5",
-"c4b3",
+"b3c4",
+"b5c4",
 "e1g1",
-"d7b6",
-"e2b5"
+"d7c5",
+"f3e5",
+"c5e4",
+"c3a5"
 ],
-"eval": 37,
+"eval": 53,
 "good": [
 "b7b5"
 ]
@@ -1287,7 +1525,7 @@
 "h5e5",
 "h6g7"
 ],
-"eval": 221,
+"eval": 207,
 "good": [
 "d5d8"
 ]
@@ -1304,23 +1542,23 @@
 "page": 484,
 "sol_exact": false,
 "level": null,
-"best_san": "b5",
+"best_san": "Nb3",
 "best_pv": [
-"b4b5",
-"a6b5",
-"a4b5",
-"d8f6",
 "d2b3",
-"a8a1",
-"f1a1",
-"h5h4"
-],
-"eval": 113,
-"good": [
-"b4b5",
-"d2b3",
+"h5h4",
 "c3e2",
-"f2f4"
+"d8f6",
+"b3c5",
+"e6c8",
+"e3e4",
+"d5e4"
+],
+"eval": 105,
+"good": [
+"d2b3",
+"b4b5",
+"c3e2",
+"a1e1"
 ]
 },
 {
@@ -1337,16 +1575,9 @@
 "level": null,
 "best_san": "e5",
 "best_pv": [
-"e4e5",
-"d6e5",
-"f4g5",
-"f6h7",
-"g5g6",
-"f7g6",
-"e1f1",
-"f8d6"
+"e4e5"
 ],
-"eval": 277,
+"eval": 318,
 "good": [
 "e4e5"
 ]
@@ -1366,18 +1597,17 @@
 "best_san": "O-O-O",
 "best_pv": [
 "e1c1",
-"e7e6",
-"a2a3",
-"c6d4",
-"e2e4",
-"d5e4",
-"d3e4",
-"c7c5"
+"f8g7",
+"e2e3",
+"c8e6",
+"g1f3",
+"d8d7",
+"c3d5",
+"d7d5"
 ],
-"eval": -41,
+"eval": -45,
 "good": [
-"e1c1",
-"e2e3"
+"e1c1"
 ],
 "book_move": "O-O-O",
 "book_uci": "e1c1"
@@ -1396,16 +1626,9 @@
 "level": null,
 "best_san": "Ra7",
 "best_pv": [
-"a4a7",
-"h4d4",
-"e3d4",
-"d6d4",
-"a7e7",
-"d4d2",
-"e7e8",
-"d2g5"
+"a4a7"
 ],
-"eval": 338,
+"eval": 344,
 "good": [
 "a4a7"
 ]
@@ -1424,14 +1647,21 @@
 "level": null,
 "best_san": "Qh6",
 "best_pv": [
-"g5h6"
+"g5h6",
+"h2h3",
+"b5b4",
+"c3b4",
+"c7b7",
+"b4c3",
+"c8b8",
+"c3e3"
 ],
-"eval": -174,
+"eval": -188,
 "good": [
 "g5h6",
-"h7h5",
-"b5b4",
-"c8b7"
+"c8b7",
+"h8g8",
+"h7h5"
 ]
 },
 {
@@ -1457,7 +1687,7 @@
 "f6f5",
 "e1g1"
 ],
-"eval": 16,
+"eval": 17,
 "good": [
 "f8b8"
 ]
@@ -1477,15 +1707,9 @@
 "best_san": "Qc6+",
 "best_pv": [
 "c1c6",
-"g2h2",
-"f4g3",
-"h2g1",
-"c6b6",
-"g1g2",
-"b6c6",
-"f8f3"
+"g2h2"
 ],
-"eval": -747,
+"eval": -918,
 "good": [
 "c1c6"
 ]
@@ -1513,7 +1737,7 @@
 "c3c4",
 "e8f7"
 ],
-"eval": 163,
+"eval": 154,
 "good": [
 "b2b4",
 "d2b3",
@@ -1537,18 +1761,18 @@
 "best_pv": [
 "f1e1",
 "g4f5",
-"e2f1",
+"c2b3",
+"d5b3",
+"a2b3",
 "f8e8",
-"d2e4",
-"f6d7",
-"b2b4",
-"f5g6"
+"d2c4",
+"e7f8"
 ],
-"eval": 0,
+"eval": -9,
 "good": [
 "f1e1",
-"c2b3",
 "h2h3",
+"c2b3",
 "f1d1"
 ]
 },
@@ -1575,42 +1799,17 @@
 "f1a1",
 "a7a6"
 ],
-"eval": 223,
+"eval": 208,
 "good": [
 "g2g3",
 "h2h3",
-"f1d1",
-"b7b4"
+"b7b4",
+"f1d1"
 ]
 },
 {
-"id": "silman-5-4",
-"fen": "2r2rk1/1bq1bppp/p2p4/np1Pp2n/P3P3/1P1B1N1P/5PP1/RNBQR1K1 b - - 0 1",
-"color": "black",
-"ch": 5,
-"n": 4,
-"chapter": "Le tir à la cible",
-"concept": "pions_faibles",
-"ex_page": 275,
-"page": 532,
-"sol_exact": true,
-"level": "1400-1800",
-"best_san": "b4",
-"best_pv": [
-"b5b4",
-"a1a2"
-],
-"eval": -63,
-"good": [
-"b5b4",
-"c7c1"
-],
-"book_move": "b4",
-"book_uci": "b5b4"
-},
-{
 "id": "silman-5-5",
-"fen": "8/1p3k2/p1pb2p1/P2p4/1Pb4p/2P2P1P/4NKP1/8 b - - 0 1",
+"fen": "7B/1p3k2/p1pb2p1/P2p4/1Pb4p/2P2P1P/4NKP1/8 b - - 0 1",
 "color": "black",
 "ch": 5,
 "n": 5,
@@ -1620,20 +1819,19 @@
 "page": 527,
 "sol_exact": false,
 "level": null,
-"best_san": "Bxe2",
+"best_san": "c5",
 "best_pv": [
-"c4e2",
-"f2e2",
-"d5d4",
-"c3d4",
-"d6b4",
-"e2d3",
-"b4a5",
-"f3f4"
+"c6c5",
+"b4c5",
+"d6c7",
+"e2d4",
+"c7a5",
+"c5c6",
+"b7c6",
+"d4c6"
 ],
-"eval": 666,
+"eval": 124,
 "good": [
-"c4e2",
 "c6c5"
 ]
 },
@@ -1654,15 +1852,16 @@
 "g7c3",
 "b2c3",
 "b4a4",
-"e3e4",
-"f8e8",
 "a1b1",
+"e6c5",
+"e3e4",
 "d8c8",
-"a2a3"
+"e4e5"
 ],
-"eval": 62,
+"eval": 52,
 "good": [
-"g7c3"
+"g7c3",
+"c7c6"
 ]
 },
 {
@@ -1679,16 +1878,9 @@
 "level": null,
 "best_san": "e4",
 "best_pv": [
-"e5e4",
-"d3e2",
-"e4f3",
-"f1f3",
-"d7e5",
-"f3f4",
-"f6h6",
-"c1f1"
+"e5e4"
 ],
-"eval": 103,
+"eval": 105,
 "good": [
 "e5e4"
 ]
@@ -1708,20 +1900,14 @@
 "best_san": "Qe2",
 "best_pv": [
 "d1e2",
-"e8f8",
-"e2e3",
-"e7f6",
-"f3e5",
-"g7g6",
-"e3h6",
-"f8g8"
+"e8f8"
 ],
-"eval": 43,
+"eval": 48,
 "good": [
 "d1e2",
-"e1e3",
-"d1b3",
-"f3e5"
+"e1e2",
+"f3e5",
+"c3a4"
 ]
 },
 {
@@ -1741,11 +1927,9 @@
 "c2c3",
 "c8b7"
 ],
-"eval": 97,
+"eval": 104,
 "good": [
-"c2c3",
-"g1h1",
-"a1c1"
+"c2c3"
 ]
 },
 {
@@ -1760,23 +1944,23 @@
 "page": 539,
 "sol_exact": false,
 "level": null,
-"best_san": "Kh8",
+"best_san": "c5",
 "best_pv": [
-"g8h8",
-"f3f4",
-"e5d4",
-"c3d4",
-"d6d5",
-"c4d5",
-"a6d3",
-"e2d3"
-],
-"eval": -150,
-"good": [
-"g8h8",
 "c7c5",
+"d4d5",
+"f6d7",
+"f1f2",
+"g7g6",
+"g3f1",
+"g8g7",
+"e3d2"
+],
+"eval": -156,
+"good": [
+"c7c5",
+"g8h8",
 "a8c8",
-"f6d7"
+"h7h6"
 ]
 },
 {
@@ -1796,13 +1980,13 @@
 "c4c5",
 "a6d3",
 "d1d3",
-"d7d5",
+"d7d6",
 "c5d6",
 "e8d6",
 "e1g1",
-"d6c4"
+"a8c8"
 ],
-"eval": 0,
+"eval": -14,
 "good": [
 "c4c5",
 "e1g1"
@@ -1828,14 +2012,137 @@
 "g2f4",
 "g6f5",
 "f4h5",
-"h8g8",
+"d8g8",
 "f2f3",
 "f5g6",
 "h5f4"
 ],
-"eval": -59,
+"eval": -71,
 "good": [
 "h7h5"
+]
+},
+{
+"id": "silman-6-4",
+"fen": "1r1r1k2/p1p3pp/1p1bbp2/P7/4PPP1/2P1B3/3RBK1P/R7 b - - 0 1",
+"color": "black",
+"ch": 6,
+"n": 4,
+"chapter": "La dualité statique-dynamique",
+"concept": "statique_dynamique",
+"ex_page": 299,
+"page": 539,
+"sol_exact": false,
+"level": null,
+"best_san": "bxa5",
+"best_pv": [
+"b6a5",
+"e2d1",
+"d6e7",
+"d2d8",
+"b8d8",
+"d1e2",
+"d8b8",
+"a1a5"
+],
+"eval": -23,
+"good": [
+"b6a5",
+"d8e8",
+"h7h6",
+"e6d7"
+]
+},
+{
+"id": "silman-6-5",
+"fen": "r2qkb1r/p2n1ppp/b1p1pn2/8/Np1P4/1B2PN2/PP3PPP/R1BQK2R w KQkq - 0 1",
+"color": "white",
+"ch": 6,
+"n": 5,
+"chapter": "La dualité statique-dynamique",
+"concept": "statique_dynamique",
+"ex_page": 298,
+"page": 539,
+"sol_exact": false,
+"level": null,
+"best_san": "Bd2",
+"best_pv": [
+"c1d2",
+"f8e7",
+"a1c1",
+"e8g8",
+"b3c4",
+"a6b7",
+"e1g1",
+"a8c8"
+],
+"eval": -26,
+"good": [
+"c1d2",
+"d1c2",
+"b3c2"
+]
+},
+{
+"id": "silman-6-6",
+"fen": "r3k2r/1pp1q1pp/p1pb1pn1/8/2Q1P3/4BN2/PPP2PPP/R2R2K1 w kq - 0 1",
+"color": "white",
+"ch": 6,
+"n": 6,
+"chapter": "La dualité statique-dynamique",
+"concept": "statique_dynamique",
+"ex_page": 299,
+"page": 551,
+"sol_exact": true,
+"level": "1400-2200",
+"best_san": "Rd4",
+"best_pv": [
+"d1d4",
+"e8c8",
+"a1d1",
+"h8e8",
+"b2b4",
+"g6e5",
+"f3e5",
+"f6e5"
+],
+"eval": -27,
+"good": [
+"d1d4",
+"e3d4",
+"a1b1",
+"e3d2",
+"h2h3"
+],
+"book_move": "h3",
+"book_uci": "h2h3"
+},
+{
+"id": "silman-7-1",
+"fen": "r2rb1k1/1pq1ppbp/p5p1/2pPn3/2P1P3/3BB2P/P4PP1/1RNQ1RK1 b - - 0 1",
+"color": "black",
+"ch": 7,
+"n": 1,
+"chapter": "L'espace",
+"concept": "espace",
+"ex_page": 350,
+"page": 553,
+"sol_exact": false,
+"level": null,
+"best_san": "b5",
+"best_pv": [
+"b7b5",
+"c4b5",
+"a6b5",
+"d3b5",
+"d8b8",
+"a2a4",
+"e5c4",
+"d1f3"
+],
+"eval": 9,
+"good": [
+"b7b5"
 ]
 },
 {
@@ -1857,11 +2164,11 @@
 "e2g4",
 "d7g4",
 "a1a2",
-"f8f1",
-"d2f1",
-"g8h8"
+"g8h8",
+"a2a7",
+"d8c8"
 ],
-"eval": 193,
+"eval": 203,
 "good": [
 "c4c5"
 ],
@@ -1882,9 +2189,16 @@
 "level": null,
 "best_san": "exd4",
 "best_pv": [
-"e5d4"
+"e5d4",
+"f3d4",
+"b5c4",
+"d2c4",
+"c6c5",
+"d4f5",
+"g6f5",
+"e3g3"
 ],
-"eval": -41,
+"eval": -42,
 "good": [
 "e5d4"
 ]
@@ -1907,17 +2221,17 @@
 "d1e2",
 "f8c8",
 "h2g4",
-"b3c1",
-"e1c1",
 "f6g4",
-"e2g4"
+"e2g4",
+"b3c1",
+"e1c1"
 ],
-"eval": -48,
+"eval": -51,
 "good": [
 "a5b3",
 "f6d7",
-"f8c8",
-"f8b8"
+"f8b8",
+"f8c8"
 ]
 },
 {
@@ -1937,7 +2251,7 @@
 "e6e5",
 "d4e5"
 ],
-"eval": 21,
+"eval": 23,
 "good": [
 "e6e5",
 "f6e4",
@@ -1947,61 +2261,91 @@
 },
 {
 "id": "silman-7-6",
-"fen": "r3nrk1/1pb3pp/p1p2n2/2Pp1p1q/PP1PpP2/1Q2P1P1/1B2N1BP/R3R1K1 w - - 0 1",
+"fen": "r3r1kb/p4p1n/b2p2p1/q2P4/2p1PP2/2NnB1N1/P1RQ2BP/5R1K w - - 0 1",
 "color": "white",
 "ch": 7,
 "n": 6,
 "chapter": "L'espace",
 "concept": "espace",
 "ex_page": 351,
+"page": 560,
+"sol_exact": true,
+"level": "1800-2200",
+"best_san": "e5",
+"best_pv": [
+"e4e5",
+"a6b7",
+"g2e4",
+"h8g7",
+"f1g1",
+"d6e5",
+"f4f5",
+"d3f4"
+],
+"eval": 149,
+"good": [
+"e4e5"
+],
+"book_move": "e5",
+"book_uci": "e4e5"
+},
+{
+"id": "silman-7-7",
+"fen": "r3nrk1/1pb3pp/p1p2n2/2Pp1p1q/PP1PpP2/1Q2P1P1/1B2N1BP/R3R1K1 w - - 0 1",
+"color": "white",
+"ch": 7,
+"n": 7,
+"chapter": "L'espace",
+"concept": "espace",
+"ex_page": 351,
 "page": 553,
 "sol_exact": false,
 "level": null,
-"best_san": "Ra2",
+"best_san": "Bc1",
 "best_pv": [
-"a1a2",
-"g8h8",
 "b2c1",
+"h7h6",
+"a1a2",
 "g7g5",
-"f4g5",
-"h5g5",
 "b4b5",
-"f6g4"
+"g5f4",
+"e3f4",
+"c7a5"
 ],
-"eval": -118,
+"eval": -108,
 "good": [
-"a1a2",
 "b2c1",
+"a1a2",
 "b4b5",
 "a1a3"
 ]
 },
 {
-"id": "silman-8-2",
-"fen": "3r2k1/p5b1/qp1Pn2p/2p2Q2/6R1/8/PP3PPP/6K1 w - - 0 1",
+"id": "silman-8-1",
+"fen": "2r3k1/3n1ppp/1p2p3/2P5/1p1KP3/5P2/1P2B1PP/2R5 w - - 0 1",
 "color": "white",
 "ch": 8,
-"n": 2,
+"n": 1,
 "chapter": "Les pions passés",
 "concept": "pion_passe",
 "ex_page": 386,
 "page": 563,
 "sol_exact": false,
 "level": null,
-"best_san": "Qxe6+",
+"best_san": "c6",
 "best_pv": [
-"f5e6",
-"g8h8",
-"g4g7",
-"h8g7",
-"e6e7",
-"g7g6",
-"e7d8",
-"a6d3"
+"c5c6",
+"d7f6",
+"e2a6",
+"e6e5",
+"d4e5",
+"c8c7",
+"c1c4",
+"f6e8"
 ],
-"eval": 560,
+"eval": 417,
 "good": [
-"f5e6"
+"c5c6"
 ]
 },
 {
@@ -2018,16 +2362,9 @@
 "level": null,
 "best_san": "Qxe6+",
 "best_pv": [
-"f5e6",
-"g8h8",
-"g4g7",
-"h8g7",
-"e6e7",
-"g7g6",
-"e7d8",
-"a6d3"
+"f5e6"
 ],
-"eval": 678,
+"eval": 593,
 "good": [
 "f5e6"
 ]
@@ -2044,23 +2381,23 @@
 "page": 563,
 "sol_exact": false,
 "level": null,
-"best_san": "f6",
+"best_san": "Re8",
 "best_pv": [
-"f7f6",
-"e5e6",
-"f6f5",
-"f1e1",
-"b8a6",
-"d4f5",
-"a6c5",
-"f5e7"
-],
-"eval": 16,
-"good": [
-"f7f6",
-"f7f5",
 "f8e8",
-"b7b6"
+"c1d2",
+"f7f6",
+"d3g3",
+"c6c5",
+"d4f3",
+"b8a6",
+"a1e1"
+],
+"eval": 0,
+"good": [
+"f8e8",
+"f7f5",
+"b7b6",
+"c6c5"
 ]
 },
 {
@@ -2079,27 +2416,88 @@
 "best_pv": [
 "c3c4",
 "g8g7",
+"c4d5",
+"c6d5",
 "d2f1",
 "a8h8",
 "b3d1",
-"g4d1",
-"e1d1",
-"d7f8"
+"g4d1"
 ],
 "eval": 0,
 "good": [
 "c3c4",
-"a2a4",
 "d2f1",
-"g1g2"
+"g1g2",
+"a2a4"
+]
+},
+{
+"id": "silman-8-5",
+"fen": "r4rk1/p4ppp/3qbn2/1Pp1p3/P1PpP3/R2B4/4NPPP/Q4RK1 b - - 0 1",
+"color": "black",
+"ch": 8,
+"n": 5,
+"chapter": "Les pions passés",
+"concept": "pion_passe",
+"ex_page": 387,
+"page": 563,
+"sol_exact": false,
+"level": null,
+"best_san": "a6",
+"best_pv": [
+"a7a6",
+"f1c1",
+"h7h5",
+"h2h3",
+"f8c8",
+"c1b1",
+"f6d7",
+"e2g3"
+],
+"eval": 61,
+"good": [
+"a7a6",
+"a7a5",
+"f6h5",
+"d6e7"
 ]
 },
 {
 "id": "silman-8-6",
-"fen": "r2q1rk1/3nnppp/p4b2/1ppPp3/4P3/1B2BQ1P/PP3PP1/RN3RK1 w - - 0 1",
+"fen": "6k1/p4p1p/1pb1p1p1/8/1PP5/P3Q2P/1q2BPP1/6K1 w - - 0 1",
 "color": "white",
 "ch": 8,
 "n": 6,
+"chapter": "Les pions passés",
+"concept": "pion_passe",
+"ex_page": 387,
+"page": 563,
+"sol_exact": false,
+"level": null,
+"best_san": "Bf3",
+"best_pv": [
+"e2f3",
+"b2a1",
+"g1h2",
+"c6f3",
+"g2f3",
+"a1a2",
+"c4c5",
+"b6c5"
+],
+"eval": 75,
+"good": [
+"e2f3",
+"h3h4",
+"b4b5"
+]
+},
+{
+"id": "silman-8-7",
+"fen": "r2q1rk1/3nnppp/p4b2/1ppPp3/4P3/1B2BQ1P/PP3PP1/RN3RK1 w - - 0 1",
+"color": "white",
+"ch": 8,
+"n": 7,
 "chapter": "Les pions passés",
 "concept": "pion_passe",
 "ex_page": 387,
@@ -2109,19 +2507,19 @@
 "best_san": "a4",
 "best_pv": [
 "a2a4",
-"c5c4",
-"b3c2",
 "e7g6",
-"b2b3",
+"b3c2",
 "f6g5",
-"b3c4",
-"b5c4"
+"b2b3",
+"g5e3",
+"f3e3",
+"d8b6"
 ],
-"eval": 103,
+"eval": 106,
 "good": [
 "a2a4",
-"f1c1",
-"f3g4"
+"f3g4",
+"f1c1"
 ],
 "book_move": "a4",
 "book_uci": "a2a4"
@@ -2140,9 +2538,16 @@
 "level": null,
 "best_san": "d6",
 "best_pv": [
-"d5d6"
+"d5d6",
+"d7e6",
+"e5e6",
+"f7e6",
+"e1e6",
+"c8c1",
+"g1h2",
+"g8f7"
 ],
-"eval": 165,
+"eval": 190,
 "good": [
 "d5d6"
 ]
@@ -2162,15 +2567,15 @@
 "best_san": "Nh8",
 "best_pv": [
 "g6h8",
-"a3a4",
+"g3g4",
 "a6c8",
-"a4a5",
-"c8h3",
-"f1b1",
-"h8f7",
-"b1b2"
+"e2f3",
+"d6d7",
+"d3e2",
+"e8f8",
+"a3a4"
 ],
-"eval": -57,
+"eval": -54,
 "good": [
 "g6h8",
 "g6e7",
@@ -2195,14 +2600,14 @@
 "best_pv": [
 "e6d5",
 "e4d5",
+"a6a5",
+"a2a4",
 "g8f8",
 "g5e3",
 "f6d7",
-"a2a4",
-"a6a5",
-"a1b1"
+"g2g4"
 ],
-"eval": -15,
+"eval": -11,
 "good": [
 "e6d5",
 "f6d5"
@@ -2231,7 +2636,7 @@
 "b1c3",
 "c8e6"
 ],
-"eval": 43,
+"eval": 40,
 "good": [
 "f1d1",
 "a3d6",
@@ -2254,14 +2659,20 @@
 "best_san": "Ra2",
 "best_pv": [
 "a4a2",
-"f5e4"
+"f5e4",
+"a2d2",
+"d6d5",
+"c4d5",
+"e7d5",
+"e3d5",
+"e4d5"
 ],
-"eval": 30,
+"eval": 34,
 "good": [
 "a4a2",
-"d1d2",
+"e3d5",
 "e3f5",
-"e3d5"
+"f1e1"
 ]
 },
 {
@@ -2279,15 +2690,15 @@
 "best_san": "d5",
 "best_pv": [
 "d7d5",
-"e1g1",
-"f8e8",
 "c2c4",
+"d5c4",
+"e2c4",
+"c8g4",
+"d1c1",
 "e7e5",
-"d4f3",
-"b8c6",
-"c4d5"
+"d4f3"
 ],
-"eval": 28,
+"eval": 34,
 "good": [
 "d7d5",
 "f8e8",
@@ -2309,17 +2720,73 @@
 "best_san": "Bxc4",
 "best_pv": [
 "f1c4",
-"g8h6",
-"f4e6",
-"d8c8",
-"d1b3",
-"a7a6",
-"e6c5",
-"e7e5"
+"d8d7",
+"d4d5",
+"b8a6",
+"e1g1",
+"e8c8",
+"b2b4",
+"c5b4"
 ],
-"eval": 281,
+"eval": 295,
 "good": [
 "f1c4"
+]
+},
+{
+"id": "silman-9-6",
+"fen": "rq2kbnr/5ppp/2p1p3/2PpP3/1P1Q2b1/5N2/P4PPP/RNB1K2R b KQkq - 0 1",
+"color": "black",
+"ch": 9,
+"n": 6,
+"chapter": "Les autres déséquilibres",
+"concept": "desequilibres",
+"ex_page": 424,
+"page": 575,
+"sol_exact": false,
+"level": null,
+"best_san": "Bxf3",
+"best_pv": [
+"g4f3",
+"g2f3",
+"g8e7",
+"f3f4",
+"e7f5",
+"d4c3",
+"f8e7",
+"b1d2"
+],
+"eval": 33,
+"good": [
+"g4f3"
+]
+},
+{
+"id": "silman-9-7",
+"fen": "3rrbk1/3q1p1p/p5p1/2pb4/5N2/1P2P1PP/P2R1P2/3Q1RK1 b - - 0 1",
+"color": "black",
+"ch": 9,
+"n": 7,
+"chapter": "Les autres déséquilibres",
+"concept": "desequilibres",
+"ex_page": 424,
+"page": 575,
+"sol_exact": false,
+"level": null,
+"best_san": "Bxb3",
+"best_pv": [
+"d5b3",
+"d2d7",
+"b3d1",
+"f1d1",
+"d8d7",
+"d1d7",
+"e8c8",
+"g1f1"
+],
+"eval": -5,
+"good": [
+"d5b3"
 ]
 },
 {
@@ -2334,23 +2801,23 @@
 "page": 575,
 "sol_exact": false,
 "level": null,
-"best_san": "Rab8",
+"best_san": "Rfb8",
 "best_pv": [
-"a8b8",
-"b1b8",
 "f8b8",
-"e1e2",
-"e6d5",
 "f2f4",
-"e7h4",
-"f4f5"
-],
-"eval": -61,
-"good": [
-"a8b8",
-"f8b8",
+"b8b1",
+"e1b1",
+"e6d5",
+"a2a4",
 "a8e8",
-"e6d5"
+"a4a5"
+],
+"eval": -70,
+"good": [
+"f8b8",
+"e6d5",
+"a8b8",
+"a8e8"
 ]
 },
 {
@@ -2365,16 +2832,44 @@
 "page": 575,
 "sol_exact": false,
 "level": null,
-"best_san": "Rfd8",
+"best_san": "Qa6",
 "best_pv": [
-"f8d8"
-],
-"eval": 66,
-"good": [
-"f8d8",
 "b6a6",
-"a8c8",
-"a8d8"
+"h4g3",
+"f8d8",
+"d1e1",
+"d8d5",
+"c1f4",
+"d5f5",
+"h2h4"
+],
+"eval": 62,
+"good": [
+"b6a6",
+"f8d8",
+"a8d8",
+"a8c8"
+]
+},
+{
+"id": "silman-9-10",
+"fen": "5bk1/5pp1/p1P5/8/1p4Pp/5P1P/P1RR1QK1/1q5r w - - 0 1",
+"color": "white",
+"ch": 9,
+"n": 10,
+"chapter": "Les autres déséquilibres",
+"concept": "desequilibres",
+"ex_page": 425,
+"page": 575,
+"sol_exact": false,
+"level": null,
+"best_san": "g5",
+"best_pv": [
+"g4g5"
+],
+"eval": 601,
+"good": [
+"g4g5"
 ]
 },
 {
@@ -2393,19 +2888,48 @@
 "best_pv": [
 "g1h2",
 "c8f8",
-"f2d2",
-"b8a6",
-"d2e2",
-"g8h8",
+"f2c2",
+"e7a3",
 "c1g1",
-"e7a3"
+"b8a6",
+"c2e2",
+"g8h8"
 ],
-"eval": 39,
+"eval": 47,
 "good": [
 "g1h2",
-"g1h1",
-"g4f5",
-"h3h4"
+"f2e2",
+"g1g2",
+"f2d2"
+]
+},
+{
+"id": "silman-9-12",
+"fen": "rnbqnrk1/pp4pp/1bp5/3pP3/8/2NBB3/PP1QNPPP/R3K2R b KQ - 0 1",
+"color": "black",
+"ch": 9,
+"n": 12,
+"chapter": "Les autres déséquilibres",
+"concept": "desequilibres",
+"ex_page": 425,
+"page": 575,
+"sol_exact": false,
+"level": null,
+"best_san": "Bxe3",
+"best_pv": [
+"b6e3",
+"d2e3",
+"d8b6",
+"e2d4",
+"e8c7",
+"e1g1",
+"c7e6",
+"c3e2"
+],
+"eval": -34,
+"good": [
+"b6e3",
+"b8d7"
 ]
 },
 {
@@ -2420,23 +2944,155 @@
 "page": 575,
 "sol_exact": false,
 "level": null,
-"best_san": "Ng3",
+"best_san": "Rc1",
 "best_pv": [
+"f1c1",
+"d8d7",
 "e2g3",
 "e7c8",
 "g3f5",
-"c7f7",
+"c7d8",
 "e3f3",
-"a7a6",
-"f1c1",
-"b8a8"
+"a7a6"
 ],
-"eval": 201,
+"eval": 211,
 "good": [
-"e2g3",
 "f1c1",
+"f1h1",
 "f1d1",
-"f2f3"
+"e2g3"
+]
+},
+{
+"id": "silman-9-14",
+"fen": "r1b1qr1k/ppp2pbp/n2p2p1/2nPp1B1/2P1P1PN/2N4P/PP1Q1P2/R3KBR1 b Q - 0 1",
+"color": "black",
+"ch": 9,
+"n": 14,
+"chapter": "Les autres déséquilibres",
+"concept": "desequilibres",
+"ex_page": 426,
+"page": 575,
+"sol_exact": false,
+"level": null,
+"best_san": "Bd7",
+"best_pv": [
+"c8d7",
+"a1b1",
+"c5a4",
+"c3a4",
+"d7a4",
+"f2f3",
+"a6c5",
+"b2b4"
+],
+"eval": -40,
+"good": [
+"c8d7",
+"c7c6",
+"c5a4",
+"f7f6"
+]
+},
+{
+"id": "silman-9-15",
+"fen": "r1bqkb1r/1p1n1p1p/p1p1pnp1/2Pp4/1P1P4/2N1PN2/P4PPP/R1BQKB1R w KQkq - 0 1",
+"color": "white",
+"ch": 9,
+"n": 15,
+"chapter": "Les autres déséquilibres",
+"concept": "desequilibres",
+"ex_page": 426,
+"page": 575,
+"sol_exact": false,
+"level": null,
+"best_san": "Bd3",
+"best_pv": [
+"f1d3",
+"f8g7"
+],
+"eval": 47,
+"good": [
+"f1d3",
+"c1b2",
+"f1e2",
+"c3a4"
+]
+},
+{
+"id": "silman-9-16",
+"fen": "2rq1rk1/1p3ppp/p1n2n2/2bp3b/8/1PN1PN1P/PB2BPP1/R2Q1RK1 w - - 0 1",
+"color": "white",
+"ch": 9,
+"n": 16,
+"chapter": "Les autres déséquilibres",
+"concept": "desequilibres",
+"ex_page": 426,
+"page": 598,
+"sol_exact": true,
+"level": "1600-2000",
+"best_san": "Nh4",
+"best_pv": [
+"f3h4",
+"h5g6"
+],
+"eval": 33,
+"good": [
+"f3h4",
+"a1c1",
+"c3a4",
+"a1b1"
+],
+"book_move": "Nh4",
+"book_uci": "f3h4"
+},
+{
+"id": "silman-9-17",
+"fen": "r3kb1r/1p3ppp/p1n1pn2/2pq3b/8/2PP1N1P/PP1N1PP1/R1BQRBK1 w kq - 0 1",
+"color": "white",
+"ch": 9,
+"n": 17,
+"chapter": "Les autres déséquilibres",
+"concept": "desequilibres",
+"ex_page": 426,
+"page": 575,
+"sol_exact": false,
+"level": null,
+"best_san": "g4",
+"best_pv": [
+"g2g4",
+"h5g6",
+"d2c4",
+"d5d8",
+"c1f4",
+"f8e7",
+"d1b3",
+"b7b5"
+],
+"eval": 134,
+"good": [
+"g2g4"
+]
+},
+{
+"id": "silman-9-18",
+"fen": "1q3rk1/1p3pp1/rn1bbn1p/p1p5/P3P3/1QN1BNPP/1P3PB1/R2R2K1 w - - 0 1",
+"color": "white",
+"ch": 9,
+"n": 18,
+"chapter": "Les autres déséquilibres",
+"concept": "desequilibres",
+"ex_page": 427,
+"page": 575,
+"sol_exact": false,
+"level": null,
+"best_san": "Qc2",
+"best_pv": [
+"b3c2"
+],
+"eval": 161,
+"good": [
+"b3c2"
 ]
 },
 {
@@ -2462,7 +3118,7 @@
 "d7f5",
 "c3d5"
 ],
-"eval": -356,
+"eval": -370,
 "good": [
 "f1g3"
 ]
@@ -2483,19 +3139,49 @@
 "best_pv": [
 "f2f3",
 "g8g7",
-"g5f4",
-"e6d7",
-"f4e5",
-"g7f8",
 "g2g4",
-"c5e6"
+"e6d7",
+"g5f4",
+"c5e6",
+"d4e6",
+"f7e6"
 ],
-"eval": 71,
+"eval": 80,
 "good": [
 "f2f3",
 "h2h3",
 "d1d2",
 "h2h4"
+]
+},
+{
+"id": "silman-9-21",
+"fen": "r2r4/2n1qppk/1pbp3p/4p2n/1PP1P3/2B1NPP1/3QB2P/R1R3K1 w - - 0 1",
+"color": "white",
+"ch": 9,
+"n": 21,
+"chapter": "Les autres déséquilibres",
+"concept": "desequilibres",
+"ex_page": 427,
+"page": 575,
+"sol_exact": false,
+"level": null,
+"best_san": "Nf5",
+"best_pv": [
+"e3f5",
+"e7f8",
+"b4b5",
+"c6b7",
+"d2e3",
+"a8b8",
+"f3f4",
+"e5f4"
+],
+"eval": 240,
+"good": [
+"e3f5",
+"b4b5",
+"a1a8"
 ]
 },
 {
@@ -2521,7 +3207,7 @@
 "g2f3",
 "b6d4"
 ],
-"eval": 140,
+"eval": 149,
 "good": [
 "d3b5"
 ]
@@ -2547,12 +3233,36 @@
 "d3d6",
 "e7d6",
 "d1d6",
-"a8b8"
+"f7f5"
 ],
-"eval": 93,
+"eval": 80,
 "good": [
 "d4c6"
 ]
+},
+{
+"id": "silman-439",
+"fen": "r1b2rk1/1p1nqpbp/2p2np1/p3p3/P3P3/2NQBN1P/1PP1BPP1/R4RK1 w - - 0 12",
+"color": "white",
+"ch": 2,
+"chapter": "Les pièces légères",
+"concept": "cavalier",
+"page": 439,
+"level": "2000-2200",
+"book_move": "Nd2",
+"book_uci": "f3d2",
+"good": [
+"f1d1",
+"d3c4",
+"f1e1",
+"f3d2"
+],
+"best_san": "Rfd1",
+"best_pv": [
+"f1d1"
+],
+"eval": 32,
+"sol_exact": true
 },
 {
 "id": "silman-462",
@@ -2587,35 +3297,90 @@
 "sol_exact": true
 },
 {
-"id": "silman-551",
-"fen": "r3k2r/1pp1q1pp/p1pb1pn1/8/2Q1P3/4BN2/PPP2PPP/R2R2K1 w kq - 1 13",
-"color": "white",
-"ch": 6,
-"chapter": "La dualité statique-dynamique",
-"concept": "statique_dynamique",
-"page": 551,
-"level": "1400-2200",
-"book_move": "h3",
-"book_uci": "h2h3",
+"id": "silman-500",
+"fen": "2kr1b1r/pp2pp1p/1np2p2/Q7/3P4/4B1N1/PPP2PqP/1K1R3R b - - 1 14",
+"color": "black",
+"ch": 4,
+"chapter": "Divagations psychologiques",
+"concept": null,
+"page": 500,
+"level": "1600-2000",
+"book_move": "Kb8",
+"book_uci": "c8b8",
 "good": [
-"d1e1",
-"e3d2",
-"e3d4",
-"b2b4",
-"h2h3"
+"c8b8",
+"g2d5"
 ],
-"best_san": "Re1",
+"best_san": "Kb8",
 "best_pv": [
-"d1e1",
-"e8c8",
-"a1d1",
-"h8e8",
-"e3d4",
-"c6c5",
-"d4c3",
-"e7e6"
+"c8b8",
+"c2c4",
+"e7e6",
+"e3f4",
+"f8d6",
+"f4d6",
+"d8d6",
+"c4c5"
 ],
-"eval": -35,
+"eval": 28,
+"sol_exact": true
+},
+{
+"id": "silman-509",
+"fen": "8/p3r2p/2p3pk/2r5/2PR1PP1/4P1K1/P7/3R4 w - - 1 34",
+"color": "white",
+"ch": 4,
+"chapter": "Divagations psychologiques",
+"concept": null,
+"page": 509,
+"level": "1600-2000",
+"book_move": "Rd7",
+"book_uci": "d4d7",
+"good": [
+"d4d7",
+"g4g5"
+],
+"best_san": "Rd7",
+"best_pv": [
+"d4d7",
+"e7d7",
+"g4g5",
+"h6g7",
+"d1d7",
+"g7h8",
+"d7a7",
+"c5c4"
+],
+"eval": 463,
+"sol_exact": true
+},
+{
+"id": "silman-532",
+"fen": "2r2rk1/1bq1bppp/p2p4/np1Pp2n/P3P3/1P1B1N1P/5PP1/RNBQR1K1 b - - 0 16",
+"color": "black",
+"ch": 5,
+"chapter": "Le tir à la cible",
+"concept": null,
+"page": 532,
+"level": "1400-1800",
+"book_move": "b4",
+"book_uci": "b5b4",
+"good": [
+"b5b4",
+"c7c1"
+],
+"best_san": "b4",
+"best_pv": [
+"b5b4",
+"a1a2",
+"c7c1",
+"d1c1",
+"c8c1",
+"e1c1",
+"f7f5",
+"e4f5"
+],
+"eval": -59,
 "sol_exact": true
 },
 {
@@ -2647,65 +3412,6 @@
 "f2f4"
 ],
 "eval": 19,
-"sol_exact": true
-},
-{
-"id": "silman-560",
-"fen": "r3r1kb/p4p1n/b2p2p1/q2P4/2p1PP2/2NnB1N1/P1RQ2BP/5R1K w - - 0 26",
-"color": "white",
-"ch": 7,
-"chapter": "L'espace",
-"concept": "espace",
-"page": 560,
-"level": "1800-2200",
-"book_move": "e5",
-"book_uci": "e4e5",
-"good": [
-"e4e5"
-],
-"best_san": "e5",
-"best_pv": [
-"e4e5",
-"a6c8",
-"g2e4",
-"c8g4",
-"d2g2",
-"d6e5",
-"f4f5",
-"d3f4"
-],
-"eval": 149,
-"sol_exact": true
-},
-{
-"id": "silman-598",
-"fen": "2rq1rk1/1p3ppp/p1n2n2/2bp3b/8/1PN1PN1P/PB2BPP1/R2Q1RK1 w - - 3 14",
-"color": "white",
-"ch": 9,
-"chapter": "Les autres déséquilibres",
-"concept": "desequilibres",
-"page": 598,
-"level": "1600-2000",
-"book_move": "Nh4",
-"book_uci": "f3h4",
-"good": [
-"a1c1",
-"f3h4",
-"c3a4",
-"a1b1"
-],
-"best_san": "Rc1",
-"best_pv": [
-"a1c1",
-"d8d6",
-"f3h4",
-"h5g6",
-"h4g6",
-"h7g6",
-"e2f3",
-"f8d8"
-],
-"eval": 26,
 "sol_exact": true
 }
 ]

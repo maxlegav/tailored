@@ -31,6 +31,30 @@ export default function Lessons({ data }: { data: Data }) {
       {book && <div className="bk-list">
         <h1 style={{ marginTop: 28 }}>Le livre : {book.book.title}</h1>
         <p className="muted">{book.book.author}. Chaque thème du livre est relié à tes positions d'entraînement, classé selon le nombre de tes erreurs d'habitude ou de compréhension qui le concernent. {book.book.note}</p>
+        {!!data.book_guide?.length && <div className="guide">
+          <h2>Ton plan de lecture</h2>
+          <p className="muted">Pas besoin de lire tout le livre : voici les passages qui comptent pour toi, dans l'ordre, selon tes parties.</p>
+          {data.book_guide.map((g, i) => {
+            const c = chapters.find(x => x.k === g.concept)
+            const tagN = g.tags.reduce((s, t) => s + (data.tags.find(x => x.tag === t)?.core_n || 0), 0)
+            return (
+              <div key={g.concept + i} className="guide-item">
+                <div className="guide-n">{i + 1}</div>
+                <div>
+                  <div className="bk-t">{g.title} <span className="bk-ref">p. {g.pages} · ~{g.minutes} min</span></div>
+                  <p>{g.why}</p>
+                  <p className="small muted">Dans tes parties : {c?.ids.length || 0} positions d'erreur liées à ce thème{tagN ? ` (et ${tagN} erreurs « ${g.tags.map(t => data.tags.find(x => x.tag === t)?.label || t).join(' / ')} »)` : ''}.</p>
+                  <div className="goal-h">Ce que tu changes dans ton jeu</div>
+                  <ul>{g.change.map(x => <li key={x}>{x}</li>)}</ul>
+                  <div className="row">
+                    {!!c?.ids.length && <Link className="btn" to={`/entrainement?silman=${g.concept}&kind=prio`}>Tes positions ({c.ids.length})</Link>}
+                    {!!c?.ex && <Link className="btn" to={`/entrainement?silman=${g.concept}&kind=livre`}>Exercices du livre ({c.ex})</Link>}
+                  </div>
+                </div>
+              </div>)
+          })}
+          <h2 style={{ marginTop: 22 }}>Tous les thèmes du livre</h2>
+        </div>}
         {chapters.map(({ k, ids, ex }) => {
           const c = book.concepts[k]; const id = 'bk-' + k
           const sample = ids.slice(0, 2).map(i => data.mistakes.find(m => m.id === i)!).filter(Boolean)
