@@ -1,5 +1,62 @@
 [
  {
+  "id": "w-torre-d5",
+  "color": "white",
+  "title": "Blancs · 1.d4 d5 2.Nf3 Nf6 3.Bg5 : ton Bg5, transformé en vrai système (Torre)",
+  "stats": "124 parties, 54 %. Selon la réponse noire : 3…Ne4 83 % (9), 3…Bf5 76 % (25), 3…Nc6 61 % (18), 3…e6 50 % (38), 3…Bg4 44 % (9), mais 3…c5 11 % (9 parties, 1 victoire).",
+  "yours": "3.Bg5, puis un coup différent à chaque fois : e3, c3, c4, Qb3…",
+  "rec": "3.Bg5 + toujours le même schéma : e3, Nbd2, c3, Bd3, O-O, puis Ne5-f4",
+  "why": "Ton 3.Bg5 n'est pas un coup sans idée : c'est l'attaque Torre (code D03), jouée par de forts joueurs. Le fou sort avant e3, donc il n'est pas enfermé comme dans le Colle. Il cloue le cavalier f6, qui défend e4 et h7. Ce qui te manque, c'est la suite. Contre 3…e6 4.e3 Be7, tu joues 5.c4 dans 23 parties (46 %) : tu mélanges la Torre et le Gambit Dame, et tes pièces ne vont nulle part. Le moteur préfère 5.Nbd2. Le vrai trou, c'est 3…c5 : ton fou a quitté c1, donc b2 est faible, et après …Qb6 tu te défends avec Qb3 ou Qc1. Dans ces 9 parties, tu as subi la position. Si tu préfères la pression sur d5, joue plutôt 3.c4 (Gambit Dame, plus bas).",
+  "plan": [
+   "Toujours le même ordre : e3, Nbd2, c3, Bd3, O-O. Ne joue pas c4 au milieu : soit Torre, soit Gambit Dame, pas les deux.",
+   "Contre …Qb6 (attaque de b2) : Nbd2 et laisse le pion. Après …Qxb2, c4! ou Rb1 : la dame noire est loin, tu gagnes 3 temps. Ne joue jamais Qb3 : après …c4 Qxb6 axb6, la colonne a s'ouvre pour lui.",
+   "Le plan d'attaque : Ne5, puis f4. La tour passe par f3-h3, la dame va en h5 ou f3. Le fou d3 vise h7.",
+   "Si les Noirs jouent …h6, prends Bxf6 sans regret : tu gagnes du temps, et ton cavalier e5 vaut leur fou.",
+   "Contre …Ne4 qui chasse ton fou : Bf4 plutôt que Bh4. Le fou reste actif et contrôle e5."
+  ],
+  "line": "d4 d5 Nf3 Nf6 Bg5 e6 e3 Be7 Nbd2 O-O Bd3 c5 c3 Nbd7 O-O b6 Ne5 Bb7 f4",
+  "line_title": "Le schéma complet : Ne5 et f4",
+  "line_text": "Le cavalier e5 est ancré, f4 le soutient et ouvre la colonne f. Tes 5 pièces (Ne5, Bd3, Bg5, Rf1, Qd1-h5) pointent toutes vers le roque noir.",
+  "ideas": [
+   {
+    "kind": "Piège",
+    "title": "Le pion b2 empoisonné",
+    "line": "d4 d5 Nf3 Nf6 Bg5 c5 e3 Qb6 Nbd2 Qxb2 c4",
+    "text": "Après …Qb6, ne défends pas b2. Nbd2, puis sur …Qxb2, c4! : Rb1 va chasser la dame, et ton développement est bien plus rapide. Le moteur donne environ +0,6 à +0,8. En blitz, la dame noire est souvent en danger.",
+    "eval": 0.6
+   },
+   {
+    "kind": "Variante",
+    "title": "Contre 3…c5 : e3 et Nbd2 avant c3",
+    "line": "d4 d5 Nf3 Nf6 Bg5 c5 e3 Nc6 Nbd2 cxd4 exd4 h6 Bxf6 exf6 Bd3 Bd6 O-O O-O c3",
+    "text": "Ta ligne faible (11 %). Garde ta structure d4 et ne lâche pas le centre. Bxf6 donne aux Noirs la paire de fous, mais leurs pions f sont doublés et ton cavalier ira en e5 ou f5. Le plan : Re1, Qc2 ou Qb3, Nf1-e3, et la pression sur d5.",
+    "eval": -0.2
+   },
+   {
+    "kind": "Variante",
+    "title": "Contre 3…Ne4 : Bf4",
+    "line": "d4 d5 Nf3 Nf6 Bg5 Ne4 Bf4 c5 e3 Nc6 Be2 cxd4 exd4 Bf5 Nbd2 e6 Nxe4 Bxe4 c3",
+    "text": "Tu échanges le cavalier e4 dès que possible, puis tu joues O-O, Nd2 et f3 pour chasser le fou. Ton fou f4 contrôle e5 et b8. Ton 4.Bh4 te réussit (70 %), mais Bf4 est plus simple.",
+    "eval": 0.1
+   },
+   {
+    "kind": "Idée",
+    "title": "Contre 3…Bf5 : c4 et Qb3, ta ligne à 77 %",
+    "line": "d4 d5 Nf3 Nf6 Bg5 Bf5 e3 e6 c4 c6 Nc3 Be7 Qb3",
+    "text": "Ici tu fais très bien de jouer c4 : le fou f5 a quitté c8, donc b7 n'est plus défendu, et Qb3 l'attaque tout de suite. Garde cette ligne telle quelle.",
+    "eval": 0.1
+   },
+   {
+    "kind": "Idée",
+    "title": "Contre 3…Bg4 : Ne5 chasse le fou",
+    "line": "d4 d5 Nf3 Nf6 Bg5 Bg4 Ne5 Bf5 c4 e6 Nc3",
+    "text": "Tu joues 4.e3 (44 %). 4.Ne5! attaque le fou g4 et prend la case e5 avant les Noirs. Puis c4 et Qb3, comme contre …Bf5.",
+    "eval": 0.3
+   }
+  ],
+  "line_eval": 0.2
+ },
+ {
   "id": "w-qgd",
   "color": "white",
   "title": "Blancs · 1.d4 d5 2.Nf3 Nf6 3.c4 : le Gambit Dame avec ton Bg5",
@@ -29,10 +86,10 @@
     "title": "Contre la Slave (…c6)",
     "line": "d4 d5 Nf3 Nf6 c4 c6 Nc3 dxc4 a4 Bf5 e3 e6 Bxc4 Bb4 O-O O-O Qe2",
     "text": "a4 empêche …b5. Tu reprends le pion c4, tu roques, puis Qe2 et e3-e4 : tu as le centre.",
-    "eval": 0.4
+    "eval": 0.3
    }
   ],
-  "line_eval": 0.5
+  "line_eval": 0.4
  },
  {
   "id": "w-catalan",
@@ -57,7 +114,7 @@
     "title": "La Catalane fermée",
     "line": "d4 Nf6 c4 e6 Nf3 d5 g3 Be7 Bg2 O-O O-O Nbd7 Qc2 c6 Nbd2 b6 e4",
     "text": "Si les Noirs gardent d5, tu prépares e2-e4 avec Nbd2 et Qc2 : ton fou g2 s'ouvre une fois le centre ouvert.",
-    "eval": 0.5
+    "eval": 0.4
    }
   ],
   "line_eval": 0.2
@@ -85,7 +142,7 @@
     "title": "Si les Blancs sacrifient d4 (gambit Milner-Barry)",
     "line": "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Bd3 cxd4 cxd4 Bd7 O-O Nxd4 Nxd4 Qxd4 Nc3",
     "text": "Tu peux prendre d4 : le moteur te donne l'avantage, mais les Blancs ont du développement et menacent Nb5. Réponds par …a6 et …Ne7-c6, sans chercher d'autres pions.",
-    "eval": 0.6
+    "eval": 0.7
    }
   ],
   "line_eval": -0.3
@@ -133,9 +190,9 @@
     "title": "Contre 3.Nd2 (Tarrasch)",
     "line": "e4 e6 d4 d5 Nd2 c5 exd5 Qxd5 Ngf3 cxd4 Bc4 Qd6 O-O Nf6 Nb3 Nc6 Nbxd4 Nxd4 Nxd4 a6",
     "text": "Tu échanges en d4 et sors ta dame tôt : développement facile, position égale, et plus tard une majorité de pions à l'aile dame.",
-    "eval": -0.4
+    "eval": -0.3
    }
   ],
-  "line_eval": -0.4
+  "line_eval": -0.6
  }
 ]
