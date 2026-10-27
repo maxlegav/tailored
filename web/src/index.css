@@ -117,3 +117,8 @@ button.on, .controls button, .btn.primary { background: var(--green); box-shadow
 .check { display: inline-flex; gap: 6px; align-items: center; font-size: .9rem; } .done-list { margin-top: 16px; } .done-list p { display: flex; gap: 10px; align-items: center; }
 .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin: 0 4px; background: #666; } .dot.good { background: #81b64c; } .dot.ok { background: #d9a43a; } .dot.bad { background: #d9534f; }
 .fix { background: var(--panel); border-left: 4px solid #d9534f; border-radius: 8px; padding: 10px 14px; margin: 10px 0; line-height: 1.5; }
+.kinds a, .planrow a, a.planrow { text-decoration: none; color: inherit; }
+.kinds a b, .cards .big { color: var(--green); }
+.kinds .card, .cards .card { transition: transform .15s, background .15s; }
+.kinds .card:hover { transform: translateY(-2px); background: #3a3734; }
+.planrow a:hover b, a.planrow:hover b { text-decoration: underline; }
