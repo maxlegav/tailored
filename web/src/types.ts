@@ -30,5 +30,5 @@ export type Data = {
 }
 export type BookConcept = { title: string; ch: number; pages: string; advice: string; question: string; exercises?: { label: string; pages: string; solutions: number } }
 export type Book = { book: { title: string; author: string; short: string; note: string }; concepts: Record<string, BookConcept>; tags: Record<string, string[]> }
-export type BookEx = { id: string; fen: string; color: 'white' | 'black'; ch: number; chapter: string; concept?: string; page: number; level?: string
-  book_move: string; book_uci: string; good: string[]; best_san: string; best_pv: string[]; eval: number }
+export type BookEx = { id: string; fen: string; color: 'white' | 'black'; ch: number; n?: number; chapter: string; concept?: string; page: number; ex_page?: number; sol_exact?: boolean; level?: string
+  book_move?: string; book_uci?: string; good: string[]; best_san: string; best_pv: string[]; eval: number }

@@ -5,7 +5,8 @@ export function conceptsFor(m: Mistake, book: Book, max = 2): string[] {
   for (const t of m.tags) for (const k of book.tags[t] || []) if (!keys.includes(k)) keys.push(k)
   const detected = (m.silman || []).map(s => s[0]).filter(k => book.concepts[k])
   const mainTag = keys.slice(0, 1)
-  return [...new Set([...mainTag, ...detected, ...keys])].filter(k => book.concepts[k]).slice(0, max)
+  const direct = m.tags.filter(t => book.concepts[t])
+  return [...new Set([...direct, ...mainTag, ...detected, ...keys])].filter(k => book.concepts[k]).slice(0, max)
 }
 
 export function BookConceptCard({ k, book }: { k: string; book: Book }) {

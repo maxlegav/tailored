@@ -153,12 +153,17 @@ function Puzzle({ m, book, onDone, n, total }: { m: Mistake; book: Data; onDone:
 function fromBook(e: BookEx, data: Data): Mistake {
   const c = e.concept && data.book?.concepts[e.concept]
   const pv = sanLine(e.fen, e.best_pv, 6)
-  const alt = e.best_san !== e.book_move ? ` Stockfish propose aussi ${e.best_san} (${pv}).` : ` Suite du moteur : ${pv}.`
+  const best = e.book_uci || e.best_pv[0]
+  const ex = e.n ? `Exercice ${e.ch}.${e.n} du livre (énoncé p. ${e.ex_page})` : `Exercice du chapitre ${e.ch}`
+  const sol = e.sol_exact ? `solution p. ${e.page}` : `solutions du chapitre à partir de la p. ${e.page}`
+  const text = e.book_move
+    ? `${ex}, ${sol}. Le coup de Silman : **${e.book_move}**.${e.best_san !== e.book_move ? ` Stockfish propose aussi ${e.best_san} (${pv}).` : ` Suite du moteur : ${pv}.`}`
+    : `${ex}, ${sol}. Le coup du moteur : **${e.best_san}** (${pv}). Silman explique l'idée en mots dans sa solution : compare avec ton raisonnement.`
   return {
-    id: e.id, fen: e.fen, san: '', uci: e.book_uci, best: e.book_uci, best_san: e.book_move, good: e.good, loss: 0, sev: '', phase: `Silman, ${e.chapter}${e.level ? ` · niveau ${e.level}` : ''}`,
+    id: e.id, fen: e.fen, san: '', uci: best, best, best_san: e.book_move || e.best_san, good: e.good, loss: 0, sev: '',
+    phase: `Silman ${e.n ? `${e.ch}.${e.n}` : `ch. ${e.ch}`}, ${e.chapter}${e.level ? ` · niveau ${e.level}` : ''}`,
     tags: e.concept ? [e.concept] : [], url: '', date: 0, color: e.color, move_no: Number(e.fen.split(' ')[5]), wp_before: 50, wp_after: 50, best_pv: e.best_pv, refutation_san: '',
-    text: `Exercice du livre (chapitre ${e.ch}, solution p. ${e.page}). Le coup de Silman : **${e.book_move}**.${alt} Lis l'explication complète dans le livre, p. ${e.page}.`,
-    goal: c ? `${c.title} : ${c.question}` : undefined,
+    text, goal: c ? `${c.title} : ${c.question}` : undefined,
   }
 }
 function shuffle<T>(a: T[]) { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]] } return b }
