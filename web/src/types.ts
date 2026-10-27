@@ -29,6 +29,7 @@ export type Data = {
   book_ex?: BookEx[]
   book_guide?: GuideItem[]
   tree?: { white: TreeNode; black: TreeNode }
+  myrep?: Opening[]
 }
 export type TreeNode = { n: number; score: number; fen?: string; best?: string; best_uci?: string; eval?: number; san?: string; uci?: string; loss?: number; verdict?: 'bad' | 'risky' | 'idea'; grade?: 'good' | 'ok' | 'bad'; delta?: number; plans?: string[]; kids: TreeNode[] }
 export type GuideItem = { concept: string; title: string; pages: string; minutes: number; tags: string[]; why: string; change: string[] }

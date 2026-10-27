@@ -126,6 +126,7 @@ if os.path.exists("content/silman.json"):
     if os.path.exists("content/silman_exercises.json"): out["book_ex"] = json.load(open("content/silman_exercises.json"))
     if os.path.exists("content/silman_guide.json"): out["book_guide"] = json.load(open("content/silman_guide.json"))
 if os.path.exists("data/tree.json"): out["tree"] = json.load(open("data/tree.json"))
+if os.path.exists("content/repertoire.json"): out["myrep"] = json.load(open("content/repertoire.json"))
 json.dump(out, open("web/public/data.json", "w"), ensure_ascii=False)
 print("ok", len(mistakes), "mistakes", len(rep), "rep nodes", len(trouble), "trouble", len(comfort), "comfort")
 for r in rep[:40]:

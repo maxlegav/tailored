@@ -5,9 +5,9 @@ import type { TreeNode } from './types'
 const START = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
 const VERD: Record<string, [string, string]> = { bad: ['À changer', 'bad'], risky: ['Risqué', 'warn'], idea: ['Coup d\'idée', 'idea'] }
 
-export default function RepTree({ tree, onPlan }: { tree: { white: TreeNode; black: TreeNode }; onPlan: (id: string) => void }) {
-  const [color, setColor] = useState<'white' | 'black'>('white')
-  const [path, setPath] = useState<number[]>([])
+export default function RepTree({ tree, onPlan, init }: { tree: { white: TreeNode; black: TreeNode }; onPlan: (id: string) => void; init?: { color: 'white' | 'black'; path: number[] } }) {
+  const [color, setColor] = useState<'white' | 'black'>(init?.color || 'white')
+  const [path, setPath] = useState<number[]>(init?.path || [])
   const nodes = useMemo(() => { const out = [tree[color]]; for (const i of path) out.push(out[out.length - 1].kids[i]); return out }, [tree, color, path])
   const node = nodes[nodes.length - 1]
   const myTurn = (path.length % 2 === 0) === (color === 'white')
@@ -49,4 +49,17 @@ export default function RepTree({ tree, onPlan }: { tree: { white: TreeNode; bla
       </div>
     </div>
   )
+}
+
+export type Fix = { color: 'white' | 'black'; path: number[]; line: string[]; node: TreeNode; parent: TreeNode }
+export function fixes(tree: { white: TreeNode; black: TreeNode }): Fix[] {
+  const out: Fix[] = []
+  for (const color of ['white', 'black'] as const) {
+    const walk = (n: TreeNode, path: number[], line: string[]) => n.kids.forEach((k, i) => {
+      if (k.verdict === 'bad' || k.verdict === 'risky') out.push({ color, path: [...path, i], line: [...line, k.san!], node: k, parent: n })
+      walk(k, [...path, i], [...line, k.san!])
+    })
+    walk(tree[color], [], [])
+  }
+  return out.sort((a, b) => b.node.n * (b.node.loss || 0) - a.node.n * (a.node.loss || 0))
 }

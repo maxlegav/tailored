@@ -2,40 +2,42 @@ import { useState } from 'react'
 import type { Data } from '../types'
 import Board from '../Board'
 import LinePlayer from '../LinePlayer'
-import RepTree from '../RepTree'
+import RepTree, { fixes } from '../RepTree'
 import type { Opening } from '../types'
 
 export default function Repertoire({ data }: { data: Data }) {
   const [tab, setTab] = useState<'tree' | 'plans' | 'verdicts' | 'trouble' | 'comfort'>(data.tree ? 'tree' : 'plans')
   const [focus, setFocus] = useState<string | null>(null)
-  const nodes = data.repertoire.filter(r => r.verdict)
+  const fx = data.tree ? fixes(data.tree) : []
+  const [init, setInit] = useState<{ color: 'white' | 'black'; path: number[] } | undefined>()
   return (
     <div className="page">
       <h1>Ton répertoire</h1>
       <div className="seg">
         {data.tree && <button className={tab === 'tree' ? 'on' : ''} onClick={() => setTab('tree')}>Ton arbre</button>}
         <button className={tab === 'plans' ? 'on' : ''} onClick={() => { setFocus(null); setTab('plans') }}>Plans ({data.openings?.length ?? 0})</button>
-        <button className={tab === 'verdicts' ? 'on' : ''} onClick={() => setTab('verdicts')}>À corriger ({nodes.length})</button>
+        <button className={tab === 'verdicts' ? 'on' : ''} onClick={() => setTab('verdicts')}>À corriger ({fx.length})</button>
         <button className={tab === 'trouble' ? 'on' : ''} onClick={() => setTab('trouble')}>Lignes difficiles</button>
         <button className={tab === 'comfort' ? 'on' : ''} onClick={() => setTab('comfort')}>Tes points forts</button>
       </div>
       {tab === 'tree' && data.tree && <><p className="muted">Ton répertoire tel que tu le joues vraiment, tiré de tes parties. Touche un coup (ou joue-le sur l'échiquier) pour descendre dans l'arbre.</p>
-        <RepTree tree={data.tree} onPlan={id => { setFocus(id); setTab('plans') }} /></>}
+        <RepTree key={init ? init.color + init.path.join('.') : 'root'} init={init} tree={data.tree} onPlan={id => { setFocus(id); setTab('plans') }} /></>}
       {tab === 'plans' && <>
         <p className="muted">Les lignes choisies à partir de tes parties : ce que tu joues, ce qu'on change, et surtout le plan. Appuie sur ▶ pour voir la suite. Évaluations vérifiées par Stockfish, de ton point de vue.</p>
         {(data.openings || []).filter(o => !focus || o.id === focus).map(o => <OpeningCard key={o.id} o={o} />)}
         {focus && <button className="btn" onClick={() => setFocus(null)}>Voir tous les plans</button>}</>}
-      {tab === 'verdicts' && nodes.map(r => {
-        const black = r.fen.split(' ')[1] === 'b'
-        return (
-          <div key={r.fen} className="item">
-            <Board fen={r.fen} orientation={black ? 'black' : 'white'} />
-            <div><p>{r.verdict}</p>
-              <table><thead><tr><th>Coup</th><th>Parties</th><th>Points</th><th>Perte moy.</th></tr></thead>
-                <tbody>{Object.entries(r.moves).sort((a, b) => b[1].n - a[1].n).map(([m, s]) => <tr key={m} className={m === r.main ? 'main' : ''}><td>{m}{m === r.engine ? ' ★' : ''}</td><td>{s.n}</td><td>{Math.round(s.score * 100)}%</td><td>{s.loss}%</td></tr>)}</tbody></table>
-              <p className="muted">★ = choix du moteur{r.engine && !r.moves[r.engine] ? ` (${r.engine}, jamais joué par toi)` : ''}</p></div>
-          </div>)
-      })}
+      {tab === 'verdicts' && <><p className="muted">Les coups de ton arbre qui te coûtent vraiment des points, du plus coûteux au moins coûteux. Les coups « d'idée » qui te réussissent ne sont pas ici : on les garde.</p>
+        {fx.map(f => {
+          const moves = f.line.map((s, i) => (f.color === 'white' ? i % 2 === 0 : i % 2 === 1) && i === f.line.length - 1 ? `[${s}]` : s)
+          return (
+            <div key={f.color + f.path.join('.')} className="fix">
+              <div className="small muted">{f.color === 'white' ? 'Avec les Blancs' : 'Avec les Noirs'}</div>
+              <p><b>{moves.join(' ')}</b></p>
+              <p>Tu joues <b>{f.node.san}</b> ({f.node.n} parties, {Math.round(f.node.score * 100)} % de points) et tu y perds en moyenne {f.node.loss} % de chances de gain.
+                {f.node.verdict === 'bad' ? <> À la place : <b>{f.parent.best}</b>.</> : <> Il te réussit encore, mais il ne tient que si l'adversaire se trompe. L'alternative sûre : <b>{f.parent.best}</b>.</>}</p>
+              <button className="btn" onClick={() => { setInit({ color: f.color, path: f.path.slice(0, -1) }); setTab('tree') }}>Voir dans l'arbre et comparer</button>
+            </div>)
+        })}</>}
       {(tab === 'trouble' || tab === 'comfort') && (tab === 'trouble' ? data.trouble : data.comfort).map(l => (
         <div key={l.fen} className="item">
           <Board fen={l.fen} orientation={l.fen.split(' ')[1] === 'b' ? 'black' : 'white'} />
@@ -47,7 +49,7 @@ export default function Repertoire({ data }: { data: Data }) {
 
 const fmt = (e?: number) => e == null ? '' : `${e > 0 ? '+' : ''}${e.toFixed(1)}`
 
-function OpeningCard({ o }: { o: Opening }) {
+export function OpeningCard({ o }: { o: Opening }) {
   const [k, setK] = useState(-1)
   const idea = k >= 0 ? o.ideas[k] : null
   return (
