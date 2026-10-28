@@ -7,6 +7,7 @@ import Train from './pages/Train'
 import Lessons from './pages/Lessons'
 import MyRep from './pages/MyRep'
 import Settings from './pages/Settings'
+import Note from './Note'
 
 const I = (d: string) => <svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d={d} /></svg>
 const NAV = [
@@ -17,7 +18,7 @@ const NAV = [
   { to: '/mon-repertoire', label: 'Mon répertoire', ic: I('M12 2a3.5 3.5 0 0 0-2 6.4L8 14h8l-2-5.6A3.5 3.5 0 0 0 12 2ZM7 16l-1 3h12l-1-3H7Zm-2 4v2h14v-2H5Z') },
 ]
 
-const Brand = () => <NavLink to="/" className="brand"><img src="./icon.svg" alt="" />Tailored</NavLink>
+const Brand = () => <NavLink to="/" className="brand"><img src="./icon.svg?v=2" alt="" />Tailored</NavLink>
 
 export default function App() {
   const [data, setData] = useState<Data | null>(null)
@@ -27,9 +28,10 @@ export default function App() {
       <aside className="side">
         <Brand />
         {NAV.map(n => <NavLink key={n.to} to={n.to} end={n.to === '/'} className="nav"><span className="ic">{n.ic}</span>{n.label}</NavLink>)}
+        <Note />
       </aside>
       <main>
-        <header className="topbar"><Brand /><NavLink to="/reglages" className="gear" aria-label="Réglages">⚙</NavLink></header>
+        <header className="topbar"><Brand /><Note /><NavLink to="/reglages" className="gear" aria-label="Réglages">⚙</NavLink></header>
         {!data ? <div className="loading">Chargement de ton coach…</div> : (
           <Routes>
             <Route path="/" element={<Profile data={data} />} />

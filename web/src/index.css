@@ -122,3 +122,12 @@ button.on, .controls button, .btn.primary { background: var(--green); box-shadow
 .kinds .card, .cards .card { transition: transform .15s, background .15s; }
 .kinds .card:hover { transform: translateY(-2px); background: #3a3734; }
 .planrow a:hover b, a.planrow:hover b { text-decoration: underline; }
+.notebtn { background: #3a3734; color: #fff; border: 0; border-radius: 999px; padding: 6px 12px; font-weight: 700; font-size: .85rem; cursor: pointer; }
+.topbar .notebtn { margin-left: auto; }
+.topbar .notebtn + .gear { margin-left: 0; }
+.side .notebtn { margin: 16px 10px 0; }
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 1000; display: flex; align-items: flex-end; justify-content: center; }
+.sheet { background: var(--panel); width: 100%; max-width: 560px; border-radius: 16px 16px 0 0; padding: 18px 18px calc(18px + env(safe-area-inset-bottom)); }
+@media (min-width: 900px) { .modal { align-items: center; } .sheet { border-radius: 16px; } }
+.sheet textarea { width: 100%; box-sizing: border-box; background: #1f1e1c; color: #fff; border: 1px solid #4a4744; border-radius: 8px; padding: 10px; font: inherit; font-size: 16px; }
+.sheet .row { display: flex; gap: 8px; justify-content: flex-end; margin-top: 10px; }

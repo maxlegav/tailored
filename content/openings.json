@@ -100,41 +100,6 @@
   "line_eval": 0.7
  },
  {
-  "id": "scandi-nf6",
-  "color": "white",
-  "title": "Contre 1.e4 d5 2.exd5 Nf6 : prends le centre avec d4 et c4",
-  "stats": "Avec 3.Nc3, tu marques 27 % des points (11 parties), 12 % après 3…Nxd5 4.Nf3.",
-  "yours": "3.Nc3",
-  "rec": "3.d4 puis 4.c4",
-  "why": "Avec 3.Nc3, les Noirs reprennent en d5 tranquillement et égalisent. Avec 3.d4 puis 4.c4, tu prends le centre en chassant le cavalier : c'est la façon la plus simple d'obtenir un avantage durable.",
-  "plan": [
-   "3.d4 Nxd5 4.c4 : le cavalier doit reculer, souvent en b6.",
-   "Développe normalement : Nf3, Nc3, Be2 ou Be3, h3 (contre …Bg4), O-O.",
-   "Ton atout : l'espace des pions c4-d4. Ton plan : c5 pour chasser le cavalier b6, ou d5 pour gêner les pièces noires.",
-   "Contre le gambit portugais 3…Bg4, garde le pion : 4.Bb5+ Nbd7 5.f3 Bf5 6.c4."
-  ],
-  "line": "e4 d5 exd5 Nf6 d4 Nxd5 c4 Nb6 Nf3 g6 Nc3 Bg7 h3 O-O Be3",
-  "line_title": "La structure idéale",
-  "line_text": "Deux pions au centre, tout est développé, h3 empêche …Bg4. Les Blancs sont nettement mieux.",
-  "ideas": [
-   {
-    "kind": "Idée",
-    "title": "Si 5…Bg4 : la poussée c5",
-    "line": "e4 d5 exd5 Nf6 d4 Nxd5 c4 Nb6 Nf3 Bg4 c5 N6d7 Be2",
-    "text": "6.c5 ! renvoie le cavalier en d7, où il bloque le développement noir. Tu gagnes encore de l'espace et ton fou e2 neutralise le clouage.",
-    "eval": 1.3
-   },
-   {
-    "kind": "Gambit",
-    "title": "Le gambit portugais (3…Bg4)",
-    "line": "e4 d5 exd5 Nf6 d4 Bg4 Bb5+ Nbd7 f3 Bf5 c4",
-    "text": "Les Noirs ont sacrifié un pion pour se développer vite. Garde-le avec c4, finis ton développement, et ne joue pas de coups de pion inutiles.",
-    "eval": 0.4
-   }
-  ],
-  "line_eval": 0.8
- },
- {
   "id": "vs-g6",
   "color": "white",
   "title": "Contre …g6/…Bg7 : e4 plutôt que Bg5",

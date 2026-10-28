@@ -1,6 +1,7 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Chessboard } from 'react-chessboard'
 import { Chess, type Square } from 'chess.js'
+import { ctx } from './ctx'
 
 type Arrow = { from: string; to: string; color?: string }
 type Props = {
@@ -15,6 +16,7 @@ const DOT = 'radial-gradient(circle, rgba(0,0,0,.18) 24%, transparent 26%)'
 const RING = 'radial-gradient(circle, transparent 58%, rgba(0,0,0,.18) 60%)'
 
 export default function Board({ fen, orientation = 'white', arrows = [], onMove, highlight = {}, lastMove }: Props) {
+  useEffect(() => { ctx.fen = fen; return () => { if (ctx.fen === fen) ctx.fen = '' } }, [fen])
   const [sel, setSel] = useState<{ fen: string; sq: string } | null>(null)
   const selected = sel && sel.fen === fen ? sel.sq : null
   const game = useMemo(() => { try { return new Chess(fen) } catch { return null } }, [fen])
