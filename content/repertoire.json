@@ -1,5 +1,85 @@
 [
  {
+  "id": "w-torre-attaque",
+  "color": "white",
+  "title": "Blancs · Torre, ligne principale : l'attaque après 10.f4",
+  "stats": "29 de tes parties avec Ne5 + f4 : 16,5 points (57 %). Le schéma te réussit déjà, il te manque la suite après f4.",
+  "yours": "10.f4, puis tu improvises : Qe2, Rf3, a4, Ndf3…",
+  "rec": "Avant f4 : vérifie …Ne4. Après f4 : la dame va en h5 (ou f3-h3), la tour en f3-h3, et tu ouvres avec g4 ou f5",
+  "why": "Position après 9…Bb7 : le moteur donne +0,4 avec 10.Qf3 et +0,2 avec 10.f4. La raison, c'est 10…Ne4!. Le cavalier saute en e4 dès que f4 l'a lâché, et après 11.Bxe7 Qxe7 la position est égale (+0,2). La vidéo de la Torre fait la même remarque. Contre toutes les autres réponses, f4 est très fort : 10…cxd4 +0,7, 10…h6 +0,7, 10…Nxe5 +1,2, 10…Ne8 +1,1. Tu dois donc connaître deux choses par cœur : la réponse …Ne4, et l'attaque contre tout le reste. La ligne ci-dessous, c'est la réponse la plus fréquente en blitz (10…Nxe5).",
+  "plan": [
+   "Étape 1, avant f4 : regarde la case e4. Si les Noirs peuvent jouer …Ne4 et échanger ton fou g5, joue d'abord Qf3 : la dame tient e4 et va ensuite en h3. Si e4 est tenue (cavalier noir parti, fou d3 + Nd2 + Qf3), f4 est bon.",
+   "Étape 2, après f4 : le cavalier e5 ne bouge plus. Ta dame va en h5 (si la case est libre) ou passe par f3-h3. Ta tour monte par f3 puis h3. Ton fou d3 vise h7. Les trois pièces visent le même point : h7.",
+   "Étape 3, s'ils prennent en e5 (…Nxe5) : reprends fxe5. La colonne f s'ouvre pour ta tour et le pion e5 chasse le dernier défenseur, le cavalier f6. Échange Bxe7, puis Qh5 ou Qg4 tout de suite.",
+   "Étape 4, s'ils ferment avec …f5 : ne pousse pas contre le mur. Joue g4! pour ouvrir la colonne g, puis Qh3, Nf3 et Rf2-g2.",
+   "Étape 5, s'ils jouent …h6 : Bxf6 Nxf6, puis g4-g5. Le pion h6 devient une cible, le pion g5 ouvre la colonne h, et la dame arrive en h5.",
+   "Étape 6, s'ils jouent …Ne4 (la meilleure défense) : Bxe7 Qxe7, puis Qe2. Tu n'as pas d'attaque directe, c'est égal. Le plan : f5! pour ouvrir la colonne f, ou Bc2, Qf2 et Qg3. Ne force rien.",
+   "Le cavalier d2 est ta pièce de réserve : Ndf3 pour renforcer e5 quand l'autre cavalier part, ou Nxe4 pour échanger le cavalier e4."
+  ],
+  "line": "d4 d5 Nf3 Nf6 Bg5 e6 e3 Be7 Nbd2 O-O Bd3 c5 c3 Nbd7 O-O b6 Ne5 Bb7 f4 Nxe5 fxe5 Nd7 Bxe7 Qxe7 Qh5 f5 g4 g6 Qh3 Rf7 Nf3",
+  "line_title": "10…Nxe5 11.fxe5 : la colonne f s'ouvre, Qh5 et g4",
+  "line_text": "Après 13.Qh5, le moteur donne +1,2. Sur 13…h6?, 14.Nf3 est déjà +2, et sur 13…g6, 14.Qh6 (+1,4). La défense …f5 tient h7, alors tu ouvres l'autre colonne avec g4, puis Qh3, Nf3, Rf2-g2. Tes pièces se placent derrière les pions qui avancent.",
+  "line_eval": 1.2,
+  "ideas": [
+   {
+    "kind": "Variante",
+    "title": "10…Ne4! : la seule bonne défense, c'est égal",
+    "line": "d4 d5 Nf3 Nf6 Bg5 e6 e3 Be7 Nbd2 O-O Bd3 c5 c3 Nbd7 O-O b6 Ne5 Bb7 f4 Ne4 Bxe7 Qxe7 Qe2 Nxd2 Qxd2 f6 Nxd7 Qxd7 f5",
+    "text": "Les Noirs échangent ton fou g5 et ton cavalier d2. Il n'y a plus d'attaque directe (+0,2). Le plan reste simple : f5! fixe e6 et ouvre la colonne f pour tes tours. N'essaie pas de mater ici, joue la position.",
+    "eval": 0.2
+   },
+   {
+    "kind": "Variante",
+    "title": "10…Nxe5 11.fxe5 Ne4 : prends le cavalier, puis Qg4",
+    "line": "d4 d5 Nf3 Nf6 Bg5 e6 e3 Be7 Nbd2 O-O Bd3 c5 c3 Nbd7 O-O b6 Ne5 Bb7 f4 Nxe5 fxe5 Ne4 Bxe7 Qxe7 Bxe4 dxe4 Qg4",
+    "text": "Sans son cavalier e4, les Noirs n'ont plus aucune pièce qui défend leur roi. Qg4 menace Rf4-h4 et la colonne f (+1,3). Si …f5, exf6 et la colonne f est à toi.",
+    "eval": 1.3
+   },
+   {
+    "kind": "Piège",
+    "title": "10…Ne8 ? 11.Qh5! et h7 tombe",
+    "line": "d4 d5 Nf3 Nf6 Bg5 e6 e3 Be7 Nbd2 O-O Bd3 c5 c3 Nbd7 O-O b6 Ne5 Bb7 f4 Ne8 Qh5 Nef6 Qh4 Re8 Nxd7 Qxd7 Bxf6 Bxf6 Qxh7+",
+    "text": "…Ne8 veut faire …f6. 11.Qh5 menace Bxe7 puis Qxh7#. Si le cavalier revient en f6, Qh4 et le clouage gagne h7 (+2,5). La meilleure défense, 11…f5, donne quand même +1,2 après Ndf3 et Qh4.",
+    "eval": 1.2
+   },
+   {
+    "kind": "Variante",
+    "title": "10…h6 : Bxf6 puis g4-g5",
+    "line": "d4 d5 Nf3 Nf6 Bg5 e6 e3 Be7 Nbd2 O-O Bd3 c5 c3 Nbd7 O-O b6 Ne5 Bb7 f4 h6 Bxf6 Nxf6 g4 Ne4 g5 hxg5 Qh5 Bf6 Ndf3",
+    "text": "Ne recule pas en h4 : prends en f6 et lance le pion g. g4-g5 ouvre la colonne h, Qh5 arrive, puis Ndf3 reprend en g5 (+0,7).",
+    "eval": 0.7
+   },
+   {
+    "kind": "Variante",
+    "title": "10…cxd4 : reprends exd4, puis Qe2 et Rf3-g3",
+    "line": "d4 d5 Nf3 Nf6 Bg5 e6 e3 Be7 Nbd2 O-O Bd3 c5 c3 Nbd7 O-O b6 Ne5 Bb7 f4 cxd4 exd4 a5 Qe2 h6 Bxf6 Nxf6 Rf3",
+    "text": "Avec exd4, ta structure reste solide et ta tour passe par la 3e rangée : Rf3 puis Rg3 ou Rh3 (+1,3). Seul 11…Ne4 tient (+0,7) : alors Nxd7 Qxd7 Bxe7 Qxe7, puis Qe2 et Nf3.",
+    "eval": 1.3
+   },
+   {
+    "kind": "Idée",
+    "title": "Le plan de la vidéo : Qf3-Qh3 avant de roquer",
+    "line": "d4 Nf6 Nf3 e6 Bg5 d5 e3 Be7 Nbd2 O-O Bd3 c5 c3 b6 Ne5 Bb7 Qf3 Nbd7 Qh3",
+    "text": "Garde ton roi en e1 et joue Qf3 puis Qh3 : la dame tient e4, vise h7, et menace Bxf6 puis Qxh7# (+0,6). Le roque n'est pas pressé : tu choisis plus tard le petit ou le grand roque.",
+    "eval": 0.6
+   },
+   {
+    "kind": "Piège",
+    "title": "Qh3 h6 Ndf3! : …hxg5 ? perd",
+    "line": "d4 Nf6 Nf3 e6 Bg5 d5 e3 Be7 Nbd2 O-O Bd3 c5 c3 b6 Ne5 Bb7 Qf3 Nbd7 Qh3 h6 Ndf3 hxg5 Nxg5",
+    "text": "Ne recule pas le fou : Ndf3 le défend. Si les Noirs le prennent, Nxg5 et h7 tombe (+5 : Bh7+, Ngxf7+). Sinon Bf4 et l'attaque continue (+0,6).",
+    "eval": 4.9
+   },
+   {
+    "kind": "Variante",
+    "title": "Qh3 Ne4 : f3, puis grand roque",
+    "line": "d4 Nf6 Nf3 e6 Bg5 d5 e3 Be7 Nbd2 O-O Bd3 c5 c3 b6 Ne5 Bb7 Qf3 Nbd7 Qh3 Ne4 Bxe7 Qxe7 f3 Ng5 Qh5 g6 Qh4 f6 Nxd7 Qxd7 O-O-O",
+    "text": "Ici tu n'as pas roqué, et c'est un avantage : f3 chasse le cavalier, O-O-O, puis g4-h4-h5. Les roques sont opposés, donc tes pions peuvent avancer sans exposer ton roi (+0,5).",
+    "eval": 0.5
+   }
+  ]
+ },
+ {
   "id": "w-torre-d5",
   "color": "white",
   "title": "Blancs · 1.d4 d5 2.Nf3 Nf6 3.Bg5 : ton Bg5, transformé en vrai système (Torre)",
@@ -10,7 +90,7 @@
   "plan": [
    "Toujours le même ordre : e3, Nbd2, c3, Bd3, O-O. Ne joue pas c4 au milieu : soit Torre, soit Gambit Dame, pas les deux.",
    "Contre …Qb6 (attaque de b2) : Nbd2 et laisse le pion. Après …Qxb2, c4! ou Rb1 : la dame noire est loin, tu gagnes 3 temps. Ne joue jamais Qb3 : après …c4 Qxb6 axb6, la colonne a s'ouvre pour lui.",
-   "Le plan d'attaque : Ne5, puis f4. La tour passe par f3-h3, la dame va en h5 ou f3. Le fou d3 vise h7.",
+   "Le plan d'attaque : Ne5, puis f4 ou Qf3-h3. Tout le détail, étape par étape, est dans la fiche « Torre, ligne principale : l'attaque après 10.f4 ».",
    "Si les Noirs jouent …h6, prends Bxf6 sans regret : tu gagnes du temps, et ton cavalier e5 vaut leur fou.",
    "Contre …Ne4 qui chasse ton fou : Bf4 plutôt que Bh4. Le fou reste actif et contrôle e5."
   ],
@@ -55,6 +135,63 @@
    }
   ],
   "line_eval": 0.2
+ },
+ {
+  "id": "w-torre-e6",
+  "color": "white",
+  "title": "Blancs · 1.d4 Nf6 2.Nf3 e6 3.Bg5 : la Torre contre …c5, …Be7 et …g6",
+  "stats": "49 parties, 50 %. 3…Be7 31 % (16 parties), 3…d5 44 % (18), 3…c5 86 % (7), 3…b6 88 % (4). Contre 2…g6 3.Bg5 : 37 parties, 51 %, mais seulement 1 point sur 6 contre …Bg7, c3, …O-O, Nbd2, …d6.",
+  "yours": "3.Bg5, puis e3, c3 ou c4 selon les parties",
+  "rec": "3.Bg5, e3, Nbd2, Bd3, c3, Ne5 si possible. Contre …g6 : Nbd2, c3 et e4",
+  "why": "La vidéo propose un seul schéma contre …e6 : e3, Nbd2, Bd3 et c3, avec Ne5 quand la case est libre. Le moteur le confirme : toutes ces positions sont entre +0,1 et +0,4. Ton vrai problème, c'est 3…Be7 (31 %). Après 4.e3 d5 5.Nbd2, tu retombes sur la ligne principale de l'attaque (fiche précédente). Après 4.e3 b6 5.Nbd2 Bb7 6.Bd3, tu cherches e4.",
+  "plan": [
+   "Contre …e6 : e3, Nbd2, Bd3, c3, puis O-O ou Qf3. Pas de c4 dans ce schéma.",
+   "Contre …c5 sans …d5 : reprends cxd4 avec exd4. Ton pion d4 tient e5, et le plan est Re1, Nf1-g3 (ou a4), et le fou reste en g5 ou h4.",
+   "Contre …Qb6 : Nbd2, le pion b2 sert d'appât. Après …Qxb2, Bd3 et Rb1 : tu gagnes des temps sur la dame. Si tu ne veux pas sacrifier, Qc1 est solide (+0,2). Jamais b3 : le pion c3 devient faible.",
+   "Contre …h6 + …b6 : Bxf6, puis e4. Tu prends le centre, la paire de fous ne compte pas.",
+   "Contre …g6/…Bg7 : la Torre calme ne mène à rien (1 point sur 6). Joue Nbd2, c3, puis e4 : le centre complet, et le fou g5 gêne …e5."
+  ],
+  "line": "d4 Nf6 Nf3 e6 Bg5 c5 e3 Be7 Nbd2 b6 Bd3 Bb7 c3 cxd4 exd4 d6 O-O Nbd7 Re1 O-O a4",
+  "line_title": "La ligne principale contre …c5 : exd4, Re1, a4",
+  "line_text": "Tu reprends exd4, la colonne e s'ouvre pour Re1, et ton pion d4 tient e5. a4 prend de l'espace et prépare a5 (+0,3). Ensuite : h3, Bh4, Nf1-g3 ou Bf1. Plan lent mais sûr : ton fou d3 et ta tour e1 visent le roque.",
+  "line_eval": 0.3,
+  "ideas": [
+   {
+    "kind": "Piège",
+    "title": "Pion b2 empoisonné : Nbd2 Qxb2 Bd3 et Rb1",
+    "line": "d4 Nf6 Nf3 e6 Bg5 c5 e3 Qb6 Nbd2 Qxb2 Bd3 d5 Rb1 Qa3 Rb3 Qa5 c4",
+    "text": "Ta tour chasse la dame (Rb1, Rb3), puis c4 ouvre le jeu alors que les Noirs n'ont pas développé (+0,3). En blitz, la dame noire en a5 ou a3 est souvent en danger.",
+    "eval": 0.3
+   },
+   {
+    "kind": "Variante",
+    "title": "Contre …Qb6, la version sûre : Qc1",
+    "line": "d4 Nf6 Nf3 e6 Bg5 c5 e3 Qb6 Qc1 cxd4 exd4 Nc6 c3 d5 Bf4",
+    "text": "Tu défends b2 sans rien affaiblir. La dame c1 reviendra en c2 ou d2. C'est calme, mais sans risque (+0,2).",
+    "eval": 0.2
+   },
+   {
+    "kind": "Variante",
+    "title": "3…Be7 4.e3 b6 : Bxf6 puis e4",
+    "line": "d4 Nf6 Nf3 e6 Bg5 Be7 e3 b6 Nbd2 Bb7 Bd3 h6 Bxf6 Bxf6 e4 d6 Qe2",
+    "text": "Les Noirs visent e4 avec le fou b7. Tu prends la case : Bxf6, puis e4, Qe2 et e5. Tu as l'espace, le fou b7 tape dans le pion e4 (+0,1).",
+    "eval": 0.1
+   },
+   {
+    "kind": "Variante",
+    "title": "Contre …g6 : Nbd2, c3 et e4",
+    "line": "d4 Nf6 Nf3 g6 Bg5 Bg7 Nbd2 O-O c3 d6 e4 c5 d5 h6 Bxf6 exf6 Bd3",
+    "text": "La Torre contre le Roi-Indienne, comme dans la vidéo : e4, puis d5 sur …c5. Le pion d5 bloque le fou g7, et les pions f noirs sont doublés après Bxf6 (+0,1).",
+    "eval": 0.1
+   },
+   {
+    "kind": "Idée",
+    "title": "Contre …g6 et …Ne4 : Bf4, puis Nxe4",
+    "line": "d4 Nf6 Nf3 g6 Bg5 Bg7 c3 Ne4 Bf4 d5 Nbd2 c5 e3 O-O Nxe4 dxe4 Nd2",
+    "text": "Tu as perdu 2 parties sur 2 ici. Ne laisse pas ton fou se faire prendre en g5 : Bf4, Nbd2, puis Nxe4 et Nd2 pour gagner le pion e4 (+0,3).",
+    "eval": 0.3
+   }
+  ]
  },
  {
   "id": "w-qgd",

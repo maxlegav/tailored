@@ -13,7 +13,7 @@ h1 { margin: 8px 0 4px; font-size: 1.5rem; } h2 { margin-top: 26px; font-size: 1
 .muted { color: var(--muted); font-size: .9rem; }
 .loading, .done { padding: 40px; text-align: center; color: var(--muted); }
 .tabs { position: fixed; bottom: 0; left: 0; right: 0; display: flex; background: var(--panel); border-top: 1px solid #1c1b19; padding-bottom: env(safe-area-inset-bottom); z-index: 10; }
-.tabs a { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 9px 2px 8px; color: var(--muted); text-decoration: none; font-size: .7rem; font-weight: 600; }
+.tabs a { flex: 1 1 0; min-width: 0; text-align: center; line-height: 1.15; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 9px 2px 8px; color: var(--muted); text-decoration: none; font-size: .7rem; font-weight: 600; }
 .tabs a .ic { font-size: 1.35rem; line-height: 1; }
 .tabs a.active { color: #fff; } .tabs a.active .ic { color: var(--green); }
 @media (min-width: 900px) {
@@ -131,3 +131,18 @@ button.on, .controls button, .btn.primary { background: var(--green); box-shadow
 @media (min-width: 900px) { .modal { align-items: center; } .sheet { border-radius: 16px; } }
 .sheet textarea { width: 100%; box-sizing: border-box; background: #1f1e1c; color: #fff; border: 1px solid #4a4744; border-radius: 8px; padding: 10px; font: inherit; font-size: 16px; }
 .sheet .row { display: flex; gap: 8px; justify-content: flex-end; margin-top: 10px; }
+
+.sect { margin: 14px 0; } .sect > summary { cursor: pointer; font-size: 1.15rem; font-weight: 800; padding: 10px 0; list-style-position: inside; }
+.sect > summary .cnt { font-size: .85rem; font-weight: 400; color: var(--muted); margin-left: 8px; }
+.repitem { background: var(--panel); border-radius: 8px; margin: 8px 0; padding: 4px 4px 10px; }
+.repitem.done .rep-t { opacity: .65; }
+.repitem .opening { margin-bottom: 8px; }
+.repitem > .check { margin: 4px 12px; }
+.rep-h { display: flex; gap: 10px; align-items: center; cursor: pointer; padding: 10px; font-weight: 700; color: #fff; }
+.rep-h .chev { color: var(--green); width: 14px; } .rep-t { flex: 1; } .rep-h .small { font-weight: 400; }
+.progress { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 12px 0; }
+.progress > div { background: var(--panel); border-radius: 8px; padding: 12px 14px; color: var(--muted); font-size: .88rem; }
+.progress b { display: block; font-size: 1.5rem; color: var(--green); }
+.steps .guide-item p { margin: 6px 0 10px; }
+.sect.stats { margin-top: 26px; border-top: 1px solid #3a3936; }
+.filters { margin: 10px 0; } .filters > summary { cursor: pointer; color: #9fd0ff; font-size: .9rem; }

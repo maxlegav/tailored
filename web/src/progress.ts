@@ -1,7 +1,7 @@
 const KEY = 'tailored-progress-v1'
-type DB = { lessons: Record<string, number>; habits: Record<string, number> }
+type DB = { lessons: Record<string, number>; habits: Record<string, number>; reps: Record<string, number> }
 export function loadDB(): DB {
-  try { return { lessons: {}, habits: {}, ...JSON.parse(localStorage.getItem(KEY) || '{}') } } catch { return { lessons: {}, habits: {} } }
+  try { return { lessons: {}, habits: {}, reps: {}, ...JSON.parse(localStorage.getItem(KEY) || '{}') } } catch { return { lessons: {}, habits: {}, reps: {} } }
 }
 export function mark(kind: keyof DB, id: string, done: boolean) {
   const db = loadDB()

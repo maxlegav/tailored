@@ -14,6 +14,15 @@ const KINDS: Record<string, string> = {
   habitude: 'Habitudes à corriger', comprehension: 'Compréhension / plans', accident: 'Accidents (pièces en prise)', zeitnot: 'Zeitnot (< 20 s)',
   livre: 'Exercices du livre de Silman',
 }
+const WHY: Record<string, string> = {
+  prio: 'Les positions de tes parties où tu as raté un coup à ta portée, par habitude ou par manque de plan. C\'est là que tu gagnes le plus de points.',
+  all: 'Toutes les positions de tes parties où tu as fait une grosse erreur.',
+  habitude: 'Les positions où tu refais le même mauvais coup. Le but : remplacer le réflexe par le bon coup.',
+  comprehension: 'Les positions où tu avais le temps mais pas le bon plan. Lis bien le « but de la position » après chaque coup.',
+  accident: 'Les positions où tu as laissé une pièce ou raté une menace simple.',
+  zeitnot: 'Les positions jouées avec moins de 20 s. Le but : le coup simple et sûr.',
+  livre: 'Les exercices du livre de Silman, à résoudre comme dans le livre.',
+}
 export const KIND_LABEL: Record<string, string> = { habitude: 'Habitude', comprehension: 'Compréhension', accident: 'Accident', zeitnot: 'Zeitnot' }
 
 export default function Train({ data }: { data: Data }) {
@@ -39,7 +48,9 @@ export default function Train({ data }: { data: Data }) {
   return (
     <div className="page">
       <h1>Entraînement</h1>
-      <p className="muted">Des positions tirées de <b>tes</b> parties. Trouve le bon coup, comprends le but, puis continue à jouer contre le moteur.</p>
+      <div className="goal"><div className="goal-h">Ce que tu travailles : {[KINDS[kind], tag && (data.tags.find(t => t.tag === tag)?.label || tag), silman && data.book?.concepts[silman]?.title].filter(Boolean).join(' · ')}</div>
+        {WHY[kind] || WHY.prio} {pool.length} positions dans cette sélection. Comment faire : trouve le coup sur l'échiquier, lis pourquoi c'est le bon, puis « Suivant ». Une série = 10 positions. Celles que tu rates reviennent demain, celles que tu trouves reviennent de plus en plus tard.</div>
+      <details className="filters"><summary>Changer de thème</summary>
       <div className="controls">
         <select value={kind} onChange={e => setKind(e.target.value)}>{Object.entries(KINDS).map(([k, l]) => <option key={k} value={k}>{l}</option>)}</select>
         <select value={tag} onChange={e => setTag(e.target.value)}>
@@ -54,6 +65,7 @@ export default function Train({ data }: { data: Data }) {
         <label><input type="checkbox" checked={onlyFindable} onChange={e => setOnlyFindable(e.target.checked)} /> Seulement les coups à ma portée</label>
         <button onClick={start}>Nouvelle série ({Math.min(10, pool.length)})</button>
       </div>
+      </details>
       {cur && <Puzzle key={cur.id} m={cur} book={data} onDone={ok => { setScore(s => s + (ok ? 1 : 0)); setIdx(i => i + 1) }} n={idx + 1} total={queue.length} />}
       {pool.length === 0 && <p className="done">Aucune position pour ce filtre.</p>}
       {queue.length > 0 && !cur && <div className="done"><div className="big">{score}/{queue.length}</div><p>Série terminée. Les positions ratées reviendront demain.</p><button className="btn primary" onClick={start}>Encore une série</button></div>}

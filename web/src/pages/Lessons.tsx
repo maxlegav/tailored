@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import type { Data } from '../types'
 import { Md } from '../md'
 import Board from '../Board'
@@ -12,7 +12,8 @@ export default function Lessons({ data }: { data: Data }) {
   const dates = (ids: string[] = []) => ids.map(i => data.mistakes.find(m => m.id === i)?.date || 0)
   const lessons = (data.lessons || []).filter(l => !isClosed(db.lessons[l.id], dates(l.mistakes)))
   const doneL = (data.lessons || []).filter(l => isClosed(db.lessons[l.id], dates(l.mistakes)))
-  const [open, setOpen] = useState<string | null>(lessons[0]?.id ?? null)
+  const [params] = useSearchParams()
+  const [open, setOpen] = useState<string | null>(params.get('open') || (lessons[lessons.length - 1]?.id ?? null))
   const book = data.book
   const core = useMemo(() => data.mistakes.filter(m => m.kind === 'habitude' || m.kind === 'comprehension'), [data])
   const chapters = useMemo(() => {

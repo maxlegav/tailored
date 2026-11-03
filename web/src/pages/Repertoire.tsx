@@ -3,6 +3,7 @@ import type { Data } from '../types'
 import Board from '../Board'
 import LinePlayer from '../LinePlayer'
 import RepTree, { fixes } from '../RepTree'
+import RepList from '../RepList'
 import type { Opening } from '../types'
 
 export default function Repertoire({ data }: { data: Data }) {
@@ -12,7 +13,8 @@ export default function Repertoire({ data }: { data: Data }) {
   const [init, setInit] = useState<{ color: 'white' | 'black'; path: number[] } | undefined>()
   return (
     <div className="page">
-      <h1>Ton répertoire</h1>
+      <h1>Plan d'ouvertures</h1>
+      <p className="muted">Ce que tu joues vraiment, tiré de tes parties : ton arbre, les plans de jeu et les coups à corriger. Les lignes à apprendre par cœur sont dans « Mon répertoire ».</p>
       <div className="seg">
         {data.tree && <button className={tab === 'tree' ? 'on' : ''} onClick={() => setTab('tree')}>Ton arbre</button>}
         <button className={tab === 'plans' ? 'on' : ''} onClick={() => { setFocus(null); setTab('plans') }}>Plans ({data.openings?.length ?? 0})</button>
@@ -24,7 +26,7 @@ export default function Repertoire({ data }: { data: Data }) {
         <RepTree key={init ? init.color + init.path.join('.') : 'root'} init={init} tree={data.tree} onPlan={id => { setFocus(id); setTab('plans') }} /></>}
       {tab === 'plans' && <>
         <p className="muted">Les lignes choisies à partir de tes parties : ce que tu joues, ce qu'on change, et surtout le plan. Appuie sur ▶ pour voir la suite. Évaluations vérifiées par Stockfish, de ton point de vue.</p>
-        {(data.openings || []).filter(o => !focus || o.id === focus).map(o => <OpeningCard key={o.id} o={o} />)}
+        {focus ? (data.openings || []).filter(o => o.id === focus).map(o => <OpeningCard key={o.id} o={o} />) : <RepList list={data.openings || []} />}
         {focus && <button className="btn" onClick={() => setFocus(null)}>Voir tous les plans</button>}</>}
       {tab === 'verdicts' && <><p className="muted">Les coups de ton arbre qui te coûtent vraiment des points, du plus coûteux au moins coûteux. Les coups « d'idée » qui te réussissent ne sont pas ici : on les garde.</p>
         {fx.map(f => {
