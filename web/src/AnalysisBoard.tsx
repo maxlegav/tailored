@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Chess, type Square } from 'chess.js'
 import Board from './Board'
-import { analyse } from './lib/engine'
+import { analyse, type EngineLine } from './lib/engine'
 
 type Mv = { uci: string; san: string; fen: string; before: string }
 type Arrow = { from: string; to: string; color?: string }
 type Props = {
   fen: string; line?: string[]; orientation?: 'white' | 'black'; arrows?: Arrow[]
-  engineReply?: boolean; showIdeas?: boolean; start?: number
+  engineReply?: boolean; showIdeas?: boolean; start?: number; autoplay?: boolean; judge?: boolean
   onChange?: (fen: string, sans: string[]) => void
   onUserMove?: (from: string, to: string, fen: string) => boolean | void
 }
@@ -23,38 +23,78 @@ function build(fen: string, line: string[]): Mv[] {
   return out
 }
 
+const art = (t: string) => (t === 'q' || t === 'r' ? 'sa ' : 'son ') + ({ p: 'pion', n: 'cavalier', b: 'fou', r: 'tour', q: 'dame', k: 'roi' } as Record<string, string>)[t]
+function flip(fen: string) { const f = fen.split(' '); f[1] = f[1] === 'w' ? 'b' : 'w'; f[3] = '-'; return f.join(' ') }
+function targets(fen: string, sq?: string) {
+  try { const t = new Chess(fen); return t.moves({ verbose: true, ...(sq ? { square: sq as Square } : {}) }).filter(x => x.captured && x.captured !== 'k') } catch { return [] }
+}
+const hanging = (g: Chess, color: 'w' | 'b') => {
+  const out: string[] = []
+  for (const row of g.board()) for (const p of row) if (p && p.color === color && p.type !== 'k' && g.isAttacked(p.square, color === 'w' ? 'b' : 'w') && !g.isAttacked(p.square, color)) out.push(p.square)
+  return out
+}
 export function describe(before: string, uci: string): string {
   try {
-    const g = new Chess(before); const m = g.move({ from: uci.slice(0, 2), to: uci.slice(2, 4), promotion: uci[4] || 'q' })
-    const who = NAME[m.piece]; const parts: string[] = []
-    if (m.san.startsWith('O-O')) parts.push(m.san === 'O-O' ? 'petit roque : le roi se met à l\'abri et la tour entre en jeu' : 'grand roque')
-    else if (m.captured) parts.push(`${who} prend ${NAME[m.captured]} en ${m.to}`)
-    else if (m.piece !== 'p' && m.piece !== 'k' && /[18]/.test(m.from) && Number(before.split(' ')[5]) <= 15) parts.push(`${who} se développe en ${m.to}`)
+    const g0 = new Chess(before); const g = new Chess(before); const m = g.move({ from: uci.slice(0, 2), to: uci.slice(2, 4), promotion: uci[4] || 'q' })
+    const who = NAME[m.piece]; const parts: string[] = []; const me = m.color; const opp = me === 'w' ? 'b' : 'w'
+    if (m.san.startsWith('O-O')) parts.push(m.san === 'O-O' ? 'petit roque : le roi se met à l\'abri et la tour entre en jeu' : 'grand roque : le roi part à l\'abri et la tour arrive tout de suite sur la colonne d')
+    else if (m.captured) parts.push(`${who} prend ${NAME[m.captured]} en ${m.to}${!g.isAttacked(m.to as Square, opp) ? ' (personne ne peut reprendre)' : ''}`)
     else parts.push(`${who} va en ${m.to}`)
     if (m.promotion) parts.push(`et se transforme en ${NAME[m.promotion]}`)
-    if (g.isCheckmate()) parts.push('échec et mat')
-    else if (g.inCheck()) parts.push('avec échec')
-    // threats created by the moved piece
-    const f = g.fen().split(' '); f[1] = f[1] === 'w' ? 'b' : 'w'; f[3] = '-'
-    try {
-      const t = new Chess(f.join(' '))
-      const hits = t.moves({ square: m.to as Square, verbose: true }).filter(x => x.captured)
-        .filter(x => VAL[x.captured!] > VAL[m.piece] || !g.isAttacked(x.to as Square, g.turn()) || x.captured === 'k')
-        .filter(x => x.captured !== 'k')
-      if (hits.length) parts.push(`et attaque ${hits.map(h => `${NAME[h.captured!]} ${h.to}`).join(' et ')}${hits.length > 1 ? ' (double attaque)' : ''}`)
-    } catch { /* side to move in check: skip threat scan */ }
-    if (!m.captured && g.isAttacked(m.to as Square, g.turn()) && !g.isAttacked(m.to as Square, m.color) && m.piece !== 'p') parts.push(`(attention : ${who} est en prise)`)
-    return parts.join(' ')
+    if (g.isCheckmate()) return parts.join(' ') + ', échec et mat'
+    if (g.inCheck()) parts.push('avec échec')
+    const why: string[] = []
+    const mine = flip(g.fen())
+    const hits = targets(mine, m.to).filter(x => VAL[x.captured!] > VAL[m.piece] || !g.isAttacked(x.to as Square, opp))
+    if (hits.length) why.push(`attaque ${hits.map(h => `${art(h.captured!)} en ${h.to}`).join(' et ')}${hits.length > 1 ? ' : double attaque, il ne peut pas tout sauver' : ''}`)
+    const was = new Set(targets(flip(before)).filter(x => x.from !== m.from).map(x => x.to))
+    const disc = targets(mine).filter(x => x.from !== m.to && !was.has(x.to) && (VAL[x.captured!] > VAL[g.get(x.from as Square)!.type] || !g.isAttacked(x.to as Square, opp)))
+    if (disc.length) why.push(`ouvre la ligne de ${NAME[g.get(disc[0].from as Square)!.type]} ${disc[0].from}, qui attaque maintenant ${art(disc[0].captured!)} en ${disc[0].to}`)
+    if (g0.isAttacked(m.from as Square, opp) && !m.captured && !g.isAttacked(m.to as Square, opp) && m.piece !== 'p') why.push(`${who} était attaqué${m.piece === 'q' || m.piece === 'r' ? 'e' : ''} et se met à l'abri`)
+    const h0 = hanging(g0, me).filter(x => x !== m.from); const h1 = new Set(hanging(g, me))
+    const saved = h0.filter(x => !h1.has(x))
+    if (saved.length && !g.inCheck()) why.push(`protège ${saved.map(x => `${NAME[g.get(x as Square)!.type]} ${x}`).join(' et ')}, qui n'était pas défendu`)
+    if (g0.inCheck()) why.push('pare l\'échec')
+    else {
+      const bad = (fen: string, g1: Chess) => targets(fen).filter(x => VAL[x.captured!] > VAL[g1.get(x.from as Square)!.type] || !g1.isAttacked(x.to as Square, opp === 'w' ? 'b' : 'w'))
+      const t0 = bad(g0.turn() === opp ? before : flip(before), g0).filter(x => x.to !== m.from)
+      const t1 = new Set(bad(g.fen(), g).map(x => x.to))
+      const gone = t0.filter(x => !t1.has(x.to) && !saved.includes(x.to))
+      if (gone.length) why.push(`pare la menace : sans ce coup, il prenait ${NAME[g0.get(gone[0].to as Square)!.type]} en ${gone[0].to}`)
+    }
+    if (m.piece === 'p' && !m.captured) {
+      const pawnHits = targets(mine, m.to).filter(x => x.captured === 'p')
+      if (pawnHits.length && !hits.length) why.push(`attaque le pion ${pawnHits[0].to} : c'est une rupture qui ouvre des lignes`)
+      else if ('de'.includes(m.to[0]) && !hits.length) why.push('prend de l\'espace au centre')
+      else if (!hits.length && (me === 'w' ? Number(m.to[1]) >= 5 : Number(m.to[1]) <= 4)) why.push('gagne de l\'espace et fixe ses pions')
+    }
+    if (m.piece === 'k' && !m.san.startsWith('O-O') && g.board().flat().filter(Boolean).length <= 14) why.push('le roi s\'active : en finale, c\'est une pièce d\'attaque')
+    if (!why.length && m.piece !== 'p' && m.piece !== 'k') {
+      const mob = (fen: string, sq: string) => { try { return new Chess(fen).moves({ square: sq as Square }).length } catch { return 0 } }
+      const a = mob(flip(g.fen()), m.to); const b0 = mob(g0.turn() === me ? before : flip(before), m.from)
+      if (a > b0) why.push(`${who} est plus actif${m.piece === 'q' || m.piece === 'r' ? 'e' : ''} : ${a} cases contrôlées au lieu de ${b0}`)
+    }
+    if (!m.captured && g.isAttacked(m.to as Square, g.turn()) && !g.isAttacked(m.to as Square, m.color) && m.piece !== 'p') why.push(`attention : ${who} est en prise`)
+    return parts.join(' ') + (why.length ? ' : ' + why.join(' ; ') : '')
   } catch { return '' }
 }
 
-export default function AnalysisBoard({ fen, line = [], orientation = 'white', arrows = [], engineReply, showIdeas = true, start = 0, onChange, onUserMove }: Props) {
+const cpOf = (l?: EngineLine) => !l ? 0 : l.mate != null ? (l.mate > 0 ? 10000 - l.mate * 10 : -10000 - l.mate * 10) : (l.cp ?? 0)
+
+export default function AnalysisBoard({ fen, line = [], orientation = 'white', arrows = [], engineReply, showIdeas = true, start = 0, autoplay, judge = true, onChange, onUserMove }: Props) {
   const orig = useMemo(() => build(fen, line), [fen, line])
   const [moves, setMoves] = useState<Mv[]>(orig)
   const [idx, setIdx] = useState(start)
   const [playing, setPlaying] = useState(false)
   const [thinking, setThinking] = useState(false)
   const timer = useRef<number | undefined>(undefined)
+  const box = useRef<HTMLDivElement>(null)
+  const [verdict, setVerdict] = useState<{ ok: 'good' | 'meh' | 'bad'; s: string } | null>(null)
+  useEffect(() => {
+    if (!autoplay || !box.current) return
+    const io = new IntersectionObserver(es => { if (es[0].isIntersecting) { setIdx(0); setPlaying(true); io.disconnect() } }, { threshold: 0.6 })
+    io.observe(box.current); return () => io.disconnect()
+  }, [autoplay])
   const cur = idx === 0 ? fen : moves[idx - 1].fen
   useEffect(() => { onChange?.(cur, moves.slice(0, idx).map(m => m.san)) }, [cur]) // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
@@ -74,14 +114,30 @@ export default function AnalysisBoard({ fen, line = [], orientation = 'white', a
     const uci = from + to + (m.promotion || '')
     if (onUserMove && onUserMove(from, to, g.fen()) === false) return false
     setPlaying(false)
-    if (moves[idx]?.uci.slice(0, 4) === uci.slice(0, 4)) { setIdx(idx + 1); return true }
+    const expected = moves[idx]
+    if (expected?.uci.slice(0, 4) === uci.slice(0, 4)) { setIdx(idx + 1); setVerdict(judge ? { ok: 'good', s: `✓ ${m.san} : c'est le coup de la ligne.` } : null); return true }
     const list = push(moves, idx, cur, uci)
-    if (list && engineReply && !g.isGameOver()) {
+    if (!list) return true
+    const before = cur; const san = m.san
+    setVerdict(null)
+    if (judge || engineReply) {
       setThinking(true)
-      analyse(g.fen(), { movetime: 600 }).then(ls => {
-        const u = ls[0]?.pv[0]; if (u) push(list, list.length, g.fen(), u)
+      ;(async () => {
+        const b0 = judge ? (await analyse(before, { movetime: 500 }))[0] : undefined
+        const ls = g.isGameOver() ? [] : await analyse(g.fen(), { movetime: 600 })
+        if (judge) {
+          const after = g.isCheckmate() ? 10000 : -cpOf(ls[0])
+          const loss = cpOf(b0) - after
+          const best = b0?.pv[0] ? build(before, [b0.pv[0]])[0]?.san : undefined
+          const alt = expected ? expected.san : best
+          setVerdict(loss > 150 ? { ok: 'bad', s: `✗ ${san} est une erreur : tu perds environ ${(loss / 100).toFixed(1).replace('.', ',')} pion${loss >= 200 ? 's' : ''}.${alt ? ` Le bon coup était ${alt}.` : ''} Reviens en arrière (◀) et réessaie.` }
+            : loss > 60 ? { ok: 'meh', s: `?! ${san} est imprécis.${alt ? ` Mieux : ${alt}.` : ''}` }
+            : { ok: 'good', s: `✓ ${san} est un bon coup${expected ? `, aussi bon que ${expected.san}` : ''}.` })
+        }
+        const u = ls[0]?.pv[0]
+        if (engineReply && u) push(list, list.length, g.fen(), u)
         setThinking(false)
-      })
+      })()
     }
     return true
   }
@@ -91,7 +147,7 @@ export default function AnalysisBoard({ fen, line = [], orientation = 'white', a
   const changed = moves.length !== orig.length || moves.some((m, i) => m.uci !== orig[i]?.uci)
   const n0 = Number(fen.split(' ')[5]) || 1; const white0 = fen.split(' ')[1] === 'w'
   return (
-    <div className="ab">
+    <div className="ab" ref={box}>
       <Board fen={cur} orientation={orientation} arrows={arr} lastMove={last ? [last.uci.slice(0, 2), last.uci.slice(2, 4)] : undefined} onMove={userMove} />
       <div className="ab-ctl">
         <button onClick={() => { setPlaying(false); setIdx(0) }} aria-label="Début">|◀</button>
@@ -102,6 +158,7 @@ export default function AnalysisBoard({ fen, line = [], orientation = 'white', a
         {changed && <button onClick={() => { setPlaying(false); setMoves(orig); setIdx(0) }}>↺ Ligne d'origine</button>}
       </div>
       {thinking && <p className="small muted">Le moteur réfléchit…</p>}
+      {verdict && <p className={`verdict ${verdict.ok}`}>{verdict.s}</p>}
       {showIdeas && last && <p className="ab-idea"><b>{last.san}</b> : {describe(last.before, last.uci)}</p>}
       {moves.length > 0 && <div className="ab-moves">{moves.map((m, i) => {
         const ply = i + (white0 ? 0 : 1); const num = ply % 2 === 0 ? `${n0 + ply / 2}.` : i === 0 ? `${n0}…` : ''

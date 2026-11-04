@@ -1,4 +1,8 @@
+import { useEffect, useState } from 'react'
 import type { Book, Mistake } from './types'
+
+const SEEN = 'tailored-seen-concepts'
+const seen = (): Record<string, number> => { try { return JSON.parse(localStorage.getItem(SEEN) || '{}') } catch { return {} } }
 
 export function conceptsFor(m: Mistake, book: Book, max = 2): string[] {
   const keys: string[] = []
@@ -25,13 +29,17 @@ export function BookConceptCard({ k, book }: { k: string; book: Book }) {
 export default function BookBox({ m, book }: { m: Mistake; book?: Book }) {
   if (!book) return null
   const ks = conceptsFor(m, book)
+  const [old] = useState(seen)
+  useEffect(() => { const s = seen(); for (const k of ks) s[k] ||= Date.now(); localStorage.setItem(SEEN, JSON.stringify(s)) }, [ks.join()]) // eslint-disable-line react-hooks/exhaustive-deps
   if (!ks.length && !m.silman?.length) return null
+  const fresh = ks.filter(k => !old[k]); const known = ks.filter(k => old[k])
   return (
     <div className="book">
       <div className="goal-h">Ce que dit {book.book.short}</div>
       {!!m.silman?.length && <div className="bk-imb"><span className="small muted">Les déséquilibres de la position :</span>
         <ul>{m.silman.map(([k, d]) => <li key={k}>{d}</li>)}</ul></div>}
-      {ks.map(k => <BookConceptCard key={k} k={k} book={book} />)}
+      {fresh.map(k => <BookConceptCard key={k} k={k} book={book} />)}
+      {!!known.length && <details className="bk-known"><summary>Déjà lu : {known.map(k => book.concepts[k].title).join(', ')}</summary>{known.map(k => <BookConceptCard key={k} k={k} book={book} />)}</details>}
     </div>
   )
 }

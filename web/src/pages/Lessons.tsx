@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import type { Data } from '../types'
+import type { Data, Mistake } from '../types'
 import { Md } from '../md'
 import Board from '../Board'
 import AnalysisBoard from '../AnalysisBoard'
@@ -30,10 +30,12 @@ export default function Lessons({ data }: { data: Data }) {
       {lessons.map(l => (
         <div key={l.id} className="lesson">
           <h2 onClick={() => setOpen(open === l.id ? null : l.id)}>{l.title}</h2>
-          {open === l.id && <><Md text={l.body} />
-            {(l.mistakes || []).map(id => data.mistakes.find(m => m.id === id)).filter(m => !!m).map(m => (
-              <div key={m!.id} className="item"><AnalysisBoard fen={m!.fen} line={m!.best_pv} orientation={m!.color} engineReply arrows={[{ from: m!.uci.slice(0, 2), to: m!.uci.slice(2, 4), color: 'rgba(200,60,60,0.8)' }]} />
-                <div><Md text={m!.text} /><p className="muted">Flèche rouge : ton coup dans la partie. ▶ Jouer : la bonne suite. <a href={m!.url} target="_blank">Partie</a></p></div></div>))}
+          {open === l.id && <>{l.body.split('\n\n').map((chunk, i) => {
+              const id = /^\[\[pos:([^\]]+)\]\]$/.exec(chunk.trim())?.[1]
+              const m = id && data.mistakes.find(x => x.id === id)
+              return id ? (m ? <LessonPos key={i} m={m} /> : null) : <Md key={i} text={chunk} />
+            })}
+            {(l.mistakes || []).filter(id => !l.body.includes(`[[pos:${id}]]`)).map(id => data.mistakes.find(m => m.id === id)).filter(m => !!m).map(m => <LessonPos key={m!.id} m={m!} />)}
             <div className="row">{l.tag && <Link className="btn" to={`/entrainement?tag=${encodeURIComponent(l.tag)}`}>S'entraîner sur ce thème</Link>}
               <label className="check"><input type="checkbox" checked={false} onChange={() => setDb(mark('lessons', l.id, true))} /> Lu et compris : retirer ce cours (il reviendra si tu refais l'erreur)</label></div></>}
         </div>))}
@@ -89,4 +91,10 @@ export default function Lessons({ data }: { data: Data }) {
       </div>}
     </div>
   )
+}
+
+function LessonPos({ m }: { m: Mistake }) {
+  return (
+    <div className="item lpos"><AnalysisBoard fen={m.fen} line={m.best_pv} orientation={m.color} engineReply autoplay arrows={[{ from: m.uci.slice(0, 2), to: m.uci.slice(2, 4), color: 'rgba(200,60,60,0.8)' }]} />
+      <p className="small muted">Coup {m.move_no}, tu as les {m.color === 'white' ? 'Blancs' : 'Noirs'}. Flèche rouge : ton coup dans la partie ({m.san}). La bonne suite se joue toute seule, chaque coup est expliqué sous l'échiquier. ▶ pour la revoir. <a href={m.url} target="_blank">Partie</a></p></div>)
 }

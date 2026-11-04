@@ -2,7 +2,7 @@ import type { Data } from '../types'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { load, stats } from '../srs'
-import { isClosed, loadDB, mark } from '../progress'
+import { dayKey, isClosed, loadDB, mark, todayStart } from '../progress'
 import { obvious } from './Train'
 
 const pct = (x: number) => `${Math.round(x * 100)}%`
@@ -31,12 +31,23 @@ export default function Profile({ data }: { data: Data }) {
   const mastered = prio.filter(m => (cards[m.id]?.box ?? 0) >= 3).length
   const week = data.games.filter(g => g.date * 1000 > data.generated * 1000 - 7 * 86400000)
   const wPts = week.reduce((a, g) => a + g.score, 0)
-  const steps: { t: string; why: string; to: string; btn: string }[] = []
-  if (nextL) steps.push({ t: `Lis le cours « ${nextL.title} »`, why: 'Il part de tes parties récentes : lis-le, joue les positions sur l\'échiquier, puis coche « Lu et compris ».', to: `/cours?open=${nextL.id}`, btn: 'Ouvrir le cours' })
-  steps.push(due ? { t: `Revois tes ${Math.min(due, 10)} positions du jour`, why: `${due} positions de tes parties reviennent aujourd'hui (celles que tu as ratées ou pas revues depuis un moment). Trouve le bon coup, lis pourquoi.`, to: '/entrainement?kind=prio', btn: 'Commencer la série' }
+  const t0 = todayStart(); const day = dayKey()
+  const lToday = allL.find(l => (db.lessons[l.id] || 0) >= t0)
+  const rToday = reps.find(o => (db.reps[o.id] || 0) >= t0)
+  const sToday = Object.keys(db.series || {}).some(k => k.startsWith(day + ':') && !k.endsWith(':habitude'))
+  const hToday = !!db.series?.[`${day}:habitude`] || Object.values(db.habits).some(x => x >= t0)
+  type Step = { t: string; why: string; to: string; btn: string; done?: boolean }
+  const steps: Step[] = []
+  if (lToday) steps.push({ t: `Cours lu : « ${lToday.title} »`, why: 'Fait aujourd\'hui. Tu peux le relire quand tu veux.', to: `/cours?open=${lToday.id}`, btn: 'Relire', done: true })
+  else if (nextL) steps.push({ t: `Lis le cours « ${nextL.title} »`, why: 'Il part de tes parties récentes. Lis-le, regarde les positions s\'animer, puis coche « Lu et compris » en bas du cours.', to: `/cours?open=${nextL.id}`, btn: 'Ouvrir le cours' })
+  steps.push(sToday ? { t: 'Série du jour terminée', why: 'Fait aujourd\'hui. Les positions ratées reviendront demain. Tu peux en faire une autre.', to: '/entrainement?kind=prio', btn: 'Encore une série', done: true }
+    : due ? { t: due > 1 ? `Revois tes ${Math.min(due, 10)} positions du jour` : 'Revois ta position du jour', why: `${due > 1 ? `${due} positions de tes parties reviennent` : '1 position de tes parties revient'} aujourd'hui (ratées ou pas revues depuis un moment). Trouve le bon coup, sans flèche.`, to: '/entrainement?kind=prio', btn: 'Commencer la série' }
     : { t: 'Fais une série de 10 positions', why: `Des positions de tes parties où tu as raté un coup qu'un joueur de 1900 trouve. ${fresh} positions jamais vues t'attendent.`, to: '/entrainement?kind=prio', btn: 'Commencer la série' })
-  if (nextR) steps.push({ t: `Apprends la ligne « ${nextR.title.replace(/^(Blancs|Noirs) · /, '')} »`, why: `${nextR.color === 'white' ? 'Blancs' : 'Noirs'} · ${nextR.stats.split('.')[0]}. Joue-la sur l'échiquier jusqu'à la connaître, puis coche « apprise ».`, to: `/mon-repertoire?open=${nextR.id}`, btn: 'Ouvrir la ligne' })
-  if (habits[0]) steps.push({ t: `Corrige ton habitude : ${habits[0].san}`, why: `Tu as joué ${habits[0].san} ${habits[0].n} fois dans la même position, et c'est une erreur. Rejoue la position jusqu'à trouver le bon coup.`, to: '/entrainement?kind=habitude', btn: 'S\'entraîner' })
+  if (rToday) steps.push({ t: `Ligne apprise : « ${rToday.title.replace(/^(Blancs|Noirs) · /, '')} »`, why: 'Fait aujourd\'hui. La suivante t\'attend demain.', to: `/mon-repertoire?open=${rToday.id}`, btn: 'Revoir', done: true })
+  else if (nextR) steps.push({ t: `Apprends la ligne « ${nextR.title.replace(/^(Blancs|Noirs) · /, '')} »`, why: `${nextR.color === 'white' ? 'Blancs' : 'Noirs'} · ${nextR.stats.split('.')[0]}. Joue-la sur l'échiquier jusqu'à la connaître, puis coche « apprise ».`, to: `/mon-repertoire?open=${nextR.id}`, btn: 'Ouvrir la ligne' })
+  if (hToday) steps.push({ t: 'Habitudes travaillées', why: 'Fait aujourd\'hui.', to: '/entrainement?kind=habitude', btn: 'Encore', done: true })
+  else if (habits[0]) steps.push({ t: `Corrige ton habitude : ${habits[0].san}`, why: `Tu as joué ${habits[0].san} ${habits[0].n} fois dans la même position, et c'est une erreur. Fais la série « habitudes » jusqu'au bout.`, to: '/entrainement?kind=habitude', btn: 'S\'entraîner' })
+  const first = steps.findIndex(x => !x.done); const nDone = steps.filter(x => x.done).length
   return (
     <div className="page">
       <h1>Ton programme</h1>
@@ -46,11 +57,11 @@ export default function Profile({ data }: { data: Data }) {
         <div><b>{reps.length - (reps.filter(o => !db.reps[o.id]).length)}/{reps.length}</b> lignes de répertoire apprises</div>
         <div><b>{mastered}/{prio.length}</b> positions maîtrisées</div>
       </div>
-      <h2>À faire maintenant</h2>
-      <p className="muted">Dans l'ordre. Quand une étape est faite, la suivante prend sa place.</p>
+      <h2>Aujourd'hui : {nDone}/{steps.length} {nDone === steps.length ? '· tout est fait, bravo' : 'étapes faites'}</h2>
+      <p className="muted">Dans l'ordre. Chaque étape se coche toute seule quand tu l'as faite.</p>
       <div className="steps">{steps.map((st, i) => (
-        <div key={st.t} className="guide-item"><div className="guide-n">{i + 1}</div>
-          <div><div className="bk-t">{st.t}</div><p>{st.why}</p><Link className={`btn${i === 0 ? ' primary' : ''}`} to={st.to}>{st.btn} →</Link></div></div>))}
+        <div key={st.t} className={`guide-item${st.done ? ' done' : ''}`}><div className="guide-n">{st.done ? '✓' : i + 1}</div>
+          <div><div className="bk-t">{st.t}</div><p>{st.why}</p><Link className={`btn${i === first ? ' primary' : ''}`} to={st.to}>{st.btn} →</Link></div></div>))}
       </div>
       <details className="sect stats"><summary>Tes statistiques détaillées</summary>
       <div className="cards">

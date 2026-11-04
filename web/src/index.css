@@ -146,3 +146,10 @@ button.on, .controls button, .btn.primary { background: var(--green); box-shadow
 .steps .guide-item p { margin: 6px 0 10px; }
 .sect.stats { margin-top: 26px; border-top: 1px solid #3a3936; }
 .filters { margin: 10px 0; } .filters > summary { cursor: pointer; color: #9fd0ff; font-size: .9rem; }
+.verdict { padding: 8px 12px; border-radius: 6px; font-weight: 700; margin: 8px 0; }
+.verdict.good { background: #2f4a22; color: #b6e08f; } .verdict.bad { background: #4a2222; color: #ff9b8f; }
+.verdict.meh { background: #4a4122; color: #f3d37a; } .verdict.info { background: #22364a; color: #9fd0ff; }
+.whyline { padding-left: 18px; margin: 6px 0; } .whyline li { margin: 4px 0; } .whyline li.opp { color: var(--muted); }
+.guide-item.done { opacity: .6; } .guide-item.done .guide-n { background: #3a3936; color: var(--green); }
+.bk-known > summary { cursor: pointer; color: var(--muted); font-size: .9rem; padding: 6px 0; }
+.lpos { display: block; } .lpos .board { max-width: 420px; }
