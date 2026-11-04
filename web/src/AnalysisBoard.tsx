@@ -89,6 +89,9 @@ export default function AnalysisBoard({ fen, line = [], orientation = 'white', a
   const [thinking, setThinking] = useState(false)
   const timer = useRef<number | undefined>(undefined)
   const box = useRef<HTMLDivElement>(null)
+  const [engineOn, setEngineOn] = useState(() => localStorage.getItem('tailored-evalbar') !== '0')
+  const [ev, setEv] = useState<{ fen: string; cp: number; txt: string; best?: string } | null>(null)
+  const req = useRef(0)
   const [verdict, setVerdict] = useState<{ ok: 'good' | 'meh' | 'bad'; s: string } | null>(null)
   useEffect(() => {
     if (!autoplay || !box.current) return
@@ -96,6 +99,22 @@ export default function AnalysisBoard({ fen, line = [], orientation = 'white', a
     io.observe(box.current); return () => io.disconnect()
   }, [autoplay])
   const cur = idx === 0 ? fen : moves[idx - 1].fen
+  useEffect(() => {
+    if (!engineOn) return
+    const id = ++req.current
+    const t = window.setTimeout(() => {
+      const g = new Chess(cur)
+      if (g.isGameOver()) { const cp = g.isCheckmate() ? (g.turn() === 'w' ? -10000 : 10000) : 0; setEv({ fen: cur, cp, txt: g.isCheckmate() ? 'Mat' : '0,0' }); return }
+      analyse(cur, { depth: 12 }).then(ls => {
+        if (id !== req.current || !ls[0]) return
+        const l = ls[0]; const sgn = g.turn() === 'w' ? 1 : -1
+        const cp = sgn * cpOf(l)
+        const txt = l.mate != null ? `M${Math.abs(l.mate)}` : `${cp > 0 ? '+' : ''}${(cp / 100).toFixed(1).replace('.', ',')}`
+        setEv({ fen: cur, cp, txt, best: l.pv[0] ? build(cur, [l.pv[0]])[0]?.san : undefined })
+      })
+    }, 250)
+    return () => window.clearTimeout(t)
+  }, [cur, engineOn])
   useEffect(() => { onChange?.(cur, moves.slice(0, idx).map(m => m.san)) }, [cur]) // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!playing) return
@@ -148,15 +167,23 @@ export default function AnalysisBoard({ fen, line = [], orientation = 'white', a
   const n0 = Number(fen.split(' ')[5]) || 1; const white0 = fen.split(' ')[1] === 'w'
   return (
     <div className="ab" ref={box}>
-      <Board fen={cur} orientation={orientation} arrows={arr} lastMove={last ? [last.uci.slice(0, 2), last.uci.slice(2, 4)] : undefined} onMove={userMove} />
+      <div className="ab-wrap">
+        {engineOn && <div className={`evalbar${orientation === 'black' ? ' flip' : ''}`} title="Évaluation Stockfish">
+          <div className="ev-w" style={{ height: `${ev ? Math.round(100 / (1 + Math.exp(-ev.cp / 250))) : 50}%` }} />
+          <span className={`ev-t${(ev?.cp ?? 0) >= 0 ? ' w' : ''}`}>{ev?.txt ?? '…'}</span>
+        </div>}
+        <Board fen={cur} orientation={orientation} arrows={arr} lastMove={last ? [last.uci.slice(0, 2), last.uci.slice(2, 4)] : undefined} onMove={userMove} />
+      </div>
       <div className="ab-ctl">
         <button onClick={() => { setPlaying(false); setIdx(0) }} aria-label="Début">|◀</button>
         <button onClick={() => { setPlaying(false); setIdx(i => Math.max(0, i - 1)) }} aria-label="Précédent">◀</button>
         <button className="primary" onClick={() => { if (idx >= moves.length) setIdx(0); setPlaying(p => !p) }}>{playing ? '❚❚' : '▶ Jouer'}</button>
         <button onClick={() => { setPlaying(false); setIdx(i => Math.min(moves.length, i + 1)) }} aria-label="Suivant">▶</button>
         <button onClick={() => { setPlaying(false); setIdx(moves.length) }} aria-label="Fin">▶|</button>
+        <button className="eng" onClick={() => { localStorage.setItem('tailored-evalbar', engineOn ? '0' : '1'); setEngineOn(!engineOn) }} aria-label="Moteur">⚙ {engineOn ? 'Moteur' : 'Moteur off'}</button>
         {changed && <button onClick={() => { setPlaying(false); setMoves(orig); setIdx(0) }}>↺ Ligne d'origine</button>}
       </div>
+      {engineOn && ev?.best && ev.fen === cur && <p className="small muted">Moteur : {ev.txt} · meilleur coup {ev.best}</p>}
       {thinking && <p className="small muted">Le moteur réfléchit…</p>}
       {verdict && <p className={`verdict ${verdict.ok}`}>{verdict.s}</p>}
       {showIdeas && last && <p className="ab-idea"><b>{last.san}</b> : {describe(last.before, last.uci)}</p>}

@@ -153,3 +153,9 @@ button.on, .controls button, .btn.primary { background: var(--green); box-shadow
 .guide-item.done { opacity: .6; } .guide-item.done .guide-n { background: #3a3936; color: var(--green); }
 .bk-known > summary { cursor: pointer; color: var(--muted); font-size: .9rem; padding: 6px 0; }
 .lpos { display: block; } .lpos .board { max-width: 420px; }
+.ab-wrap { display: flex; gap: 6px; align-items: stretch; max-width: 480px; margin: 0 auto; } .ab-wrap .board { flex: 1; margin: 8px 0; min-width: 0; }
+.evalbar { position: relative; width: 24px; flex: 0 0 24px; margin: 8px 0; border-radius: 3px; overflow: hidden; background: #403d39; display: flex; flex-direction: column; justify-content: flex-end; }
+.evalbar.flip { flex-direction: column-reverse; } .evalbar .ev-w { background: #f0efe9; transition: height .4s; }
+.evalbar .ev-t { position: absolute; left: 0; right: 0; bottom: 3px; font-size: .6rem; font-weight: 800; letter-spacing: -.3px; text-align: center; color: #f0efe9; }
+.evalbar .ev-t.w { color: #403d39; } .evalbar:not(.flip) .ev-t:not(.w) { top: 3px; bottom: auto; } .evalbar.flip .ev-t.w { top: 3px; bottom: auto; }
+.ab-ctl button.eng { font-size: .8rem; }
