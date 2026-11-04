@@ -19,35 +19,49 @@
   "line": "d4 d5 Nf3 Nf6 Bg5 e6 e3 Be7 Nbd2 O-O Bd3 c5 c3 Nbd7 O-O b6 Ne5 Bb7 f4 Nxe5 fxe5 Nd7 Bxe7 Qxe7 Qh5 f5 g4 g6 Qh3 Rf7 Nf3",
   "line_title": "10…Nxe5 11.fxe5 : la colonne f s'ouvre, Qh5 et g4",
   "line_text": "Après 13.Qh5, le moteur donne +1,2. Sur 13…h6?, 14.Nf3 est déjà +2, et sur 13…g6, 14.Qh6 (+1,4). La défense …f5 tient h7, alors tu ouvres l'autre colonne avec g4, puis Qh3, Nf3, Rf2-g2. Tes pièces se placent derrière les pions qui avancent.",
-  "line_eval": 1.1,
+  "line_eval": 1.2,
   "ideas": [
+   {
+    "kind": "Piège",
+    "title": "Piège blitz : 10.Qa4!? au lieu de 10.f4 (ton idée)",
+    "line": "d4 d5 Nf3 Nf6 Bg5 e6 e3 Be7 Nbd2 O-O Bd3 c5 c3 Nbd7 O-O b6 Ne5 Bb7 Qa4 Nxe5 dxe5 Nd7 Qh4",
+    "text": "La dame met la pression sur d7. Le coup naturel 10…Nxe5 (52 % des joueurs de 1900 selon Maia) et 11.dxe5 attaquent le cavalier f6. Là, 11…Nd7 ?? est joué 86 % du temps. 12.Qh4! : la dame passe par la 4e rangée, libérée par le pion d4. Elle menace deux choses : Qxh7# avec le fou d3, et Bxe7, car le fou e7 est attaqué deux fois. Les Noirs ne peuvent pas parer les deux : ils perdent une pièce (+5). 11…Ne8 ? 12.Qh4 (+5,8) et 11…c4 ? 12.exf6 (+3,8) perdent aussi. La seule défense est 11…Ne4! : 12.Bxe7 Qxe7 13.Nxe4 dxe4 14.Bxe4 Bxe4 15.Qxe4, tu gagnes un pion (+0,3). Le risque : 10…c4! (13 %), alors 11.Nxd7 Nxd7 12.Bxe7 Qxe7 et c'est égal (−0,2). Le piège ne coûte presque rien.",
+    "eval": 5.0
+   },
    {
     "kind": "Variante",
     "title": "10…Ne4! : la seule bonne défense, c'est égal",
     "line": "d4 d5 Nf3 Nf6 Bg5 e6 e3 Be7 Nbd2 O-O Bd3 c5 c3 Nbd7 O-O b6 Ne5 Bb7 f4 Ne4 Bxe7 Qxe7 Qe2 Nxd2 Qxd2 f6 Nxd7 Qxd7 f5",
     "text": "Les Noirs échangent ton fou g5 et ton cavalier d2. Il n'y a plus d'attaque directe (+0,2). Le plan reste simple : f5! fixe e6 et ouvre la colonne f pour tes tours. N'essaie pas de mater ici, joue la position.",
-    "eval": 0.2
+    "eval": 0.1
+   },
+   {
+    "kind": "Piège",
+    "title": "10.f4 Ne4 11.Bb5!? : …Bxg5 ? 12.Nxd7 gagne la qualité",
+    "line": "d4 d5 Nf3 Nf6 Bg5 e6 e3 Be7 Nbd2 O-O Bd3 c5 c3 Nbd7 O-O b6 Ne5 Bb7 f4 Ne4 Bb5 Bxg5 Nxd7 Be7 Nxf8",
+    "text": "Contre la meilleure défense 10…Ne4, Bb5 cloue le cavalier d7 et c'est toujours égal (0,0). Le coup naturel 11…Bxg5 (23 % à 1900) perd : 12.Nxd7! attaque la tour f8 et la dame d8 ne peut pas reprendre à cause du fou b5. Les Noirs perdent la qualité (+2,2). Si 12…Nxd2 13.Qxd2, même chose.",
+    "eval": 2.1
    },
    {
     "kind": "Variante",
     "title": "10…Nxe5 11.fxe5 Ne4 : prends le cavalier, puis Qg4",
     "line": "d4 d5 Nf3 Nf6 Bg5 e6 e3 Be7 Nbd2 O-O Bd3 c5 c3 Nbd7 O-O b6 Ne5 Bb7 f4 Nxe5 fxe5 Ne4 Bxe7 Qxe7 Bxe4 dxe4 Qg4",
     "text": "Sans son cavalier e4, les Noirs n'ont plus aucune pièce qui défend leur roi. Qg4 menace Rf4-h4 et la colonne f (+1,3). Si …f5, exf6 et la colonne f est à toi.",
-    "eval": 1.4
+    "eval": 1.3
    },
    {
     "kind": "Piège",
     "title": "10…Ne8 ? 11.Qh5! et h7 tombe",
     "line": "d4 d5 Nf3 Nf6 Bg5 e6 e3 Be7 Nbd2 O-O Bd3 c5 c3 Nbd7 O-O b6 Ne5 Bb7 f4 Ne8 Qh5 Nef6 Qh4 Re8 Nxd7 Qxd7 Bxf6 Bxf6 Qxh7+",
     "text": "…Ne8 veut faire …f6. 11.Qh5 menace Bxe7 puis Qxh7#. Si le cavalier revient en f6, Qh4 et le clouage gagne h7 (+2,5). La meilleure défense, 11…f5, donne quand même +1,2 après Ndf3 et Qh4.",
-    "eval": 2.5
+    "eval": 2.6
    },
    {
     "kind": "Variante",
     "title": "10…h6 : Bxf6 puis g4-g5",
     "line": "d4 d5 Nf3 Nf6 Bg5 e6 e3 Be7 Nbd2 O-O Bd3 c5 c3 Nbd7 O-O b6 Ne5 Bb7 f4 h6 Bxf6 Nxf6 g4 Ne4 g5 hxg5 Qh5 Bf6 Ndf3",
-    "text": "Ne recule pas en h4 : prends en f6 et lance le pion g. g4-g5 ouvre la colonne h, Qh5 arrive, puis Ndf3 reprend en g5 (+0,4 à +0,7).",
-    "eval": 0.4
+    "text": "Ne recule pas en h4 : prends en f6 et lance le pion g. g4-g5 ouvre la colonne h, Qh5 arrive, puis Ndf3 reprend en g5 (+0,4 à +0,7). Piège : après 14.Qh5, le réflexe 14…g6 ? (35 %) perd tout de suite à 15.Nxg6! (+3,4), car fxg6 laisse passer Qxg6+.",
+    "eval": 0.6
    },
    {
     "kind": "Variante",
@@ -61,20 +75,20 @@
     "title": "Le plan de la vidéo : Qf3-Qh3 avant de roquer",
     "line": "d4 Nf6 Nf3 e6 Bg5 d5 e3 Be7 Nbd2 O-O Bd3 c5 c3 b6 Ne5 Bb7 Qf3 Nbd7 Qh3",
     "text": "Garde ton roi en e1 et joue Qf3 puis Qh3 : la dame tient e4, vise h7, et menace Bxf6 puis Qxh7# (+0,6). Le roque n'est pas pressé : tu choisis plus tard le petit ou le grand roque.",
-    "eval": 0.5
+    "eval": 0.4
    },
    {
     "kind": "Piège",
     "title": "Qh3 h6 Ndf3! : …hxg5 ? perd",
     "line": "d4 Nf6 Nf3 e6 Bg5 d5 e3 Be7 Nbd2 O-O Bd3 c5 c3 b6 Ne5 Bb7 Qf3 Nbd7 Qh3 h6 Ndf3 hxg5 Nxg5",
     "text": "Ne recule pas le fou : Ndf3 le défend. Si les Noirs le prennent, Nxg5 et h7 tombe (+5 : Bh7+, Ngxf7+). Sinon Bf4 et l'attaque continue (+0,6).",
-    "eval": 5.1
+    "eval": 4.7
    },
    {
     "kind": "Variante",
     "title": "Qh3 Ne4 : f3, puis grand roque",
     "line": "d4 Nf6 Nf3 e6 Bg5 d5 e3 Be7 Nbd2 O-O Bd3 c5 c3 b6 Ne5 Bb7 Qf3 Nbd7 Qh3 Ne4 Bxe7 Qxe7 f3 Ng5 Qh5 g6 Qh4 f6 Nxd7 Qxd7 O-O-O",
-    "text": "Ici tu n'as pas roqué, et c'est un avantage : f3 chasse le cavalier, O-O-O, puis g4-h4-h5. Les roques sont opposés, donc tes pions peuvent avancer sans exposer ton roi (+0,2 à +0,5).",
+    "text": "Ici tu n'as pas roqué, et c'est un avantage : f3 chasse le cavalier, O-O-O, puis g4-h4-h5. Les roques sont opposés, donc tes pions peuvent avancer sans exposer ton roi (+0,2 à +0,5). Piège : après 12.f3, 12…Nxd2 ?? (18 %) permet 13.Qxh7#.",
     "eval": 0.2
    }
   ]
@@ -257,6 +271,48 @@
   "line_eval": 0.2
  },
  {
+  "id": "w-pieges",
+  "color": "white",
+  "title": "Blancs · Pièges blitz dans tes lignes",
+  "stats": "Des pièges vérifiés au moteur, à des positions que tu as dans tes parties. Le pourcentage, c'est la fréquence du coup perdant chez un joueur de 1900 (Maia).",
+  "yours": "Tu joues le coup normal et tu attends l'erreur",
+  "rec": "Joue le coup piège quand il ne coûte rien, et sache la seule bonne défense",
+  "why": "Un bon piège de blitz, c'est un coup correct (le moteur le trouve à peu près égal) où la réponse la plus naturelle perd. Chacun ci-dessous remplit les deux conditions : coup sain, et erreur fréquente à 1900 selon Maia. Pour chaque piège, retiens aussi la bonne défense, pour ne pas être surpris quand ton adversaire la trouve.",
+  "plan": [
+   "Torre, après 9…Bb7 : 10.Qa4!? puis 12.Qh4 sur …Nxe5 dxe5 Nd7.",
+   "Torre, après 10.f4 Ne4 : 11.Bb5!? et 12.Nxd7 sur …Bxg5.",
+   "1.d4 d5 2.Nf3 Nc6 3.Bg5 Bf5 : 4.c4! et sur …f6, les pions chassent les pièces.",
+   "Plan Qf3-Qh3 : sur …Ne4, f3, et …Nxd2 ?? permet Qxh7#."
+  ],
+  "line": "d4 d5 Nf3 Nf6 Bg5 e6 e3 Be7 Nbd2 O-O Bd3 c5 c3 Nbd7 O-O b6 Ne5 Bb7 Qa4 Nxe5 dxe5 Nd7 Qh4",
+  "line_title": "Le piège Qa4-Qh4 (Torre)",
+  "line_text": "10.Qa4 Nxe5 (52 %) 11.dxe5 Nd7 ?? (86 %) 12.Qh4! menace Qxh7# et Bxe7 : une pièce tombe (+5). Seule défense : 11…Ne4!.",
+  "line_eval": 5.0,
+  "ideas": [
+   {
+    "kind": "Piège",
+    "title": "3…Nc6 et …Bf5 : 4.c4! puis cxd5 et d5",
+    "line": "d4 d5 Nf3 Nc6 Bg5 Bf5 c4 f6 cxd5 Qxd5 Nc3 Qd7 e4 Bg6 d5",
+    "text": "4.c4 est le meilleur coup (+0,5) : le fou f5 a quitté c8, et d5 est attaqué deux fois. 4…f6 ? (37 % à 1900) chasse ton fou, mais 5.cxd5 Qxd5 6.Nc3 gagne un temps sur la dame. Ensuite 7.e4! et 8.d5 : tes pions avancent en chassant le fou et le cavalier (+2). Bonne défense : 4…Nf6.",
+    "eval": 2.0
+   },
+   {
+    "kind": "Piège",
+    "title": "10.f4 Ne4 11.Bb5!? : …Bxg5 ? 12.Nxd7 gagne la qualité",
+    "line": "d4 d5 Nf3 Nf6 Bg5 e6 e3 Be7 Nbd2 O-O Bd3 c5 c3 Nbd7 O-O b6 Ne5 Bb7 f4 Ne4 Bb5 Bxg5 Nxd7 Be7 Nxf8",
+    "text": "Contre la meilleure défense 10…Ne4, Bb5 cloue le cavalier d7 et c'est toujours égal (0,0). Le coup naturel 11…Bxg5 (23 % à 1900) perd : 12.Nxd7! attaque la tour f8 et la dame d8 ne peut pas reprendre à cause du fou b5. Les Noirs perdent la qualité (+2,2). Si 12…Nxd2 13.Qxd2, même chose.",
+    "eval": 2.1
+   },
+   {
+    "kind": "Piège",
+    "title": "Qf3-Qh3 contre …Ne4 : f3 et Qxh7#",
+    "line": "d4 Nf6 Nf3 e6 Bg5 d5 e3 Be7 Nbd2 O-O Bd3 c5 c3 b6 Ne5 Bb7 Qf3 Nbd7 Qh3 Ne4 Bxe7 Qxe7 f3 Nxd2 Qxh7#",
+    "text": "12.f3 chasse le cavalier e4. S'il échange en d2 (18 %), le fou d3 et la dame h3 font mat en h7. La bonne réponse est 12…Ng5 13.Qh5, et tu continues l'attaque (+0,5).",
+    "eval": 100.0
+   }
+  ]
+ },
+ {
   "id": "b-french-adv",
   "color": "black",
   "title": "Noirs · Française Avance (1.e4 e6 2.d4 d5 3.e5)",
@@ -331,5 +387,54 @@
    }
   ],
   "line_eval": -0.6
+ },
+ {
+  "id": "b-pieges",
+  "color": "black",
+  "title": "Noirs · Pièges blitz dans tes lignes",
+  "stats": "Des pièges vérifiés au moteur, à des positions de tes parties avec les Noirs. Le pourcentage, c'est la fréquence du coup perdant chez un joueur de 1900 (Maia).",
+  "yours": "Tu joues le coup normal et tu attends l'erreur",
+  "rec": "Joue le coup piège quand il ne coûte rien, et sache la seule bonne défense",
+  "why": "Même principe qu'avec les Blancs : un coup correct, et la réponse naturelle de l'adversaire perd du matériel. Ces positions viennent de tes parties (Française, Gambit Dame refusé, Slave, Jobava).",
+  "plan": [
+   "Gambit Dame refusé : 4…Nbd7 tend le piège de l'éléphant. Si 6.Nxd5 ??, Nxd5! et la dame blanche est perdue.",
+   "Slave avec …Bg4 contre Bg5 : 5…Ne4!, et sur 6.e3 ?, Nxg5 gagne une pièce (le cavalier f3 est cloué).",
+   "Française contre 2.Bc4 : après 4.Bb3, 4…a5! menace …a4 et le fou est pris.",
+   "Française Rubinstein contre 5.Ng5 : 5…h6! Le sacrifice 6.Nxf7 ne marche pas : 6…Kxf7 et 7…c5."
+  ],
+  "line": "d4 d5 c4 e6 Nc3 Nf6 Bg5 Nbd7 cxd5 exd5 Nxd5 Nxd5 Bxd8 Bb4+ Qd2 Bxd2+ Kxd2 Kxd8",
+  "line_title": "Le piège de l'éléphant (Gambit Dame refusé)",
+  "line_text": "6.Nxd5 ?? (18 % à 1900) semble gagner un pion, car le cavalier f6 est cloué. Mais 6…Nxd5! 7.Bxd8 Bb4+ : l'échec permet de reprendre la dame. 8.Qd2 Bxd2+ 9.Kxd2 Kxd8, et tu as une pièce de plus (−3,7). Ça marche parce que ton cavalier est en d7 et non en c6.",
+  "line_eval": 3.7,
+  "ideas": [
+   {
+    "kind": "Piège",
+    "title": "Slave : 5…Ne4!, et 6.e3 ? perd une pièce",
+    "line": "d4 d5 c4 c6 Nf3 Nf6 Nc3 Bg4 Bg5 Ne4 e3 Nxg5 cxd5 cxd5 Qb3 Nxf3+",
+    "text": "5…Ne4 attaque le fou g5 (−0,6, à peu près égal). 6.e3 ? (16 %) laisse le fou en g5 : 6…Nxg5!. 7.Nxg5 est impossible, car le cavalier f3 est cloué par ton fou g4 sur la dame d1. Tu gagnes une pièce (−3,8). Bonne réponse pour les Blancs : 6.Bf4.",
+    "eval": 3.8
+   },
+   {
+    "kind": "Piège",
+    "title": "Française contre 2.Bc4 : 4…a5! et …a4 enferme le fou",
+    "line": "e4 e6 Bc4 d5 exd5 exd5 Bb3 a5 d4 a4 Bxd5 Qxd5",
+    "text": "Le fou b3 n'a plus de case : sur …a4, il ne peut aller ni en c4 (pris par d5) ni en a4. 5.d4 ? (16 %) ne fait rien, et 5…a4 gagne le fou contre un pion (−4,1). Bonne réponse pour les Blancs : 5.a4 ou 5.a3.",
+    "eval": 4.0
+   },
+   {
+    "kind": "Piège",
+    "title": "Française Rubinstein : 5.Ng5 h6!, le sacrifice en f7 ne marche pas",
+    "line": "e4 e6 d4 d5 Nc3 dxe4 Nxe4 Nf6 Ng5 h6 Nxf7 Kxf7 Nf3 c5 Ne5+ Kg8",
+    "text": "Après 5…h6, 6.Nxf7 ?! (21 %) fait peur, mais 6…Kxf7! 7.Nf3 c5 : tu as une pièce pour un pion, et ton roi est en sécurité en g8 (−2,7). Attention : seul 6…Kxf7 marche, 6…Qd5 ? perd. Sinon, sur 6.N5f3, joue …c5 : la position est confortable (−0,5).",
+    "eval": 2.6
+   },
+   {
+    "kind": "Piège",
+    "title": "Contre le Jobava : 3…c5, et 4.Nb5 ? Qa5+",
+    "line": "d4 Nf6 Nc3 d5 Bf4 c5 Nb5 Qa5+ Nc3 cxd4 Qxd4 Nc6",
+    "text": "4.Nb5 (20 %) vise c7. Mais 4…Qa5+ force 5.Nc3 : le cavalier revient, tu as joué …cxd4 et …Nc6 avec gain de temps sur la dame d4 (−2,6). Bonne réponse pour les Blancs : 4.e4 ou 4.e3 (égal).",
+    "eval": 2.3
+   }
+  ]
  }
 ]

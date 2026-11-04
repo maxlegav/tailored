@@ -49,7 +49,7 @@ export default function Repertoire({ data }: { data: Data }) {
   )
 }
 
-const fmt = (e?: number) => e == null ? '' : `${e > 0 ? '+' : ''}${e.toFixed(1)}`
+const fmt = (e?: number) => e == null ? '' : Math.abs(e) >= 50 ? (e > 0 ? 'Mat' : 'Mat contre toi') : `${e > 0 ? '+' : ''}${e.toFixed(1)}`
 
 export function OpeningCard({ o }: { o: Opening }) {
   const [k, setK] = useState(-1)

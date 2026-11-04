@@ -23,3 +23,7 @@ cd web && npm install && npm run build                             # PWA in web/
 - `classify.py`: per-move win% loss, severity, phase, clock, tactical/positional tags (from engine lines + board facts).
 - `explain.py`: French explanations generated only from verified facts.
 - `content/lessons.json`: lessons written by the coach (Devin) from the profile.
+- `content/repertoire.json`: lines to learn (Mon répertoire), including `w-pieges` / `b-pieges` (blitz traps).
+- `traps.py [n]`: blitz trap finder (Stockfish + Maia 1900) on the n most frequent positions of Max's games and repertoire -> `data/traps.json`.
+
+Weekly refresh: besides the lesson, add one new verified blitz trap (Maia 1900 plays the losing reply >= 15 %, trap move within 1 pawn of best) to `w-pieges` or `b-pieges`, as Max asked: niche traps that work at 1900-2000 blitz.
