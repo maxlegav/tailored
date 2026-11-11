@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { load, stats } from '../srs'
 import { dayKey, isClosed, loadDB, mark, todayStart } from '../progress'
 import { obvious } from './Train'
+import { fixes } from '../RepTree'
 
 const pct = (x: number) => `${Math.round(x * 100)}%`
 export default function Profile({ data }: { data: Data }) {
@@ -23,7 +24,6 @@ export default function Profile({ data }: { data: Data }) {
   const unread = allL.filter(l => !isClosed(db.lessons[l.id], dates(l.mistakes)))
   const nextL = unread[unread.length - 1]
   const reps = data.myrep || []
-  const nextR = reps.find(o => !db.reps[o.id])
   const prio = data.mistakes.filter(m => (m.kind === 'habitude' || m.kind === 'comprehension') && m.findable && !obvious(m))
   const cards = load(); const now = Date.now()
   const due = prio.filter(m => cards[m.id] && cards[m.id].due <= now).length
@@ -32,21 +32,40 @@ export default function Profile({ data }: { data: Data }) {
   const week = data.games.filter(g => g.date * 1000 > data.generated * 1000 - 7 * 86400000)
   const wPts = week.reduce((a, g) => a + g.score, 0)
   const t0 = todayStart(); const day = dayKey()
+  const dayN = Math.floor(t0 / 86400000); const weekN = Math.floor(dayN / 7)
+  const did = (k: string) => !!db.series?.[`${day}:${k}`]
   const lToday = allL.find(l => (db.lessons[l.id] || 0) >= t0)
-  const rToday = reps.find(o => (db.reps[o.id] || 0) >= t0)
-  const sToday = Object.keys(db.series || {}).some(k => k.startsWith(day + ':') && !k.endsWith(':habitude'))
+  const sToday = Object.keys(db.series || {}).some(k => k.startsWith(day + ':') && !/:(habitude|quiz-rep|quiz-pieges|plan)$/.test(k))
   const hToday = !!db.series?.[`${day}:habitude`] || Object.values(db.habits).some(x => x >= t0)
-  type Step = { t: string; why: string; to: string; btn: string; done?: boolean }
+  const weekStart = data.generated - 7 * 86400
+  const weekPool = data.mistakes.filter(m => m.date > weekStart && m.findable && !obvious(m))
+  const weekLeft = weekPool.filter(m => !cards[m.id] || cards[m.id].due <= now).length
+  const weekOk = weekPool.filter(m => (cards[m.id]?.ok ?? 0) > 0).length
+  const lines = reps.filter(o => !o.id.endsWith('pieges'))
+  const toLearn = lines.filter(o => !db.reps[o.id])
+  const repDay = (toLearn.length ? toLearn : lines)[dayN % Math.max(1, (toLearn.length ? toLearn : lines).length)]
+  const trapSets = reps.filter(o => o.id.endsWith('pieges'))
+  const newTrap = trapSets.map(o => o.ideas[o.ideas.length - 1]).filter(Boolean)[0]
+  const fx = data.tree ? fixes(data.tree).slice(0, 6) : []
+  const fix = fx.length ? fx[weekN % fx.length] : undefined
+  const habitW = habits.find(h => hd(h.ids).some(d => d > weekStart))
+  type Step = { t: string; why: string; to: string; btn: string; done?: boolean; k?: string }
   const steps: Step[] = []
   if (lToday) steps.push({ t: `Cours lu : « ${lToday.title} »`, why: 'Fait aujourd\'hui. Tu peux le relire quand tu veux.', to: `/cours?open=${lToday.id}`, btn: 'Relire', done: true })
   else if (nextL) steps.push({ t: `Lis le cours « ${nextL.title} »`, why: 'Il part de tes parties récentes. Lis-le, regarde les positions s\'animer, puis coche « Lu et compris » en bas du cours.', to: `/cours?open=${nextL.id}`, btn: 'Ouvrir le cours' })
-  steps.push(sToday ? { t: 'Série du jour terminée', why: 'Fait aujourd\'hui. Les positions ratées reviendront demain. Tu peux en faire une autre.', to: '/entrainement?kind=prio', btn: 'Encore une série', done: true }
-    : due ? { t: due > 1 ? `Revois tes ${Math.min(due, 10)} positions du jour` : 'Revois ta position du jour', why: `${due > 1 ? `${due} positions de tes parties reviennent` : '1 position de tes parties revient'} aujourd'hui (ratées ou pas revues depuis un moment). Trouve le bon coup, sans flèche.`, to: '/entrainement?kind=prio', btn: 'Commencer la série' }
-    : { t: 'Fais une série de 10 positions', why: `Des positions de tes parties où tu as raté un coup qu'un joueur de 1900 trouve. ${fresh} positions jamais vues t'attendent.`, to: '/entrainement?kind=prio', btn: 'Commencer la série' })
-  if (rToday) steps.push({ t: `Ligne apprise : « ${rToday.title.replace(/^(Blancs|Noirs) · /, '')} »`, why: 'Fait aujourd\'hui. La suivante t\'attend demain.', to: `/mon-repertoire?open=${rToday.id}`, btn: 'Revoir', done: true })
-  else if (nextR) steps.push({ t: `Apprends la ligne « ${nextR.title.replace(/^(Blancs|Noirs) · /, '')} »`, why: `${nextR.color === 'white' ? 'Blancs' : 'Noirs'} · ${nextR.stats.split('.')[0]}. Joue-la sur l'échiquier jusqu'à la connaître, puis coche « apprise ».`, to: `/mon-repertoire?open=${nextR.id}`, btn: 'Ouvrir la ligne' })
-  if (hToday) steps.push({ t: 'Habitudes travaillées', why: 'Fait aujourd\'hui.', to: '/entrainement?kind=habitude', btn: 'Encore', done: true })
-  else if (habits[0]) steps.push({ t: `Corrige ton habitude : ${habits[0].san}`, why: `Tu as joué ${habits[0].san} ${habits[0].n} fois dans la même position, et c'est une erreur. Fais la série « habitudes » jusqu'au bout.`, to: '/entrainement?kind=habitude', btn: 'S\'entraîner' })
+  const kindS = weekLeft ? 'semaine' : 'prio'
+  steps.push(sToday ? { t: 'Série du jour terminée', why: 'Fait aujourd\'hui. Les positions ratées reviendront demain. Tu peux en faire une autre.', to: `/entrainement?kind=${kindS}`, btn: 'Encore une série', done: true }
+    : weekLeft ? { t: 'Exos de la semaine : 10 positions', why: `Tirées de tes parties des 7 derniers jours, là où tu as raté un coup qu'un joueur de 1900 trouve. ${weekLeft} à faire cette semaine, elles changent chaque lundi.`, to: '/entrainement?kind=semaine', btn: 'Commencer la série' }
+    : due ? { t: due > 1 ? `Revois tes ${Math.min(due, 10)} positions du jour` : 'Revois ta position du jour', why: `Les exos de la semaine sont faits. ${due > 1 ? `${due} positions plus anciennes reviennent` : '1 position plus ancienne revient'} aujourd'hui.`, to: '/entrainement?kind=prio', btn: 'Commencer la série' }
+    : { t: 'Fais une série de 10 positions', why: `Les exos de la semaine sont faits. ${fresh} positions plus anciennes jamais vues t'attendent.`, to: '/entrainement?kind=prio', btn: 'Commencer la série' })
+  if (repDay) steps.push(did('quiz-rep') ? { t: 'Quiz d\'ouverture fait', why: 'Fait aujourd\'hui. Demain, une autre ligne.', to: `/mon-repertoire?open=${repDay.id}&quiz=1`, btn: 'Encore 5 questions', done: true }
+    : { t: `Quiz d'ouverture : « ${repDay.title.replace(/^(Blancs|Noirs) · /, '')} »`, why: 'Pas besoin d\'apprendre toute la ligne. Regarde-la une fois en entier avec ▶, puis réponds à 5 questions « dans cette position, que joues-tu ? ». La ligne change chaque jour, et elle se coche toute seule quand tu as réussi toutes ses positions.', to: `/mon-repertoire?open=${repDay.id}&quiz=1`, btn: 'Faire le quiz' })
+  if (trapSets.length) steps.push(did('quiz-pieges') ? { t: 'Pièges révisés', why: 'Fait aujourd\'hui.', to: '/mon-repertoire?quiz=pieges', btn: 'Encore', done: true }
+    : { t: 'Quiz pièges : 5 positions', why: `Les pièges de ton répertoire : trouve le coup piège, puis la punition quand l'adversaire tombe dedans.${newTrap ? ` Nouveau cette semaine : ${newTrap.title}.` : ''}`, to: '/mon-repertoire?quiz=pieges', btn: 'Faire le quiz' })
+  if (fix) steps.push(did('plan') ? { t: 'Coup d\'ouverture de la semaine vu', why: 'Fait aujourd\'hui. Joue-le dans tes prochaines parties.', to: '/repertoire?tab=verdicts', btn: 'Revoir', done: true }
+    : { t: `Plan : change ${fix.node.san} pour ${fix.parent.best}`, why: `${fix.color === 'white' ? 'Avec les Blancs' : 'Avec les Noirs'}, après ${fix.line.slice(0, -1).join(' ') || 'le début'} : tu joues ${fix.node.san} (${fix.node.n} parties, ${Math.round(fix.node.score * 100)} % des points). Regarde pourquoi ${fix.parent.best} est meilleur, puis essaie-le cette semaine.`, to: '/repertoire?tab=verdicts', btn: 'Voir dans le plan', k: 'plan' })
+  if (habitW) steps.push(hToday ? { t: 'Habitude travaillée', why: 'Fait aujourd\'hui.', to: '/entrainement?kind=habitude', btn: 'Encore', done: true }
+    : { t: `Habitude revue cette semaine : ${habitW.san}`, why: `Tu as rejoué ${habitW.san} cette semaine, dans une position où c'est une erreur (${habitW.n} fois au total). Fais la série « habitudes ».`, to: '/entrainement?kind=habitude', btn: 'S\'entraîner' })
   const first = steps.findIndex(x => !x.done); const nDone = steps.filter(x => x.done).length
   return (
     <div className="page">
@@ -55,13 +74,14 @@ export default function Profile({ data }: { data: Data }) {
       <div className="progress">
         <div><b>{allL.length - unread.length}/{allL.length}</b> cours lus</div>
         <div><b>{reps.length - (reps.filter(o => !db.reps[o.id]).length)}/{reps.length}</b> lignes de répertoire apprises</div>
+        <div><b>{weekOk}/{weekPool.length}</b> exos de la semaine réussis</div>
         <div><b>{mastered}/{prio.length}</b> positions maîtrisées</div>
       </div>
       <h2>Aujourd'hui : {nDone}/{steps.length} {nDone === steps.length ? '· tout est fait, bravo' : 'étapes faites'}</h2>
       <p className="muted">Dans l'ordre. Chaque étape se coche toute seule quand tu l'as faite.</p>
       <div className="steps">{steps.map((st, i) => (
         <div key={st.t} className={`guide-item${st.done ? ' done' : ''}`}><div className="guide-n">{st.done ? '✓' : i + 1}</div>
-          <div><div className="bk-t">{st.t}</div><p>{st.why}</p><Link className={`btn${i === first ? ' primary' : ''}`} to={st.to}>{st.btn} →</Link></div></div>))}
+          <div><div className="bk-t">{st.t}</div><p>{st.why}</p><Link className={`btn${i === first ? ' primary' : ''}`} to={st.to} onClick={() => { if (st.k) setDb(mark('series', `${day}:${st.k}`, true)) }}>{st.btn} →</Link></div></div>))}
       </div>
       <details className="sect stats"><summary>Tes statistiques détaillées</summary>
       <div className="cards">

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { Data } from '../types'
 import Board from '../Board'
 import LinePlayer from '../LinePlayer'
@@ -7,7 +8,8 @@ import RepList from '../RepList'
 import type { Opening } from '../types'
 
 export default function Repertoire({ data }: { data: Data }) {
-  const [tab, setTab] = useState<'tree' | 'plans' | 'verdicts' | 'trouble' | 'comfort'>(data.tree ? 'tree' : 'plans')
+  const [params] = useSearchParams()
+  const [tab, setTab] = useState<'tree' | 'plans' | 'verdicts' | 'trouble' | 'comfort'>(params.get('tab') === 'verdicts' ? 'verdicts' : data.tree ? 'tree' : 'plans')
   const [focus, setFocus] = useState<string | null>(null)
   const fx = data.tree ? fixes(data.tree) : []
   const [init, setInit] = useState<{ color: 'white' | 'black'; path: number[] } | undefined>()

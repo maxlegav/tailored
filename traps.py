@@ -36,6 +36,7 @@ for ii, k in enumerate(pos):
     for s, pv in cands:
         if s < best - 100 or s < -50: continue
         q = b.copy(); q.push(pv[0])
+        if q.is_game_over(): continue
         probs, _ = inference.inference_each(M, prep, q.fen(), 1900, 1900)
         for r, p in sorted(probs.items(), key=lambda x: -x[1])[:4]:
             if p < 0.15: continue

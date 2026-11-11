@@ -12,11 +12,12 @@ import { pieceList, sanLine, uciOf } from '../lib/chess'
 import { dayKey, mark } from '../progress'
 
 const KINDS: Record<string, string> = {
-  prio: 'Priorités : habitudes et compréhension', all: 'Toutes les positions',
+  semaine: 'Exos de la semaine (tes parties des 7 derniers jours)', prio: 'Priorités : habitudes et compréhension', all: 'Toutes les positions',
   habitude: 'Habitudes à corriger', comprehension: 'Compréhension / plans', accident: 'Accidents (pièces en prise)', zeitnot: 'Zeitnot (< 20 s)',
   livre: 'Exercices du livre de Silman',
 }
 const WHY: Record<string, string> = {
+  semaine: 'Les positions de tes parties de cette semaine où tu as raté un coup à ta portée. Elles changent à chaque mise à jour du lundi.',
   prio: 'Les positions de tes parties où tu as raté un coup à ta portée, par habitude ou par manque de plan. C\'est là que tu gagnes le plus de points.',
   all: 'Toutes les positions de tes parties où tu as fait une grosse erreur.',
   habitude: 'Les positions où tu refais le même mauvais coup. Le but : remplacer le réflexe par le bon coup.',
@@ -38,12 +39,16 @@ export default function Train({ data }: { data: Data }) {
   const bookEx = useMemo(() => (data.book_ex || []).map(e => fromBook(e, data)), [data])
   const pool = useMemo(() => kind === 'livre' ? bookEx.filter(m => !silman || m.tags.includes(silman)) : data.mistakes.filter(m => (!tag || m.tags.includes(tag)) && (!onlyFindable || m.findable)
     && (!silman || !data.book || conceptsFor(m, data.book, 3).includes(silman)) && (withObvious || !obvious(m))
-    && (kind === 'all' || (kind === 'prio' ? m.kind === 'habitude' || m.kind === 'comprehension' : m.kind === kind))), [data, tag, onlyFindable, kind, silman, bookEx, withObvious])
+    && (kind === 'all' || (kind === 'semaine' ? m.date > data.generated - 7 * 86400 : kind === 'prio' ? m.kind === 'habitude' || m.kind === 'comprehension' : m.kind === kind))), [data, tag, onlyFindable, kind, silman, bookEx, withObvious])
   const all = kind === 'livre' ? bookEx : data.mistakes
   const [queue, setQueue] = useState<string[]>([])
   const [idx, setIdx] = useState(0)
   const [score, setScore] = useState(0)
-  const start = () => { setQueue(dueIds(shuffle(pool.map(m => m.id)), 10)); setIdx(0); setScore(0) }
+  const start = () => {
+    const recent = pool.filter(m => m.date > data.generated - 7 * 86400)
+    const ids = [...shuffle(recent), ...shuffle(pool.filter(m => !recent.includes(m)))].map(m => m.id)
+    setQueue(dueIds(ids, 10)); setIdx(0); setScore(0)
+  }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(start, [pool])
   const cur = queue[idx] ? all.find(m => m.id === queue[idx]) : undefined

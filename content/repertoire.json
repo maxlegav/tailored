@@ -282,7 +282,8 @@
    "Torre, après 9…Bb7 : 10.Qa4!? puis 12.Qh4 sur …Nxe5 dxe5 Nd7.",
    "Torre, après 10.f4 Ne4 : 11.Bb5!? et 12.Nxd7 sur …Bxg5.",
    "1.d4 d5 2.Nf3 Nc6 3.Bg5 Bf5 : 4.c4! et sur …f6, les pions chassent les pièces.",
-   "Plan Qf3-Qh3 : sur …Ne4, f3, et …Nxd2 ?? permet Qxh7#."
+   "Plan Qf3-Qh3 : sur …Ne4, f3, et …Nxd2 ?? permet Qxh7#.",
+   "Torre, 10…Ne8 11.Qh5 Nef6 12.Qh4 Re8 : 13.Nxd7!, et sur …Nxd7 ??, Qxh7+ puis Qh8#."
   ],
   "line": "d4 d5 Nf3 Nf6 Bg5 e6 e3 Be7 Nbd2 O-O Bd3 c5 c3 Nbd7 O-O b6 Ne5 Bb7 Qa4 Nxe5 dxe5 Nd7 Qh4",
   "line_title": "Le piège Qa4-Qh4 (Torre)",
@@ -308,6 +309,13 @@
     "title": "Qf3-Qh3 contre …Ne4 : f3 et Qxh7#",
     "line": "d4 Nf6 Nf3 e6 Bg5 d5 e3 Be7 Nbd2 O-O Bd3 c5 c3 b6 Ne5 Bb7 Qf3 Nbd7 Qh3 Ne4 Bxe7 Qxe7 f3 Nxd2 Qxh7#",
     "text": "12.f3 chasse le cavalier e4. S'il échange en d2 (18 %), le fou d3 et la dame h3 font mat en h7. La bonne réponse est 12…Ng5 13.Qh5, et tu continues l'attaque (+0,5).",
+    "eval": 100.0
+   },
+   {
+    "kind": "Piège",
+    "title": "Torre, 12…Re8 ? : 13.Nxd7!, et …Nxd7 ?? Qxh7+ puis Qh8#",
+    "line": "d4 d5 Nf3 Nf6 Bg5 e6 e3 Be7 Nbd2 O-O Bd3 c5 c3 Nbd7 O-O b6 Ne5 Bb7 f4 Ne8 Qh5 Nef6 Qh4 Re8 Nxd7 Nxd7 Qxh7+ Kf8 Qh8#",
+    "text": "Après 10…Ne8 11.Qh5 Nef6 12.Qh4 Re8, 13.Nxd7! est le meilleur coup (+2,6). Le cavalier f6 est le seul défenseur de h7. 13…Nxd7 ?? (20 % à 1900) le retire : 14.Qxh7+ Kf8 15.Qh8#. Le roi ne peut pas aller en e8, car …Re8 a mis la tour sur cette case. La bonne reprise est 13…Qxd7, mais 14.Bxf6 Bxf6 15.Qxh7+ Kf8 te laisse un pion de plus et l'attaque (+2,8).",
     "eval": 100.0
    }
   ]

@@ -24,5 +24,16 @@
    "186119594598-56",
    "186166608358-100"
   ]
+ },
+ {
+  "id": "coup-force",
+  "title": "Cours 4 — Gagnant : joue d'abord le coup qui force",
+  "tag": "avantage_gâché",
+  "body": "**Cette semaine (2 – 6 nov.)** : 103 parties, 53,5 points sur 103 (52 %), et ton Elo blitz passe de 1950 à **1990** (pic à 2023). L'ouverture est très propre : **0,5** erreur grave pour 100 coups, contre 1,0 sur l'année. La finale, le thème du Cours 3, revient à **4,0** pour 100 coups (5,1 la semaine dernière). Le milieu de partie recule : **6,1** pour 100 coups, contre 5,4 sur l'année et 3,4 la semaine dernière. Tu convertis 40 de tes 55 positions gagnantes (73 %, contre 77 % sur l'année) : 51 de tes 145 erreurs graves sont des avantages gâchés.\n\nDans 10 de ces avantages gâchés, le meilleur coup était **un échec**, et tu as joué un coup sans échec. Trois fois, c'était une attaque sur le roi déjà gagnante, et le coup joué a laissé un temps à l'adversaire. Deux de ces trois parties sont perdues.\n\n**1. Ne pas échanger la tour de la 7e (Blancs, coup 21).** Ta tour f7 est sur la 7e rangée, ton cavalier g5 la soutient, et ton fou noir g7 n'est défendu que par le roi. **21.Rxg7+!** Kxg7 22.Rd7+ (la colonne d est ouverte, la deuxième tour arrive sur la 7e avec échec) Kg8 23.Qd5+ Rf7 24.Qxf7+ Kh8 25.Qh7#. Tu as joué 21.Rxf8+ ? Rxf8 : la tour qui attaquait s'échange, et il ne reste que +0,8. C'est le coup que Maia joue le plus (70 %), donc l'erreur est naturelle. Mais 21.Rxg7+ sort dans 22 % des cas à 1900, et chaque coup de la suite est évident (Qd5+ 94 %, Qxf7+ 95 %). Même 22.Ne6+, le coup que Maia préfère ensuite, garde +4.\n\n[[pos:186615411348-40]]\n\n**2. Le mat du couloir avant l'échange (Blancs, coup 29).** Le roi noir est en g8. Ta tour h3 tient h7 et ton pion f6 tient g7 : le roi n'a aucune case. **29.Qc8+!** Qd8 30.Qxd8+ Re8 31.Qxe8#. Maia trouve Qc8+ dans 52 % des cas. Tu as joué 29.Rxh8+ ? Kxh8 : en échangeant ta tour h3, tu as rendu au roi noir la case h7, et après 30.Rxe5 Qxe5 la position passe de mat à −3,7. Tu as gagné la partie quand même, mais c'était un cadeau de l'adversaire.\n\n[[pos:186397624784-56]]\n\n**3. Le sacrifice en g7 quand un cavalier menace (Blancs, coup 20).** Tes tours sont en g1 et d1, ta dame en f3, et le pion g7 n'est défendu que par le roi. Le cavalier noir f2 attaque ta tour d1 et ton fou d3. **20.Rxg7+!** Kxg7 21.Rg1+ Ng4 22.Rxg4+ Kh6 23.Qh3#. Sur 20…Kh8, 21.Rxh7+ Kg8 22.Rg1+ Ng4 23.Rxg4# (mat en 4 dans les deux cas). Tu as joué 20.Qg3 ?, qui menace Qxg7#, mais ce n'est pas un échec : 20…g6 (80 % à 1900) ferme la colonne, puis …Nxd3+ prend ton fou avec échec (−3,6). Ici, le premier coup est plus dur à voir (Maia : 13 %), mais la suite est naturelle : Rg1+ (72 %), puis Qh3# (44 %).\n\n[[pos:186482756866-38]]\n\n**La règle :** quand tu es gagnant et que ton attaque vise le roi, calcule d'abord les échecs et les prises qui gardent ta pièce d'attaque, avant tout coup qui « menace ». Un coup qui menace laisse un temps à l'adversaire (…g6, …Nxd3+). Un échange de ton attaquant (Rxf8+, Rxh8+) peut aussi libérer une case au roi adverse. Dans ces trois positions, la suite forcée tient en 3 ou 4 coups, tous avec échec.",
+  "mistakes": [
+   "186615411348-40",
+   "186397624784-56",
+   "186482756866-38"
+  ]
  }
 ]
